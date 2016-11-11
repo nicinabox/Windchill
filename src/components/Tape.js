@@ -11,7 +11,7 @@ var {
 } = ReactNative
 
 const TAPE_WIDTH = Math.floor(Dimensions.get('window').width)
-const MARK_WIDTH = 12
+const MARK_WIDTH = 15
 
 export default class Tape extends Component {
   constructor(props) {
@@ -90,7 +90,7 @@ export default class Tape extends Component {
           snapToAlignment="start"
           showsHorizontalScrollIndicator={false}
           onScroll={this._handleScroll}
-          scrollEventThrottle={200}>
+          scrollEventThrottle={100}>
 
           <View style={styles.marks}>
             {this._renderIntervals()}
@@ -133,6 +133,7 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     paddingHorizontal: TAPE_WIDTH / 2,
+    marginRight: -MARK_WIDTH,
   },
   markContainer: {
     width: MARK_WIDTH,
