@@ -77,16 +77,18 @@ export default class Root extends Component {
           </Text>
         </View>
 
-        <View style={styles.tape}>
-          <Text style={styles.tapeValue}>{this.state.wind} mph</Text>
-          <Tape min={3} onChange={this._handleWindSpeedChange} />
-          <Text style={styles.tapeLabel}>Wind Speed</Text>
-        </View>
+        <View style={styles.controls}>
+          <View style={styles.tape}>
+            <Text style={styles.tapeValue}>{this.state.wind} mph</Text>
+            <Tape min={3} onChange={this._handleWindSpeedChange} />
+            <Text style={styles.tapeLabel}>Wind Speed</Text>
+          </View>
 
-        <View style={styles.tape}>
-          <Text style={styles.tapeValue}>{this.state.temp} F</Text>
-          <Tape max={50} onChange={this._handleTemperatureChange} />
-          <Text style={styles.tapeLabel}>Temperature</Text>
+          <View style={styles.tape}>
+            <Text style={styles.tapeValue}>{this.state.temp} F</Text>
+            <Tape max={50} onChange={this._handleTemperatureChange} />
+            <Text style={styles.tapeLabel}>Temperature</Text>
+          </View>
         </View>
       </View>
     )
@@ -111,10 +113,14 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     color: '#4A4A4A'
   },
+  controls: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   feelsLike: {
     flex: 1,
     alignItems: 'center',
-    marginVertical: 80,
+    justifyContent: 'center',
   },
   feelsLikeText: {
     fontSize: 38,
