@@ -66,8 +66,7 @@ var styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   tape: {
-    marginTop: 20,
-    marginBottom: 30
+    marginBottom: 40
   },
   tapeValue: {
     fontWeight: 'bold',
