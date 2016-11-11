@@ -18,8 +18,8 @@ export default class Root extends Component {
     this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
 
     this.state = {
-      wind: null,
-      temp: null,
+      wind: 3,
+      temp: 1,
     }
   }
 
