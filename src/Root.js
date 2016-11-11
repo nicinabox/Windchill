@@ -3,6 +3,7 @@ import { windchill } from 'weather-tools'
 import ReactNative from 'react-native'
 import Tape from './components/Tape'
 import { get } from './utils/http'
+import { US, SI, UNITS, convertTemp, convertSpeed } from './utils/conversions'
 
 var {
   StyleSheet,

@@ -1,8 +1,19 @@
 const toC = (t) => ((t - 32) * 5 / 9).toFixed(1)
 const toF = (t) => (t * 9 / 5 + 32).toFixed(1)
 
-const US = 'us'
-const SI = 'si'
+export const US = 'us'
+export const SI = 'si'
+
+export const UNITS = {
+  [SI]: {
+    temperature: 'C',
+    speed: 'kph'
+  },
+  [US]: {
+    temperature: 'F',
+    speed: 'mph'
+  }
+}
 
 export const convertSpeed = (speed, convertTo = SI) => {
   if (convertTo === SI) {
