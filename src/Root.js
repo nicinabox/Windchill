@@ -12,6 +12,7 @@ var {
 } = ReactNative
 
 const FORECAST_API_KEY = process.env.FORECAST_API_KEY
+const ENABLE_FORECAST = process.env.ENABLE_FORECAST || !__DEV__
 
 export default class Root extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ export default class Root extends Component {
   }
 
   _queryDarkSky(coords = {}) {
-    if (__DEV__) return
+    if (!ENABLE_FORECAST) return
 
     let { latitude, longitude } = coords
     var url = `https://api.forecast.io/forecast/${FORECAST_API_KEY}/${[latitude, longitude].join(',')}`
