@@ -87,7 +87,7 @@ export default class Tape extends Component {
           horizontal={true}
           decelerationRate={0}
           snapToInterval={MARK_WIDTH}
-          snapToAlignment="start"
+          snapToAlignment="center"
           showsHorizontalScrollIndicator={false}
           onScroll={this._handleScroll}
           scrollEventThrottle={100}>
@@ -113,7 +113,7 @@ Tape.propTypes = {
 
 Tape.defaultProps = {
   min: 1,
-  max: 100,
+  max: 99,
   interval: 1,
   mark: 10,
 }
@@ -133,13 +133,15 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     paddingHorizontal: TAPE_WIDTH / 2,
-    marginRight: -MARK_WIDTH,
+    marginHorizontal: -MARK_WIDTH / 2,
   },
   markContainer: {
     width: MARK_WIDTH,
+    alignItems: 'center',
   },
   mark: {
     width: 1,
+    marginRight: -1,
     backgroundColor: '#979797',
   },
   markValue: {
