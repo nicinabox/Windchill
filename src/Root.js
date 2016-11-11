@@ -143,6 +143,7 @@ export default class Root extends Component {
             <Tape
               ref={r => this._speed = r}
               onChange={this._handleWindSpeedChange}
+              initialValue={this.state.speed}
               {...BOUNDS[unit].speed} />
 
             <Text style={styles.tapeLabel}>Wind speed</Text>
@@ -153,6 +154,7 @@ export default class Root extends Component {
             <Tape
               ref={r => this._temp = r}
               onChange={this._handleTemperatureChange}
+              initialValue={this.state.temp}
               {...BOUNDS[unit].temp} />
 
             <Text style={styles.tapeLabel}>Temperature</Text>
