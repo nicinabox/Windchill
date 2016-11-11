@@ -104,8 +104,8 @@ export default class Root extends Component {
 
     this.setState({
       unit,
-      speed: parseInt(convertSpeed(this.state.speed, unit)),
-      temp: parseInt(convertTemp(this.state.temp, unit)),
+      speed: Math.round(convertSpeed(this.state.speed, unit)),
+      temp: Math.round(convertTemp(this.state.temp, unit)),
     }, () => {
       this._speed.value(this.state.speed)
       this._temp.value(this.state.temp)
