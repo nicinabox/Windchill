@@ -13,32 +13,58 @@ var {
 const TAPE_WIDTH = Math.floor(Dimensions.get('window').width)
 const MARK_WIDTH = 15
 
+const scale = (v, inputMin, inputMax, outputMin, outputMax) => {
+  return Math.floor(((v - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin)
+}
+
 export default class Tape extends Component {
   constructor(props) {
     super(props)
 
     this._handleScroll = this._handleScroll.bind(this)
 
-    this.scrollMax = (props.max - props.min) * props.interval * MARK_WIDTH
+    this.scrollMax = this._getScrollMax(props)
 
     this.state = {
-      value: props.value || props.min,
+      contentOffset: this._scaleValue(props.initialValue || props.min),
     }
   }
 
-  _scale(x) {
-    let { min, max, interval } = this.props
+  componentWillReceiveProps(nextProps) {
+    this.scrollMax = this._getScrollMax(nextProps)
+  }
+
+  value(val) {
+    this.setState({
+      contentOffset: this._scaleValue(val)
+    })
+  }
+
+  _getScrollMax(props = this.props) {
+    return (props.max - props.min) * props.interval * MARK_WIDTH
+  }
+
+  _scaleScroll(x) {
+    let { min, max } = this.props
     let scrollMin = 0
     let scrollMax = this.scrollMax
 
-    return Math.floor(((x - scrollMin) / (scrollMax - scrollMin)) * (max - min) + min)
+    return scale(x, scrollMin, scrollMax, min, max)
+  }
+
+  _scaleValue(v) {
+    let { min, max } = this.props
+    let scrollMin = 0
+    let scrollMax = this.scrollMax
+
+    return scale(v, min, max, scrollMin, scrollMax)
   }
 
   _handleScroll(event) {
     let offset = event.nativeEvent.contentOffset.x
     let { min, max } = this.props
 
-    let val = this._scale(offset)
+    let val = this._scaleScroll(offset)
     val = val < min ? min : val
     val = val > max ? max : val
 
@@ -90,7 +116,8 @@ export default class Tape extends Component {
           snapToAlignment="center"
           showsHorizontalScrollIndicator={false}
           onScroll={this._handleScroll}
-          scrollEventThrottle={100}>
+          scrollEventThrottle={100}
+          contentOffset={{ x: this.state.contentOffset }}>
 
           <View style={styles.marks}>
             {this._renderIntervals()}

@@ -8,12 +8,36 @@ import { US, SI, UNITS, convertTemp, convertSpeed } from './utils/conversions'
 var {
   StyleSheet,
   Dimensions,
+  TouchableHighlight,
   View,
   Text,
 } = ReactNative
 
 const FORECAST_API_KEY = process.env.FORECAST_API_KEY
 const ENABLE_FORECAST = process.env.ENABLE_FORECAST || !__DEV__
+
+const BOUNDS = {
+  [SI]: {
+    speed: {
+      min: 5,
+      max: 170,
+    },
+    temp: {
+      min: -17,
+      max: 10,
+    }
+  },
+  [US]: {
+    speed: {
+      min: 3,
+      max: 99,
+    },
+    temp: {
+      min: 0,
+      max: 50,
+    }
+  }
+}
 
 export default class Root extends Component {
   constructor(props) {
@@ -23,8 +47,9 @@ export default class Root extends Component {
     this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
 
     this.state = {
-      wind: 3,
-      temp: 1,
+      speed: BOUNDS[US].speed.min,
+      temp: BOUNDS[US].temp.min,
+      unit: US
     }
   }
 
@@ -53,41 +78,83 @@ export default class Root extends Component {
 
       this.setState({
         temp: Math.round(temperature),
-        wind: Math.round(windSpeed)
+        speed: Math.round(windSpeed)
       })
     })
+  }
+
+  _calculateWindChill() {
+    let { temp, speed, unit } = this.state
+    return windchill[unit](temp, speed)
   }
 
   _handleTemperatureChange(temp) {
     this.setState({ temp })
   }
 
-  _handleWindSpeedChange(wind) {
-    this.setState({ wind })
+  _handleWindSpeedChange(speed) {
+    this.setState({ speed })
+  }
+
+  _handleUnitChange(unit) {
+    if (unit === this.state.unit) return
+
+    this.setState({
+      unit,
+      speed: parseInt(convertSpeed(this.state.speed, unit)),
+      temp: parseInt(convertTemp(this.state.temp, unit)),
+    }, () => {
+      this._speed.value(this.state.speed)
+      this._temp.value(this.state.temp)
+    })
   }
 
   render() {
+    let { unit, speed, temp } = this.state
+
     return (
       <View style={styles.container}>
+        <View style={styles.unitControls}>
+          {[US, SI].map((u) => {
+            return (
+              <TouchableHighlight key={`unit-${u}`} onPress={() => this._handleUnitChange(u)}>
+                <View style={[styles.unitControl, unit === u && styles.unitControlActive]}>
+                  <Text style={[styles.unitControlText, unit === u && styles.unitControlActiveText]}>
+                    {u.toUpperCase()}
+                  </Text>
+                </View>
+              </TouchableHighlight>
+            )
+          })}
+        </View>
+
         <View style={styles.feelsLike}>
           <Text style={styles.feelsLikeText}>
             Feels like
           </Text>
           <Text style={styles.feelsLikeTempText}>
-            {windchill.us(this.state.temp, this.state.wind)}
+            {this._calculateWindChill()}
           </Text>
         </View>
 
         <View style={styles.controls}>
           <View style={styles.tape}>
-            <Text style={styles.tapeValue}>{this.state.wind} mph</Text>
-            <Tape min={3} onChange={this._handleWindSpeedChange} />
-            <Text style={styles.tapeLabel}>Wind Speed</Text>
+            <Text style={styles.tapeValue}>{speed} {UNITS[unit].speed}</Text>
+            <Tape
+              ref={r => this._speed = r}
+              onChange={this._handleWindSpeedChange}
+              {...BOUNDS[unit].speed} />
+
+            <Text style={styles.tapeLabel}>Wind speed</Text>
           </View>
 
           <View style={styles.tape}>
-            <Text style={styles.tapeValue}>{this.state.temp} F</Text>
-            <Tape max={50} onChange={this._handleTemperatureChange} />
+            <Text style={styles.tapeValue}>{temp} {UNITS[unit].temperature}</Text>
+            <Tape
+              ref={r => this._temp = r}
+              onChange={this._handleTemperatureChange}
+              {...BOUNDS[unit].temp} />
+
             <Text style={styles.tapeLabel}>Temperature</Text>
           </View>
         </View>
@@ -99,6 +166,7 @@ export default class Root extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 20,
     flexDirection: 'column',
     justifyContent: 'space-around',
   },
@@ -132,5 +200,24 @@ var styles = StyleSheet.create({
     fontSize: 144,
     fontWeight: '100',
     color: '#4990E2',
+  },
+  unitControls: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  unitControl: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    backgroundColor: '#fff',
+  },
+  unitControlActive: {
+  },
+  unitControlActiveText: {
+    color: '#4990E2',
+    fontWeight: 'bold',
+  },
+  unitControlText: {
+    fontSize: 12,
+    color: '#aaa'
   }
 })
