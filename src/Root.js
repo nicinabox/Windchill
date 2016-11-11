@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { windchill } from 'weather-tools'
 import ReactNative from 'react-native'
 import Tape from './components/Tape'
+import { get } from './utils/http'
 
 var {
   StyleSheet,
@@ -9,6 +10,8 @@ var {
   View,
   Text,
 } = ReactNative
+
+const FORECAST_API_KEY = process.env.FORECAST_API_KEY
 
 export default class Root extends Component {
   constructor(props) {
@@ -21,6 +24,36 @@ export default class Root extends Component {
       wind: 3,
       temp: 1,
     }
+  }
+
+  componentDidMount() {
+    this._getCurrentForecast()
+  }
+
+  _getCurrentForecast() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this._queryDarkSky(position.coords)
+      },
+      (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    )
+  }
+
+  _queryDarkSky(coords = {}) {
+    if (__DEV__) return
+
+    let { latitude, longitude } = coords
+    var url = `https://api.forecast.io/forecast/${FORECAST_API_KEY}/${[latitude, longitude].join(',')}`
+
+    get(url).then((resp) => {
+      let { temperature, windSpeed } = resp.currently
+
+      this.setState({
+        temp: Math.round(temperature),
+        wind: Math.round(windSpeed)
+      })
+    })
   }
 
   _handleTemperatureChange(temp) {
