@@ -11,7 +11,8 @@ var {
 } = ReactNative
 
 const TAPE_WIDTH = Math.floor(Dimensions.get('window').width)
-const MARK_WIDTH = 15
+const IS_EVEN_WIDTH = TAPE_WIDTH % 2 === 0
+const MARK_WIDTH = IS_EVEN_WIDTH ? 14 : 15
 
 const scale = (v, inputMin, inputMax, outputMin, outputMax) => {
   return Math.floor(((v - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin)
