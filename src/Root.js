@@ -79,6 +79,9 @@ export default class Root extends Component {
       this.setState({
         temp: Math.round(temperature),
         speed: Math.round(windSpeed)
+      }, () => {
+        this._speed.value(this.state.speed)
+        this._temp.value(this.state.temp)
       })
     })
   }
