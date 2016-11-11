@@ -48,7 +48,7 @@ export default class Root extends Component {
 
     this.state = {
       speed: BOUNDS[US].speed.min,
-      temp: BOUNDS[US].temp.min,
+      temp: BOUNDS[US].temp.max,
       unit: US
     }
   }
