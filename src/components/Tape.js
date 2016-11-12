@@ -11,8 +11,7 @@ var {
 } = ReactNative
 
 const TAPE_WIDTH = Math.floor(Dimensions.get('window').width)
-const IS_EVEN_WIDTH = TAPE_WIDTH % 2 === 0
-const MARK_WIDTH = IS_EVEN_WIDTH ? 14 : 15
+const MARK_WIDTH =  15
 
 const scale = (v, inputMin, inputMax, outputMin, outputMax) => {
   return Math.floor(((v - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin)
@@ -114,7 +113,7 @@ export default class Tape extends Component {
           horizontal={true}
           decelerationRate={0}
           snapToInterval={MARK_WIDTH}
-          snapToAlignment="center"
+          snapToAlignment="start"
           showsHorizontalScrollIndicator={false}
           onScroll={this._handleScroll}
           scrollEventThrottle={100}
