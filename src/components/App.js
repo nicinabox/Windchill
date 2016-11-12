@@ -94,26 +94,26 @@ export default class App extends Component {
         </View>
 
         <View style={styles.controls}>
-          <View style={styles.tape}>
-            <Text style={styles.tapeValue}>{speed} {UNITS[unit].speed}</Text>
+          <View style={styles.linearGauge}>
+            <Text style={styles.linearGaugeValue}>{speed} {UNITS[unit].speed}</Text>
             <LineGauge
               ref={r => this._speed = r}
               onChange={this._handleWindSpeedChange}
               initialValue={this.state.speed}
               {...BOUNDS[unit].speed} />
 
-            <Text style={styles.tapeLabel}>Wind speed</Text>
+            <Text style={styles.linearGaugeLabel}>Wind speed</Text>
           </View>
 
-          <View style={styles.tape}>
-            <Text style={styles.tapeValue}>{temp} {UNITS[unit].temperature}</Text>
+          <View style={styles.linearGauge}>
+            <Text style={styles.linearGaugeValue}>{temp} {UNITS[unit].temperature}</Text>
             <LineGauge
               ref={r => this._temp = r}
               onChange={this._handleTemperatureChange}
               initialValue={this.state.temp}
               {...BOUNDS[unit].temp} />
 
-            <Text style={styles.tapeLabel}>Temperature</Text>
+            <Text style={styles.linearGaugeLabel}>Temperature</Text>
           </View>
         </View>
 
@@ -126,19 +126,19 @@ export default class App extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
     flexDirection: 'column',
     justifyContent: 'space-around',
   },
-  tape: {
-    marginBottom: 30
+  linearGauge: {
+    marginBottom: 20,
+    justifyContent: 'space-between',
   },
-  tapeValue: {
+  linearGaugeValue: {
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 20
   },
-  tapeLabel: {
+  linearGaugeLabel: {
     textAlign: 'center',
     color: '#4A4A4A'
   },
