@@ -50,8 +50,7 @@ export default class CurrentConnditions extends Component {
         this.setState({ currently })
       })
       .catch((err) => {
-        console.log(err);
-        alert(err)
+        alert(JSON.stringify(err))
       })
   }
 
