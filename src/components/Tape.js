@@ -11,7 +11,7 @@ var {
 } = ReactNative
 
 const TAPE_WIDTH = Math.floor(Dimensions.get('window').width)
-const MARK_WIDTH =  15
+const INTERVAL_WIDTH =  15
 
 const scale = (v, inputMin, inputMax, outputMin, outputMax) => {
   return Math.floor(((v - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin)
@@ -41,7 +41,7 @@ export default class Tape extends Component {
   }
 
   _getScrollMax(props = this.props) {
-    return (props.max - props.min) * props.interval * MARK_WIDTH
+    return (props.max - props.min) * props.interval * INTERVAL_WIDTH
   }
 
   _scaleScroll(x) {
@@ -71,35 +71,30 @@ export default class Tape extends Component {
     this.props.onChange(val)
   }
 
-  _getMarkSize(val) {
-    let { mark } = this.props
-    if (val % mark == 0) {
-      return 'large'
-    }
+  _getIntervalSize(val) {
+    let { largeInterval, mediumInterval } = this.props
 
-    if (Number.isInteger(mark / 2) && val % (mark / 2) === 0) {
-      return 'medium'
-    }
-
+    if (val % largeInterval == 0) return 'large'
+    if (val % mediumInterval == 0) return 'medium'
     return 'small'
   }
 
   _renderIntervals() {
-    let { min, max, interval, mark } = this.props
+    let { min, max, interval } = this.props
     let range = max - min + 1
 
     let values = times(range, (i) => i + min)
 
     return values.map((val, i) => {
-      let markSize = this._getMarkSize(val)
+      let intervalSize = this._getIntervalSize(val)
 
       return (
-        <View key={`val-${i}`} style={styles.markContainer}>
-          {markSize === 'large' && (
-            <Text style={styles.markValue}>{val}</Text>
+        <View key={`val-${i}`} style={styles.intervalContainer}>
+          {intervalSize === 'large' && (
+            <Text style={styles.intervalValue}>{val}</Text>
           )}
 
-          <View style={[styles.mark, styles[markSize]]}/>
+          <View style={[styles.interval, styles[intervalSize]]}/>
         </View>
       )
     })
@@ -112,14 +107,14 @@ export default class Tape extends Component {
           automaticallyAdjustInsets={false}
           horizontal={true}
           decelerationRate={0}
-          snapToInterval={MARK_WIDTH}
+          snapToInterval={INTERVAL_WIDTH}
           snapToAlignment="start"
           showsHorizontalScrollIndicator={false}
           onScroll={this._handleScroll}
           scrollEventThrottle={100}
           contentOffset={{ x: this.state.contentOffset }}>
 
-          <View style={styles.marks}>
+          <View style={styles.intervals}>
             {this._renderIntervals()}
           </View>
         </ScrollView>
@@ -134,15 +129,17 @@ Tape.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   interval: PropTypes.number,
-  mark: PropTypes.number,
-  value: PropTypes.number,
+  largeInterval: PropTypes.number,
+  mediumInterval: PropTypes.number,
+  initialValue: PropTypes.number,
 }
 
 Tape.defaultProps = {
   min: 1,
   max: 99,
   interval: 1,
-  mark: 10,
+  mediumInterval: 5,
+  largeInterval: 10,
 }
 
 var styles = StyleSheet.create({
@@ -156,22 +153,22 @@ var styles = StyleSheet.create({
     backgroundColor: '#F9F9F9',
     marginVertical: 8,
   },
-  marks: {
+  intervals: {
     flexDirection: 'row',
     alignItems: 'flex-end',
     paddingHorizontal: TAPE_WIDTH / 2,
-    marginHorizontal: -MARK_WIDTH / 2,
+    marginHorizontal: -INTERVAL_WIDTH / 2,
   },
-  markContainer: {
-    width: MARK_WIDTH,
+  intervalContainer: {
+    width: INTERVAL_WIDTH,
     alignItems: 'center',
   },
-  mark: {
+  interval: {
     width: 1,
     marginRight: -1,
     backgroundColor: '#979797',
   },
-  markValue: {
+  intervalValue: {
     fontSize: 9,
     marginBottom: 3,
     fontWeight: 'bold',
