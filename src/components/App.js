@@ -20,7 +20,7 @@ const BOUNDS = {
       max: 170,
     },
     temp: {
-      min: -17,
+      min: -45,
       max: 10,
     }
   },
@@ -30,7 +30,7 @@ const BOUNDS = {
       max: 100,
     },
     temp: {
-      min: 0,
+      min: -50,
       max: 50,
     }
   }
