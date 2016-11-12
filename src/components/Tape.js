@@ -11,7 +11,7 @@ var {
 } = ReactNative
 
 const TAPE_WIDTH = Math.floor(Dimensions.get('window').width)
-const INTERVAL_WIDTH =  15
+const INTERVAL_WIDTH =  18
 
 const scale = (v, inputMin, inputMax, outputMin, outputMax) => {
   return Math.floor(((v - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin)
