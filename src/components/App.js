@@ -27,7 +27,7 @@ const BOUNDS = {
   [US]: {
     speed: {
       min: 3,
-      max: 99,
+      max: 100,
     },
     temp: {
       min: 0,
