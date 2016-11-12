@@ -107,7 +107,11 @@ export default class CurrentConnditions extends Component {
             Currently {this._getTemp()}{' '}
             and wind is {this._getSpeed()}
           </Text>
-        ) : null}
+          ) : (
+          <Text style={styles.text}>
+            Getting current conditions...
+          </Text>
+        )}
       </View>
     )
   }
