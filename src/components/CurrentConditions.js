@@ -14,7 +14,6 @@ const ENABLE_FORECAST = process.env.ENABLE_FORECAST || !__DEV__
 
 const fetchCurrentConditions = ({ latitude, longitude }, unit) => {
   let url = `https://api.forecast.io/forecast/${FORECAST_API_KEY}/${[latitude, longitude].join(',')}?units=${unit}`
-  console.log(url);
   return get(url).then((resp) => ({ unit, ...resp.currently }))
 }
 
