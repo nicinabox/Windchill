@@ -774,6 +774,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicinabox.windchill;
 				PRODUCT_NAME = FeelsLike;
 				PROVISIONING_PROFILE = "fcc4cd09-7e72-4adf-a556-851487ec6c3f";
 				PROVISIONING_PROFILE_SPECIFIER = "Nicinabox Ad Hoc Profile";
@@ -816,6 +817,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicinabox.windchill;
 				PRODUCT_NAME = FeelsLike;
 				PROVISIONING_PROFILE = "cd9a03e7-b783-4e8c-8358-2dfd4530c5ec";
 				PROVISIONING_PROFILE_SPECIFIER = Development;
@@ -842,6 +844,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicinabox.windchill;
 				PRODUCT_NAME = FeelsLike;
 				PROVISIONING_PROFILE = "fae39076-f6c6-4409-ad1d-d1bb7987c1d0";
 				PROVISIONING_PROFILE_SPECIFIER = "Nicinabox Distribution Profile";
