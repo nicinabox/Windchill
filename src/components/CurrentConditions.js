@@ -119,6 +119,7 @@ export default class CurrentConnditions extends Component {
 
 var styles = StyleSheet.create({
   container: {
+    marginVertical: 10,
     alignItems: 'center'
   },
   text: {

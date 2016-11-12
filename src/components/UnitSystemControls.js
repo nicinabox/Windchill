@@ -39,7 +39,7 @@ var styles = StyleSheet.create({
   unitControls: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 10,
+    marginVertical: 10,
   },
   unitControl: {
     paddingHorizontal: 10,
