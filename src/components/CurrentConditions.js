@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactNative from 'react-native'
 import { get } from '../utils/http'
+import toBoolean from '../utils/toBoolean'
 import { UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 
 var {
@@ -10,7 +11,7 @@ var {
 } = ReactNative
 
 const FORECAST_API_KEY = process.env.FORECAST_API_KEY
-const ENABLE_FORECAST = process.env.ENABLE_FORECAST || !__DEV__
+const ENABLE_FORECAST = toBoolean(process.env.ENABLE_FORECAST) || !__DEV__
 
 const fetchCurrentConditions = ({ latitude, longitude }, unit) => {
   let url = `https://api.forecast.io/forecast/${FORECAST_API_KEY}/${[latitude, longitude].join(',')}?units=${unit}`
