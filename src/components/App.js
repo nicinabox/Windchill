@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { windchill } from 'weather-tools'
 import ReactNative from 'react-native'
-import LineGauge from './LineGauge'
+import LineGauge from 'react-native-line-gauge'
 import CurrentConditions from './CurrentConditions'
 import UnitSystemControls from './UnitSystemControls'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
