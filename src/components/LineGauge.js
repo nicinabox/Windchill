@@ -17,7 +17,7 @@ const scale = (v, inputMin, inputMax, outputMin, outputMax) => {
   return Math.floor(((v - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin)
 }
 
-export default class Tape extends Component {
+export default class LineGauge extends Component {
   constructor(props) {
     super(props)
 
@@ -125,7 +125,7 @@ export default class Tape extends Component {
   }
 }
 
-Tape.propTypes = {
+LineGauge.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   interval: PropTypes.number,
@@ -134,7 +134,7 @@ Tape.propTypes = {
   initialValue: PropTypes.number,
 }
 
-Tape.defaultProps = {
+LineGauge.defaultProps = {
   min: 1,
   max: 99,
   interval: 1,

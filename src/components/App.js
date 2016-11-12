@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { windchill } from 'weather-tools'
 import ReactNative from 'react-native'
-import Tape from './Tape'
+import LineGauge from './LineGauge'
 import CurrentConditions from './CurrentConditions'
 import UnitSystemControls from './UnitSystemControls'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
@@ -96,7 +96,7 @@ export default class App extends Component {
         <View style={styles.controls}>
           <View style={styles.tape}>
             <Text style={styles.tapeValue}>{speed} {UNITS[unit].speed}</Text>
-            <Tape
+            <LineGauge
               ref={r => this._speed = r}
               onChange={this._handleWindSpeedChange}
               initialValue={this.state.speed}
@@ -107,7 +107,7 @@ export default class App extends Component {
 
           <View style={styles.tape}>
             <Text style={styles.tapeValue}>{temp} {UNITS[unit].temperature}</Text>
-            <Tape
+            <LineGauge
               ref={r => this._temp = r}
               onChange={this._handleTemperatureChange}
               initialValue={this.state.temp}
