@@ -14,6 +14,10 @@ var {
 const FORECAST_API_KEY = process.env.FORECAST_API_KEY
 const ENABLE_FORECAST = toBoolean(process.env.ENABLE_FORECAST) || !__DEV__
 
+const now = () => +(new Date)
+const ONE_MIN = 60
+const FIVE_MIN = ONE_MIN * 5
+
 const fetchCurrentConditions = ({ latitude, longitude }, unit) => {
   let url = `https://api.forecast.io/forecast/${FORECAST_API_KEY}/${[latitude, longitude].join(',')}?units=${unit}`
   return get(url).then((resp) => ({ unit, ...resp.currently }))
@@ -56,13 +60,17 @@ export default class CurrentConnditions extends Component {
 
   _getCurrentForecast() {
     if (!ENABLE_FORECAST) return
+    if (now() < this.state.lastUpdate + FIVE_MIN) return
 
     this._getPosition()
       .then((position) => {
         return fetchCurrentConditions(position.coords, this.props.unit)
       })
       .then((currently) => {
-        this.setState({ currently })
+        this.setState({
+          currently,
+          lastUpdate: now()
+        })
       })
       .catch((err) => {
         alert(JSON.stringify(err))
