@@ -2,19 +2,16 @@ import React, { Component } from 'react'
 import { windchill } from 'weather-tools'
 import ReactNative from 'react-native'
 import Tape from './components/Tape'
-import { get } from './utils/http'
+import CurrentConditions from './components/CurrentConditions'
+import UnitSystemControls from './components/UnitSystemControls'
 import { US, SI, UNITS, convertTemp, convertSpeed } from './utils/conversions'
 
 var {
   StyleSheet,
   Dimensions,
-  TouchableHighlight,
   View,
   Text,
 } = ReactNative
-
-const FORECAST_API_KEY = process.env.FORECAST_API_KEY
-const ENABLE_FORECAST = process.env.ENABLE_FORECAST || !__DEV__
 
 const BOUNDS = {
   [SI]: {
@@ -45,45 +42,13 @@ export default class Root extends Component {
 
     this._handleTemperatureChange = this._handleTemperatureChange.bind(this)
     this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
+    this._handleUnitChange = this._handleUnitChange.bind(this)
 
     this.state = {
       speed: BOUNDS[US].speed.min,
       temp: BOUNDS[US].temp.max,
       unit: US
     }
-  }
-
-  componentDidMount() {
-    this._getCurrentForecast()
-  }
-
-  _getCurrentForecast() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this._queryDarkSky(position.coords)
-      },
-      (error) => alert(JSON.stringify(error)),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    )
-  }
-
-  _queryDarkSky(coords = {}) {
-    if (!ENABLE_FORECAST) return
-
-    let { latitude, longitude } = coords
-    var url = `https://api.forecast.io/forecast/${FORECAST_API_KEY}/${[latitude, longitude].join(',')}`
-
-    get(url).then((resp) => {
-      let { temperature, windSpeed } = resp.currently
-
-      this.setState({
-        temp: Math.round(temperature),
-        speed: Math.round(windSpeed)
-      }, () => {
-        this._speed.value(this.state.speed)
-        this._temp.value(this.state.temp)
-      })
-    })
   }
 
   _calculateWindChill() {
@@ -117,19 +82,7 @@ export default class Root extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.unitControls}>
-          {[US, SI].map((u) => {
-            return (
-              <TouchableHighlight key={`unit-${u}`} onPress={() => this._handleUnitChange(u)}>
-                <View style={[styles.unitControl, unit === u && styles.unitControlActive]}>
-                  <Text style={[styles.unitControlText, unit === u && styles.unitControlActiveText]}>
-                    {u.toUpperCase()}
-                  </Text>
-                </View>
-              </TouchableHighlight>
-            )
-          })}
-        </View>
+        <CurrentConditions unit={unit} />
 
         <View style={styles.feelsLike}>
           <Text style={styles.feelsLikeText}>
@@ -163,6 +116,8 @@ export default class Root extends Component {
             <Text style={styles.tapeLabel}>Temperature</Text>
           </View>
         </View>
+
+        <UnitSystemControls unit={unit} onPress={this._handleUnitChange} />
       </View>
     )
   }
@@ -176,7 +131,7 @@ var styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   tape: {
-    marginBottom: 40
+    marginBottom: 30
   },
   tapeValue: {
     fontWeight: 'bold',
@@ -206,23 +161,4 @@ var styles = StyleSheet.create({
     fontWeight: '100',
     color: '#4990E2',
   },
-  unitControls: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  unitControl: {
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    backgroundColor: '#fff',
-  },
-  unitControlActive: {
-  },
-  unitControlActiveText: {
-    color: '#4990E2',
-    fontWeight: 'bold',
-  },
-  unitControlText: {
-    fontSize: 12,
-    color: '#aaa'
-  }
 })
