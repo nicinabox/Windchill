@@ -6,6 +6,7 @@ import { UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 
 var {
   StyleSheet,
+  AppState,
   Text,
   View,
 } = ReactNative
@@ -22,6 +23,8 @@ export default class CurrentConnditions extends Component {
   constructor(props) {
     super(props)
 
+    this._handleAppStateChange = this._handleAppStateChange.bind(this)
+
     this.state = {
       currently: false
     }
@@ -29,6 +32,18 @@ export default class CurrentConnditions extends Component {
 
   componentDidMount() {
     this._getCurrentForecast()
+
+    AppState.addEventListener('change', this._handleAppStateChange)
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange)
+  }
+
+  _handleAppStateChange(state) {
+    if (state === 'active') {
+      this._getCurrentForecast()
+    }
   }
 
   _getPosition() {
