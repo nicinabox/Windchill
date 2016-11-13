@@ -52,8 +52,8 @@ export default class App extends Component {
   }
 
   _calculateWindChill() {
-    let { temp, speed, unit } = this.state
-    return windchill[unit](temp, speed)
+    let { temp, speed, units } = this.state
+    return windchill[units](temp, speed)
   }
 
   _handleTemperatureChange(temp) {
@@ -64,13 +64,13 @@ export default class App extends Component {
     this.setState({ speed })
   }
 
-  _handleUnitChange(unit) {
-    if (unit === this.state.unit) return
+  _handleUnitChange(units) {
+    if (units === this.state.units) return
 
     this.setState({
-      unit,
-      speed: Math.round(convertSpeed(this.state.speed, unit)),
-      temp: Math.round(convertTemp(this.state.temp, unit)),
+      units,
+      speed: Math.round(convertSpeed(this.state.speed, units)),
+      temp: Math.round(convertTemp(this.state.temp, units)),
     }, () => {
       this._speed.value(this.state.speed)
       this._temp.value(this.state.temp)
@@ -78,11 +78,11 @@ export default class App extends Component {
   }
 
   render() {
-    let { unit, speed, temp } = this.state
+    let { units, speed, temp } = this.state
 
     return (
       <View style={styles.container}>
-        <CurrentConditions unit={unit} />
+        <CurrentConditions units={units} />
 
         <View style={styles.feelsLike}>
           <Text style={styles.feelsLikeText}>
@@ -95,29 +95,29 @@ export default class App extends Component {
 
         <View style={styles.controls}>
           <View style={styles.linearGauge}>
-            <Text style={styles.linearGaugeValue}>{speed} {UNITS[unit].speed}</Text>
+            <Text style={styles.linearGaugeValue}>{speed} {UNITS[units].speed}</Text>
             <LineGauge
               ref={r => this._speed = r}
               onChange={this._handleWindSpeedChange}
               initialValue={this.state.speed}
-              {...BOUNDS[unit].speed} />
+              {...BOUNDS[units].speed} />
 
             <Text style={styles.linearGaugeLabel}>Wind speed</Text>
           </View>
 
           <View style={styles.linearGauge}>
-            <Text style={styles.linearGaugeValue}>{temp} {UNITS[unit].temperature}</Text>
+            <Text style={styles.linearGaugeValue}>{temp} {UNITS[units].temperature}</Text>
             <LineGauge
               ref={r => this._temp = r}
               onChange={this._handleTemperatureChange}
               initialValue={this.state.temp}
-              {...BOUNDS[unit].temp} />
+              {...BOUNDS[units].temp} />
 
             <Text style={styles.linearGaugeLabel}>Temperature</Text>
           </View>
         </View>
 
-        <UnitSystemControls unit={unit} onPress={this._handleUnitChange} />
+        <UnitSystemControls units={units} onPress={this._handleUnitChange} />
       </View>
     )
   }

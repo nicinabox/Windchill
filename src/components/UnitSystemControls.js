@@ -15,15 +15,15 @@ export default class UnitSystemControls extends Component {
   }
 
   render() {
-    let { unit } = this.props
+    let { units } = this.props
 
     return (
       <View style={styles.unitControls}>
         {[US, SI].map((u) => {
           return (
-            <TouchableHighlight key={`unit-${u}`} onPress={() => this.props.onPress(u)}>
-              <View style={[styles.unitControl, unit === u && styles.unitControlActive]}>
-                <Text style={[styles.unitControlText, unit === u && styles.unitControlActiveText]}>
+            <TouchableHighlight key={`units-${u}`} onPress={() => this.props.onPress(u)}>
+              <View style={[styles.unitControl, units === u && styles.unitControlActive]}>
+                <Text style={[styles.unitControlText, units === u && styles.unitControlActiveText]}>
                   {u.toUpperCase()}
                 </Text>
               </View>

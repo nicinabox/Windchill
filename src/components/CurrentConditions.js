@@ -18,9 +18,9 @@ const now = () => +(new Date)
 const ONE_MIN = 60
 const FIVE_MIN = ONE_MIN * 5
 
-const fetchCurrentConditions = ({ latitude, longitude }, unit) => {
-  let url = `https://api.forecast.io/forecast/${FORECAST_API_KEY}/${[latitude, longitude].join(',')}?units=${unit}`
-  return get(url).then((resp) => ({ unit, ...resp.currently }))
+const fetchCurrentConditions = ({ latitude, longitude }, units) => {
+  let url = `https://api.forecast.io/forecast/${FORECAST_API_KEY}/${[latitude, longitude].join(',')}?units=${units}`
+  return get(url).then((resp) => ({ units, ...resp.currently }))
 }
 
 export default class CurrentConnditions extends Component {
@@ -64,7 +64,7 @@ export default class CurrentConnditions extends Component {
 
     this._getPosition()
       .then((position) => {
-        return fetchCurrentConditions(position.coords, this.props.unit)
+        return fetchCurrentConditions(position.coords, this.props.units)
       })
       .then((currently) => {
         this.setState({
@@ -80,21 +80,21 @@ export default class CurrentConnditions extends Component {
   _getTemp() {
     let temp = this.state.currently.temperature
 
-    if (this.props.unit !== this.state.currently.unit) {
-      temp = convertTemp(temp, this.props.unit)
+    if (this.props.units !== this.state.currently.units) {
+      temp = convertTemp(temp, this.props.units)
     }
 
-    return Math.round(temp) + UNITS[this.props.unit].temperature
+    return Math.round(temp) + UNITS[this.props.units].temperature
   }
 
   _getSpeed() {
     let speed  = this.state.currently.windSpeed
 
-    if (this.props.unit !== this.state.currently.unit) {
-      speed = convertSpeed(speed, this.props.unit)
+    if (this.props.units !== this.state.currently.units) {
+      speed = convertSpeed(speed, this.props.units)
     }
 
-    return Math.round(speed) + UNITS[this.props.unit].speed
+    return Math.round(speed) + UNITS[this.props.units].speed
   }
 
   render() {
