@@ -12,6 +12,7 @@
     "react": "15.3.2",
     "react-native": "0.37.0",
     "react-native-line-gauge": "^1.0.0",
+    "react-native-locale": "0.0.11",
     "weather-tools": "^2.0.1"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { windchill } from 'weather-tools'
 import ReactNative from 'react-native'
+import Locale from 'react-native-locale'
 import LineGauge from 'react-native-line-gauge'
 import CurrentConditions from './CurrentConditions'
 import UnitSystemControls from './UnitSystemControls'
@@ -36,6 +37,10 @@ const BOUNDS = {
   }
 }
 
+const getLocaleUnits = () => {
+  return Locale.constants().measurementSystem === 'Metric' ? SI : US
+}
+
 export default class App extends Component {
   constructor(props) {
     super(props)
@@ -44,10 +49,12 @@ export default class App extends Component {
     this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
     this._handleUnitChange = this._handleUnitChange.bind(this)
 
+    let units = getLocaleUnits()
+
     this.state = {
-      speed: BOUNDS[US].speed.min,
-      temp: BOUNDS[US].temp.max,
-      unit: US
+      speed: BOUNDS[units].speed.min,
+      temp: BOUNDS[units].temp.max,
+      units
     }
   }
 
