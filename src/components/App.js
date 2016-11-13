@@ -79,9 +79,6 @@ export default class App extends Component {
       units,
       speed: Math.round(convertSpeed(this.state.speed, units)),
       temp: Math.round(convertTemp(this.state.temp, units)),
-    }, () => {
-      this._speed.value(this.state.speed)
-      this._temp.value(this.state.temp)
     })
   }
 
@@ -109,9 +106,8 @@ export default class App extends Component {
           <View style={styles.linearGauge}>
             <Text style={styles.linearGaugeValue}>{speed} {UNITS[units].speed}</Text>
             <LineGauge
-              ref={r => this._speed = r}
               onChange={this._handleWindSpeedChange}
-              initialValue={this.state.speed}
+              value={speed}
               {...BOUNDS[units].speed} />
 
             <Text style={styles.linearGaugeLabel}>Wind speed</Text>
@@ -120,9 +116,8 @@ export default class App extends Component {
           <View style={styles.linearGauge}>
             <Text style={styles.linearGaugeValue}>{temp} {UNITS[units].temperature}</Text>
             <LineGauge
-              ref={r => this._temp = r}
               onChange={this._handleTemperatureChange}
-              initialValue={this.state.temp}
+              value={temp}
               {...BOUNDS[units].temp} />
 
             <Text style={styles.linearGaugeLabel}>Temperature</Text>
