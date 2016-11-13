@@ -48,6 +48,7 @@ export default class App extends Component {
     this._handleTemperatureChange = this._handleTemperatureChange.bind(this)
     this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
     this._handleUnitChange = this._handleUnitChange.bind(this)
+    this._handleConditionsPress = this._handleConditionsPress.bind(this)
 
     let units = getLocaleUnits()
 
@@ -84,12 +85,16 @@ export default class App extends Component {
     })
   }
 
+  _handleConditionsPress(currently) {
+    this.setState(currently)
+  }
+
   render() {
     let { units, speed, temp } = this.state
 
     return (
       <View style={styles.container}>
-        <CurrentConditions units={units} />
+        <CurrentConditions units={units} onPress={this._handleConditionsPress}/>
 
         <View style={styles.feelsLike}>
           <Text style={styles.feelsLikeText}>

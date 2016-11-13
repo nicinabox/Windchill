@@ -84,7 +84,7 @@ export default class CurrentConnditions extends Component {
       temp = convertTemp(temp, this.props.units)
     }
 
-    return Math.round(temp) + UNITS[this.props.units].temperature
+    return Math.round(temp)
   }
 
   _getSpeed() {
@@ -94,18 +94,19 @@ export default class CurrentConnditions extends Component {
       speed = convertSpeed(speed, this.props.units)
     }
 
-    return Math.round(speed) + UNITS[this.props.units].speed
+    return Math.round(speed)
   }
 
   render() {
     let { currently } = this.state
+    let temp = this._getTemp()
+    let speed = this._getSpeed()
 
     return (
       <View style={styles.container}>
         {currently ? (
-          <Text style={styles.text}>
-            Currently {this._getTemp()}{' '}
-            and wind is {this._getSpeed()}
+          <Text style={styles.text} onPress={() => this.props.onPress({ temp, speed })}>
+            Currently {temp}{UNITS[this.props.units].temperature} and wind is {speed}{ UNITS[this.props.units].speed}
           </Text>
           ) : (
           <Text style={styles.text}>
