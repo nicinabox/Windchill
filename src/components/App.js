@@ -88,18 +88,31 @@ export default class App extends Component {
 
   render() {
     let { units, speed, temp } = this.state
+    let feelsLike = this._calculateWindChill()
+
+    let speedError = speed < BOUNDS[units].speed.min && 'Speed is too low'
+    let tempError = temp > BOUNDS[units].temp.max && 'Temperature is too high'
+    let windchillError = `${speedError || tempError} to calculate windchill`
 
     return (
       <View style={styles.container}>
         <CurrentConditions units={units} onPress={this._handleConditionsPress}/>
 
         <View style={styles.feelsLike}>
-          <Text style={styles.feelsLikeText}>
-            Feels like
-          </Text>
-          <Text style={styles.feelsLikeTempText}>
-            {this._calculateWindChill()}
-          </Text>
+          {feelsLike ? (
+            <View>
+              <Text style={styles.feelsLikeText}>
+                Feels like
+              </Text>
+              <Text style={styles.feelsLikeTempText}>
+                {this._calculateWindChill()}
+              </Text>
+            </View>
+            ): (
+            <Text style={styles.errorText}>
+              {windchillError}
+            </Text>
+            )}
         </View>
 
         <View style={styles.controls}>
@@ -168,4 +181,8 @@ var styles = StyleSheet.create({
     fontWeight: '100',
     color: '#4990E2',
   },
+  errorText: {
+    color: '#D13856',
+    padding: 30
+  }
 })
