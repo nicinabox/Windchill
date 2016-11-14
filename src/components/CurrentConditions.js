@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactNative from 'react-native'
 import { get } from '../utils/http'
 import toBoolean from '../utils/toBoolean'
+import errorReporter from '../utils/errorReporter'
 import { UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 
 var {
@@ -72,9 +73,7 @@ export default class CurrentConnditions extends Component {
           lastUpdate: now()
         })
       })
-      .catch((err) => {
-        alert(JSON.stringify(err))
-      })
+      .catch(errorReporter.notify)
   }
 
   _getTemp() {

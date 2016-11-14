@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "babel-plugin-transform-inline-environment-variables": "^6.8.0",
+    "bugsnag-react-native": "^1.1.2",
     "lodash": "^4.16.6",
     "react": "15.3.2",
     "react-native": "0.37.0",
