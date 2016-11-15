@@ -175,11 +175,13 @@ var styles = StyleSheet.create({
     fontSize: 38,
     color: '#4990E2',
     fontWeight: '200',
+    textAlign: 'center',
   },
   feelsLikeTempText: {
     fontSize: 144,
     fontWeight: '100',
     color: '#4990E2',
+    textAlign: 'center',
   },
   errorText: {
     color: '#D13856',
