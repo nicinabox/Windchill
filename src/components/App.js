@@ -99,7 +99,7 @@ export default class App extends Component {
         <CurrentConditions units={units} onPress={this._handleConditionsPress}/>
 
         <View style={styles.feelsLike}>
-          {feelsLike ? (
+          {feelsLike !== undefined ? (
             <View>
               <Text style={styles.feelsLikeText}>
                 Feels like
