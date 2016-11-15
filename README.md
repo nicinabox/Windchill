@@ -2,7 +2,12 @@
 
 ## Changelog
 
-### 1.1.0 (unreleased)
+### 1.1.1
+
+* Fix large text centering
+* Fix error when calculated windchill was zero
+
+### 1.1.0
 
 * Fix 3-digit numbers wrapping
 * Adjust layout for small and large screens
