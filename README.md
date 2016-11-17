@@ -12,6 +12,11 @@
 * Shows the current conditions
 * Tap current conditions to set calculator to those values
 
+## Neat tricks
+
+* Use `babel-plugin-transform-inline-environment-variables` to inline `process.env.VAR`. Super useful for enabling features at build time.
+* Add support for environment variables in `.env` by adding `[[ -s "../.env" ]] && source "../.env"` to Build Phases > Bundle React Native code and images in Xcode
+
 ## Changelog
 
 ### 1.1.1
