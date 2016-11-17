@@ -36,3 +36,7 @@
 ### 1.0.0
 
 * Initial release
+
+## Copyright
+
+2016 Nic Haynes
