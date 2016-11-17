@@ -1,5 +1,15 @@
 # FeelsLike (Windchill)
 
+![](screenshot.jpg)
+
+## Features
+
+* Dead simple design
+* Supports US and SI
+* Selects unit system automatically based on locale
+* Shows the current conditions
+* Tap current conditions to set calculator to those values
+
 ## Changelog
 
 ### 1.1.1
