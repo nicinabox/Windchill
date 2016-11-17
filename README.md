@@ -2,6 +2,8 @@
 
 ![](screenshot.jpg)
 
+[Available on the App Store](https://appsto.re/us/wtyegb.i)
+
 ## Features
 
 * Dead simple design
