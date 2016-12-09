@@ -17,7 +17,17 @@
 * Use `babel-plugin-transform-inline-environment-variables` to inline `process.env.VAR`. Super useful for enabling features at build time.
 * Add support for environment variables in `.env` by adding `[[ -s "../.env" ]] && source "../.env"` to Build Phases > Bundle React Native code and images in Xcode
 
+## App Store Release
+
+* npm version [major|minor|patch]
+* Open xcode
+* Archive and upload
+
 ## Changelog
+
+### 1.1.2
+
+* Adjust current conditions contrast
 
 ### 1.1.1
 
