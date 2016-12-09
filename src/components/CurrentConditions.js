@@ -123,6 +123,6 @@ var styles = StyleSheet.create({
     alignItems: 'center'
   },
   text: {
-    color: '#aaa'
+    color: '#444'
   }
 })
