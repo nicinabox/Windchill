@@ -26,6 +26,10 @@
 
 ## Changelog
 
+### Unreleased
+
+* Show current temperature instead of error when no windchill
+
 ### 1.1.2
 
 * Adjust current conditions contrast
