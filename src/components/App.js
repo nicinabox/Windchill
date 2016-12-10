@@ -61,7 +61,7 @@ export default class App extends Component {
 
   _calculateWindChill() {
     let { temp, speed, units } = this.state
-    return windchill[units](temp, speed)
+    return windchill[units](temp, speed) || temp
   }
 
   _handleTemperatureChange(temp) {
@@ -90,29 +90,21 @@ export default class App extends Component {
     let { units, speed, temp } = this.state
     let feelsLike = this._calculateWindChill()
 
-    let speedError = speed < BOUNDS[units].speed.min && 'Speed is too low'
-    let tempError = temp > BOUNDS[units].temp.max && 'Temperature is too high'
-    let windchillError = `${speedError || tempError} to calculate windchill`
-
     return (
       <View style={styles.container}>
-        <CurrentConditions units={units} onPress={this._handleConditionsPress}/>
+        <CurrentConditions
+          units={units}
+          onPress={this._handleConditionsPress} />
 
         <View style={styles.feelsLike}>
-          {feelsLike !== undefined ? (
-            <View>
-              <Text style={styles.feelsLikeText}>
-                Feels like
-              </Text>
-              <Text style={styles.feelsLikeTempText}>
-                {this._calculateWindChill()}
-              </Text>
-            </View>
-            ): (
-            <Text style={styles.errorText}>
-              {windchillError}
+          <View>
+            <Text style={styles.feelsLikeText}>
+              Feels like
             </Text>
-            )}
+            <Text style={styles.feelsLikeTempText}>
+              {feelsLike}
+            </Text>
+          </View>
         </View>
 
         <View style={styles.controls}>
