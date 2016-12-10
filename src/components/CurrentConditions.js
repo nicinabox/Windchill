@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import ReactNative from 'react-native'
-import { get } from '../utils/http'
-import toBoolean from '../utils/toBoolean'
 import errorReporter from '../utils/errorReporter'
 import { UNITS, convertTemp, convertSpeed } from '../utils/conversions'
+import fetchCurrentConditions from '../utils/fetchCurrentConditions'
+import getPosition from '../utils/getPosition'
 
 var {
   StyleSheet,
@@ -12,17 +12,9 @@ var {
   View,
 } = ReactNative
 
-const FORECAST_API_KEY = process.env.FORECAST_API_KEY
-const ENABLE_FORECAST = toBoolean(process.env.ENABLE_FORECAST) || !__DEV__
-
 const now = () => +(new Date)
 const ONE_MIN = 60
 const FIVE_MIN = ONE_MIN * 5
-
-const fetchCurrentConditions = ({ latitude, longitude }, units) => {
-  let url = `https://api.forecast.io/forecast/${FORECAST_API_KEY}/${[latitude, longitude].join(',')}?units=${units}`
-  return get(url).then((resp) => ({ units, ...resp.currently }))
-}
 
 export default class CurrentConnditions extends Component {
   constructor(props) {
@@ -51,19 +43,10 @@ export default class CurrentConnditions extends Component {
     }
   }
 
-  _getPosition() {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject, {
-        enableHighAccuracy: true, timeout: 20000, maximumAge: 1000
-      })
-    })
-  }
-
   _getCurrentForecast() {
-    if (!ENABLE_FORECAST) return
     if (now() < this.state.lastUpdate + FIVE_MIN) return
 
-    this._getPosition()
+    getPosition()
       .then((position) => {
         return fetchCurrentConditions(position.coords, this.props.units)
       })
