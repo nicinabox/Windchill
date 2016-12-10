@@ -19,9 +19,12 @@
 
 ## App Store Release
 
-* npm version [major|minor|patch]
-* Open xcode
+* Update version and build in package.json
+* Update version and build in xcode
 * Archive and upload
+* git commit package.json ios/ -m "VERSION"
+* git tag VERSION
+* git push && git push --tags
 
 ## Changelog
 
