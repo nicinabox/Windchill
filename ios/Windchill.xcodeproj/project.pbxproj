@@ -278,7 +278,6 @@
 				00E356F21AD99517003FC87E /* WindchillTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			name = WindchillTests;
 			path = WindchillTests;
 			sourceTree = "<group>";
 		};
