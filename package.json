@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "mocha"
+    "test": "mocha",
+    "postversion": "react-native-version"
   },
   "dependencies": {
     "babel-plugin-transform-inline-environment-variables": "^6.8.0",
@@ -15,6 +16,7 @@
     "react-native": "0.37.0",
     "react-native-line-gauge": "^1.0.0",
     "react-native-locale": "0.0.11",
+    "react-native-version": "^2.2.1",
     "weather-tools": "^2.0.1"
   },
   "devDependencies": {
