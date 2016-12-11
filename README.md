@@ -26,7 +26,7 @@
 
 ## Changelog
 
-### Unreleased
+### 1.2.0
 
 * Attempt to calculate windchill with out of bounds temperature instead of showing error
 * Fix gauge not animating to correct value when toggling between units
