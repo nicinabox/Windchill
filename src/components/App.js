@@ -57,7 +57,11 @@ export default class App extends Component {
 
   _calculateWindChill() {
     let { temp, speed, units } = this.state
-    return windchill[units](temp, speed) || temp
+    speed = speed >= BOUNDS[units].speed.min
+      ? speed
+      : BOUNDS[units].speed.min
+
+    return windchill[units](temp, speed, false)
   }
 
   _handleTemperatureChange(temp) {
