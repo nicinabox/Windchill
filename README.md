@@ -31,6 +31,7 @@
 * Show current temperature instead of error when no windchill
 * Fix gauge not animating to correct value when toggling between units
 * Allow gauge to be scrolled to out of bounds values
+* Save unit system preferences but default to current locale
 
 ### 1.1.2
 
