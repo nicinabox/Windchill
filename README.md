@@ -20,8 +20,8 @@
 ## App Store Release
 
 * Update changelog readme
-* Archive and upload
 * npm version VERSION
+* Archive and upload
 * git push && git push --tags
 
 ## Changelog
