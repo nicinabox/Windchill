@@ -1,4 +1,4 @@
-rootProject.name = 'FeelsLike'
+rootProject.name = 'Windchill'
 
 include ':app'
 include ':bugsnag-react-native'
