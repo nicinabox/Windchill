@@ -15,6 +15,16 @@
 		00E356F31AD99517003FC87E /* WindchillTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WindchillTests.m */; };
 		032EA220805248278AF175F3 /* libRCTLocale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBCFA7C4294B4A4C96820E43 /* libRCTLocale.a */; };
 		0424A8C71DDA7AF700B2292A /* libBugsnagReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0424A8B41DDA7AE900B2292A /* libBugsnagReactNative.a */; };
+		047DAF6B1EBE1D2000D33A1C /* libRCTRevMob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF5B1EBE1B9F00D33A1C /* libRCTRevMob.a */; };
+		047DAF6D1EBE1F9000D33A1C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF6C1EBE1F9000D33A1C /* AdSupport.framework */; };
+		047DAF6F1EBE1F9800D33A1C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF6E1EBE1F9800D33A1C /* AVFoundation.framework */; };
+		047DAF711EBE1FB300D33A1C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF701EBE1FB300D33A1C /* CoreFoundation.framework */; };
+		047DAF731EBE1FB700D33A1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF721EBE1FB700D33A1C /* CoreLocation.framework */; };
+		047DAF751EBE1FBF00D33A1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF741EBE1FBF00D33A1C /* Foundation.framework */; };
+		047DAF771EBE1FC600D33A1C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF761EBE1FC600D33A1C /* MediaPlayer.framework */; };
+		047DAF791EBE1FCE00D33A1C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF781EBE1FCE00D33A1C /* StoreKit.framework */; };
+		047DAF7B1EBE1FD200D33A1C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF7A1EBE1FD200D33A1C /* SystemConfiguration.framework */; };
+		047DAF7D1EBE203A00D33A1C /* RevMobAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF7C1EBE203A00D33A1C /* RevMobAds.framework */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -127,6 +137,13 @@
 			remoteGlobalIDString = DB248BF21C18396500105A5D;
 			remoteInfo = RCTLocale;
 		};
+		047DAF5A1EBE1B9F00D33A1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C901433497A843D79180BDBD /* RCTRevMob.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AF8B75C31CEB61BF00C59F7F;
+			remoteInfo = RCTRevMob;
+		};
 		04B524831DD586E7009DA2C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
@@ -223,6 +240,15 @@
 		00E356EE1AD99517003FC87E /* WindchillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WindchillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* WindchillTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WindchillTests.m; sourceTree = "<group>"; };
+		047DAF6C1EBE1F9000D33A1C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		047DAF6E1EBE1F9800D33A1C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		047DAF701EBE1FB300D33A1C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		047DAF721EBE1FB700D33A1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		047DAF741EBE1FBF00D33A1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		047DAF761EBE1FC600D33A1C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		047DAF781EBE1FCE00D33A1C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		047DAF7A1EBE1FD200D33A1C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		047DAF7C1EBE203A00D33A1C /* RevMobAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RevMobAds.framework; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Windchill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Windchill.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,6 +263,7 @@
 		3E2F043CE4FA4E668CABD9C6 /* BugsnagReactNative.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BugsnagReactNative.xcodeproj; path = "../node_modules/bugsnag-react-native/cocoa/BugsnagReactNative.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		C901433497A843D79180BDBD /* RCTRevMob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTRevMob.xcodeproj; path = "../node_modules/react-native-revmob/ios/RCTRevMob.xcodeproj"; sourceTree = "<group>"; };
 		D3568392EE99412C82F540C5 /* RCTLocale.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTLocale.xcodeproj; path = "../node_modules/react-native-locale/ios/RCTLocale.xcodeproj"; sourceTree = "<group>"; };
 		FBCFA7C4294B4A4C96820E43 /* libRCTLocale.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTLocale.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -254,6 +281,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				047DAF7B1EBE1FD200D33A1C /* SystemConfiguration.framework in Frameworks */,
+				047DAF791EBE1FCE00D33A1C /* StoreKit.framework in Frameworks */,
+				047DAF771EBE1FC600D33A1C /* MediaPlayer.framework in Frameworks */,
+				047DAF751EBE1FBF00D33A1C /* Foundation.framework in Frameworks */,
+				047DAF731EBE1FB700D33A1C /* CoreLocation.framework in Frameworks */,
+				047DAF711EBE1FB300D33A1C /* CoreFoundation.framework in Frameworks */,
+				047DAF6F1EBE1F9800D33A1C /* AVFoundation.framework in Frameworks */,
+				047DAF6D1EBE1F9000D33A1C /* AdSupport.framework in Frameworks */,
+				047DAF6B1EBE1D2000D33A1C /* libRCTRevMob.a in Frameworks */,
 				0424A8C71DDA7AF700B2292A /* libBugsnagReactNative.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -265,6 +301,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				047DAF7D1EBE203A00D33A1C /* RevMobAds.framework in Frameworks */,
 				685C987FAE064E33B35D7216 /* libz.tbd in Frameworks */,
 				032EA220805248278AF175F3 /* libRCTLocale.a in Frameworks */,
 			);
@@ -348,6 +385,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		047DAF4D1EBE1B9F00D33A1C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				047DAF5B1EBE1B9F00D33A1C /* libRCTRevMob.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,6 +464,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				3E2F043CE4FA4E668CABD9C6 /* BugsnagReactNative.xcodeproj */,
 				D3568392EE99412C82F540C5 /* RCTLocale.xcodeproj */,
+				C901433497A843D79180BDBD /* RCTRevMob.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -457,6 +503,15 @@
 		F6C51211C3CE4126B708B6A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				047DAF7C1EBE203A00D33A1C /* RevMobAds.framework */,
+				047DAF7A1EBE1FD200D33A1C /* SystemConfiguration.framework */,
+				047DAF781EBE1FCE00D33A1C /* StoreKit.framework */,
+				047DAF761EBE1FC600D33A1C /* MediaPlayer.framework */,
+				047DAF741EBE1FBF00D33A1C /* Foundation.framework */,
+				047DAF721EBE1FB700D33A1C /* CoreLocation.framework */,
+				047DAF701EBE1FB300D33A1C /* CoreFoundation.framework */,
+				047DAF6E1EBE1F9800D33A1C /* AVFoundation.framework */,
+				047DAF6C1EBE1F9000D33A1C /* AdSupport.framework */,
 				166B71A38DCB41B692E7D5E6 /* libz.tbd */,
 			);
 			name = Frameworks;
@@ -561,6 +616,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 047DAF4D1EBE1B9F00D33A1C /* Products */;
+					ProjectRef = C901433497A843D79180BDBD /* RCTRevMob.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -681,6 +740,13 @@
 			fileType = archive.ar;
 			path = libRCTLocale.a;
 			remoteRef = 047DAF2C1EBE168A00D33A1C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		047DAF5B1EBE1B9F00D33A1C /* libRCTRevMob.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTRevMob.a;
+			remoteRef = 047DAF5A1EBE1B9F00D33A1C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		04B524841DD586E7009DA2C4 /* libRCTImage-tvOS.a */ = {
@@ -863,6 +929,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Windchill.app/Windchill";
@@ -881,6 +948,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -939,6 +1007,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: nic haynes (M55932FLPL)";
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = M55932FLPL;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -946,6 +1018,7 @@
 					"$(SRCROOT)/../node_modules/react-native-locale/RCTLocale",
 					"$(SRCROOT)/../node_modules/bugsnag-react-native/cocoa/**",
 					"$(SRCROOT)/../node_modules/react-native-locale/ios/RCTLocale",
+					"$(SRCROOT)/../node_modules/react-native-revmob/ios/**",
 				);
 				INFOPLIST_FILE = Windchill/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -977,6 +1050,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Windchill.app/Windchill";
@@ -991,6 +1065,10 @@
 				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M55932FLPL;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -998,6 +1076,7 @@
 					"$(SRCROOT)/../node_modules/react-native-locale/RCTLocale",
 					"$(SRCROOT)/../node_modules/bugsnag-react-native/cocoa/**",
 					"$(SRCROOT)/../node_modules/react-native-locale/ios/RCTLocale",
+					"$(SRCROOT)/../node_modules/react-native-revmob/ios/**",
 				);
 				INFOPLIST_FILE = Windchill/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1021,6 +1100,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: nic haynes (M55932FLPL)";
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = M55932FLPL;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1028,6 +1111,7 @@
 					"$(SRCROOT)/../node_modules/react-native-locale/RCTLocale",
 					"$(SRCROOT)/../node_modules/bugsnag-react-native/cocoa/**",
 					"$(SRCROOT)/../node_modules/react-native-locale/ios/RCTLocale",
+					"$(SRCROOT)/../node_modules/react-native-revmob/ios/**",
 				);
 				INFOPLIST_FILE = Windchill/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
