@@ -10,11 +10,15 @@
   "dependencies": {
     "bugsnag-react-native": "^2.2.3",
     "lodash": "^4.17.4",
+    "prop-types": "^15.5.8",
     "react": "16.0.0-alpha.6",
     "react-native": "^0.44.0",
+    "react-native-in-app-utils": "^5.2.3",
     "react-native-line-gauge": "^1.0.0",
     "react-native-locale": "0.0.16",
+    "react-native-navbar": "^1.7.1",
     "react-native-revmob": "^9.2.2",
+    "react-native-vector-icons": "^4.1.0",
     "weather-tools": "^2.0.1"
   },
   "devDependencies": {

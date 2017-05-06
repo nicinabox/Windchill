@@ -2471,7 +2471,7 @@ lodash@^3.5.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.14.0, lodash@^4.16.6, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.6.1:
+lodash@^4.0.0, lodash@^4.14.0, lodash@^4.16.6, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -2930,7 +2930,7 @@ promise@^7, promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.4:
+prop-types@^15.5.4, prop-types@^15.5.8:
   version "15.5.8"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
   dependencies:
@@ -2994,6 +2994,10 @@ react-devtools-core@^2.0.8:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-in-app-utils@^5.2.3:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-in-app-utils/-/react-native-in-app-utils-5.2.3.tgz#25eb0eeb1ff597679322db924f8d61188ebb1dd3"
+
 react-native-line-gauge@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/react-native-line-gauge/-/react-native-line-gauge-1.1.2.tgz#178909678922c596c8da1c311ffb60fbc7a79f27"
@@ -3004,9 +3008,21 @@ react-native-locale@0.0.16:
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/react-native-locale/-/react-native-locale-0.0.16.tgz#8862c19994d681dd40a0d5bb74c23cfc291ef416"
 
+react-native-navbar@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-navbar/-/react-native-navbar-1.7.1.tgz#de0e6f8c2156c7e984bb43c76732bd2437b7df0f"
+
 react-native-revmob@^9.2.2:
   version "9.2.2"
   resolved "https://registry.yarnpkg.com/react-native-revmob/-/react-native-revmob-9.2.2.tgz#232fe68dd7d2b7365cb0001ae037993398c148bb"
+
+react-native-vector-icons@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.1.0.tgz#816054e85ce7d0a68957b2a4433d2daea91fd821"
+  dependencies:
+    lodash "^4.0.0"
+    prop-types "^15.5.8"
+    yargs "^6.3.0"
 
 react-native-version@^2.3.1:
   version "2.3.1"
@@ -3879,7 +3895,7 @@ yargs-parser@^4.2.0:
   dependencies:
     camelcase "^3.0.0"
 
-yargs@^6.4.0:
+yargs@^6.3.0, yargs@^6.4.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-6.6.0.tgz#782ec21ef403345f830a808ca3d513af56065208"
   dependencies:
