@@ -1,18 +1,26 @@
 import React, { Component } from 'react'
+import { RevMobManager } from 'react-native-revmob'
 import { windchill } from 'weather-tools'
 import ReactNative from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 import LineGauge from 'react-native-line-gauge'
 import CurrentConditions from './CurrentConditions'
-import UnitSystemControls from './UnitSystemControls'
+import AdSpacer from './AdSpacer'
+import Settings from './Settings'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 import { setUnits } from '../utils/unitSystem'
 
 var {
+  NativeAppEventEmitter,
   StyleSheet,
   Dimensions,
+  TouchableOpacity,
+  Modal,
   View,
   Text,
 } = ReactNative
+
+const REVMOB_APP_ID = '590de166328d84955c988752'
 
 const BOUNDS = {
   [SI]: {
@@ -49,10 +57,25 @@ export default class App extends Component {
     let units = props.units
 
     this.state = {
+      settingsVisible: false,
       speed: BOUNDS[units].speed.min,
       temp: BOUNDS[units].temp.max,
       units
     }
+  }
+
+  componentDidMount() {
+    RevMobManager.startSession(REVMOB_APP_ID, (err) => {
+      if (!err) RevMobManager.loadBanner()
+    })
+
+    NativeAppEventEmitter.addListener('onRevmobBannerDidReceive', () => {
+      // RevMobManager.showBanner()
+    })
+  }
+
+  componentWillUnmount () {
+    NativeAppEventEmitter.removeAllListeners()
   }
 
   _calculateWindChill() {
@@ -94,9 +117,22 @@ export default class App extends Component {
 
     return (
       <View style={styles.container}>
-        <CurrentConditions
-          units={units}
-          onPress={this._handleConditionsPress} />
+        <Modal
+          transparent={false}
+          visible={this.state.settingsVisible}
+          animationType="slide">
+          <Settings
+            handleClose={() => this.setState({ settingsVisible: false })}
+            handleUnitChange={this._handleUnitChange}
+            units={units}
+          />
+        </Modal>
+
+        <TouchableOpacity
+          style={styles.settingsButton}
+          onPress={() => this.setState({ settingsVisible: true })}>
+          <Icon name="ios-settings-outline" style={styles.settingsText} />
+        </TouchableOpacity>
 
         <View style={styles.feelsLike}>
           <View>
@@ -107,6 +143,11 @@ export default class App extends Component {
               {feelsLike}
             </Text>
           </View>
+
+          <CurrentConditions
+            units={units}
+            onPress={this._handleConditionsPress}
+          />
         </View>
 
         <View style={styles.controls}>
@@ -115,7 +156,8 @@ export default class App extends Component {
             <LineGauge
               onChange={this._handleWindSpeedChange}
               value={speed}
-              {...BOUNDS[units].speed} />
+              {...BOUNDS[units].speed}
+            />
 
             <Text style={styles.linearGaugeLabel}>Wind speed</Text>
           </View>
@@ -125,23 +167,52 @@ export default class App extends Component {
             <LineGauge
               onChange={this._handleTemperatureChange}
               value={temp}
-              {...BOUNDS[units].temp} />
+              {...BOUNDS[units].temp}
+            />
 
             <Text style={styles.linearGaugeLabel}>Temperature</Text>
           </View>
         </View>
 
-        <UnitSystemControls units={units} onPress={this._handleUnitChange} />
+        <Text style={styles.removeAdsText} onPress={() => this.setState({ settingsVisible: true })}>
+          REMOVE ADS
+        </Text>
+
+        <AdSpacer height={50} />
       </View>
     )
   }
 }
 
 var styles = StyleSheet.create({
+  removeAdsText: {
+    fontSize: 12,
+    color: '#4990E2',
+    textAlign: 'center',
+    padding: 10
+  },
   container: {
     flex: 1,
+    marginTop: 20,
     flexDirection: 'column',
     justifyContent: 'space-around',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  settingsButton: {
+    padding: 8,
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 1,
+  },
+  settingsText: {
+    color: '#666',
+    fontSize: 23,
   },
   linearGauge: {
     marginBottom: 20,
@@ -166,13 +237,15 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
   },
   feelsLikeText: {
-    fontSize: 38,
+    fontSize: 28,
+    maxHeight: 28,
     color: '#4990E2',
     fontWeight: '200',
     textAlign: 'center',
   },
   feelsLikeTempText: {
-    fontSize: 144,
+    fontSize: 124,
+    maxHeight: 124,
     fontWeight: '100',
     color: '#4990E2',
     textAlign: 'center',
