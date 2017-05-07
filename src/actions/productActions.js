@@ -15,7 +15,7 @@ export const AD_CODE_EXPIRED = 'AD_CODE_EXPIRED'
 
 const AD_CODE_URL = __DEV__
   ? 'http://localhost:3000/ad_codes'
-  : 'https://windchill-api.nicinabox.com/ad_codes'
+  : 'https://windchill-api.apps.nicinabox.com/ad_codes'
 
 export function checkAdCodeExpiration() {
   return (dispatch, getState) => {
