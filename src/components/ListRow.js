@@ -62,9 +62,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   content: {
-    flex: 1,
   },
   accessory: {
+    flex: 1,
+    alignItems: 'flex-end',
     marginRight: 15,
     marginLeft: 10,
   },

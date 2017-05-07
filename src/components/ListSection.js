@@ -9,6 +9,8 @@ var {
   Text,
 } = ReactNative
 
+const result = (el) => (typeof el === 'function') ? el() : el
+
 export default class ListSection extends Component {
   constructor(props) {
     super(props)
@@ -17,24 +19,24 @@ export default class ListSection extends Component {
   render() {
     return (
       <View style={styles.section}>
-        {this.props.header && (
+        {this.props.header ? (
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionHeaderText}>
-              {this.props.header}
+              {result(this.props.header)}
             </Text>
           </View>
-        )}
+        ) : null}
 
         <ListSeparator />
         {this.props.children}
 
-        {this.props.footer && (
+        {this.props.footer ? (
           <View style={styles.sectionFooter}>
             <Text style={styles.sectionFooterText}>
-              {this.props.footer}
+              {result(this.props.footer)}
             </Text>
           </View>
-        )}
+        ) : null}
       </View>
     )
   }
@@ -50,11 +52,11 @@ ListSection.defaultProps = {
 
 var styles = StyleSheet.create({
   section: {
+    marginTop: 30,
   },
   sectionHeader: {
     marginHorizontal: 15,
-    marginTop: 22,
-    paddingVertical: 8,
+    marginBottom: 8,
   },
   sectionHeaderText: {
     color: '#888',
@@ -62,7 +64,12 @@ var styles = StyleSheet.create({
     fontSize: 14,
   },
   sectionFooter: {
+    marginHorizontal: 15,
+    marginVertical: 8,
   },
   sectionFooterText: {
+    color: '#888',
+    textAlign: 'center',
+    fontSize: 13,
   }
 })

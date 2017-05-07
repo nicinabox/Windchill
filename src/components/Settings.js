@@ -1,26 +1,33 @@
 import React, { Component } from 'react'
 import ReactNative from 'react-native'
+import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { connect } from 'react-redux'
+import { format } from 'date-fns'
 import NavigationBar from 'react-native-navbar'
 import ListSection from './ListSection'
 import ListRow from './ListRow'
+import Button from './Button'
 import { US, SI } from '../utils/conversions'
 import { setItem } from '../utils/storage'
 import { isPurchased } from '../utils/purchases'
 import { setUnits } from '../actions/settingsActions'
-import { loadProducts, purchaseProduct, restorePurchases } from '../actions/productActions'
+import {
+  validateAdCode,
+  loadProducts,
+  purchaseProduct,
+  restorePurchases
+} from '../actions/productActions'
 
 const {
-  NativeModules,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
   View,
   Text,
+  TextInput,
+  Linking,
   Alert,
 } = ReactNative
-
-const { InAppUtils } = NativeModules
 
 export class Settings extends Component {
   constructor(props) {
@@ -28,6 +35,10 @@ export class Settings extends Component {
 
     this.purchase = this.purchase.bind(this)
     this.restorePurchases = this.restorePurchases.bind(this)
+    this.handleContact = this.handleContact.bind(this)
+    this.handleRemoveAdsCodeSubmit = this.handleRemoveAdsCodeSubmit.bind(this)
+
+    this.state = {}
   }
 
   componentDidMount() {
@@ -40,6 +51,14 @@ export class Settings extends Component {
 
   restorePurchases() {
     this.props.restorePurchases()
+  }
+
+  handleContact() {
+    Linking.openURL('mailto:nic@nicinabox.com?subject=Windchill Ad-free Code')
+  }
+
+  handleRemoveAdsCodeSubmit() {
+    this.props.validateAdCode(this.state.removeAdsCode)
   }
 
   render() {
@@ -56,7 +75,9 @@ export class Settings extends Component {
           }}
         />
 
-        <ScrollView>
+        <ScrollView
+          ref={r => this.scrollView = r}
+          style={{flex:1}}>
           <ListSection header="UNITS">
             {[US, SI].map((u) => {
               return (
@@ -81,9 +102,9 @@ export class Settings extends Component {
                   renderAccessory={() => isProductPurchased ? (
                     <Text style={styles.textMuted}>Purchased!</Text>
                   ) : (
-                    <TouchableOpacity onPress={() => this.purchase(product.identifier)}>
-                      <Text style={styles.buttonText}>Buy</Text>
-                    </TouchableOpacity>
+                    <Button onPress={() => this.purchase(product.identifier)}>
+                      Buy
+                    </Button>
                   )}
                 />
               )
@@ -95,14 +116,54 @@ export class Settings extends Component {
             />
           </ListSection>
 
+          {!this.props.state.products.adCode && (
+            <ListSection
+              header="Share Windchill on your favorite social media site or forum and get a year ad-free!"
+              footer={() => (
+                <Text>
+                  <Text onPress={this.handleContact} style={styles.footerLink}>
+                    Contact me
+                  </Text>
+                  {' '}with a link to your post and I'll send you a code.
+                </Text>
+              )}>
+              <ListRow
+                primaryText="Enter Code"
+                renderAccessory={() => (
+                  <TextInput
+                    style={styles.input}
+                    value={this.state.removeAdsCode}
+                    onChangeText={(removeAdsCode) => this.setState({ removeAdsCode })}
+                    onSubmitEditing={this.handleRemoveAdsCodeSubmit}
+                    autoCorrect={false}
+                    autoCapitalize="characters"
+                    returnKeyType="go"
+                  />
+                )}
+              />
+            </ListSection>
+          )}
+
           {!this.props.state.settings.shouldShowAds && (
             <View style={styles.thanks}>
-              <Text style={styles.thanksText}>
-                Thanks for supporting Windchill!
-              </Text>
+              {this.props.state.products.adCode ? (
+                <Text style={styles.thanksText}>
+                  Enjoy Windchill ad-free until {format(this.props.state.products.adCode.expiration, 'MMM D, YYYY')}!
+                </Text>
+              ) : (
+                <Text style={styles.thanksText}>
+                  Thanks for supporting Windchill!
+                </Text>
+              )}
             </View>
           )}
         </ScrollView>
+
+        <KeyboardSpacer onToggle={(isOpen) => {
+          setTimeout(() => {
+            isOpen && this.scrollView.scrollToEnd()
+          }, 1)
+        }}/>
       </View>
     )
   }
@@ -117,10 +178,6 @@ var styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#bbb'
   },
-  buttonText: {
-    color: '#4990E2',
-    fontSize: 17
-  },
   textMuted: {
     color: '#bbb'
   },
@@ -130,12 +187,22 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   thanksText: {
-    color: '#1acb58'
-  }
+    color: '#16ac4b'
+  },
+  input: {
+    height: 40,
+    flex: 1,
+    fontFamily: 'Menlo',
+    textAlign: 'right',
+  },
+  footerLink: {
+    textDecorationLine: 'underline',
+  },
 })
 
 export default connect((state) => ({state}), {
   setUnits,
+  validateAdCode,
   loadProducts,
   purchaseProduct,
   restorePurchases,

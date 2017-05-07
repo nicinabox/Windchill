@@ -10,12 +10,14 @@ import AdSpacer from './AdSpacer'
 import Settings from './Settings'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 import { setUnits } from '../actions/settingsActions'
+import { checkAdCodeExpiration } from '../actions/productActions'
 
 var {
   NativeAppEventEmitter,
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  AppState,
   Modal,
   View,
   Text,
@@ -64,6 +66,10 @@ export class App extends Component {
   }
 
   componentDidMount() {
+    this.props.checkAdCodeExpiration()
+
+    AppState.addEventListener('change', this._handleAppStateChange)
+
     RevMobManager.startSession(REVMOB_APP_ID, (err) => {
       if (err) {
         console.log(err);
@@ -94,6 +100,7 @@ export class App extends Component {
 
   componentWillUnmount () {
     NativeAppEventEmitter.removeAllListeners()
+    AppState.removeEventListener('change', this._handleAppStateChange)
   }
 
   _calculateWindChill() {
@@ -104,6 +111,12 @@ export class App extends Component {
       : BOUNDS[units].speed.min
 
     return windchill[units](temp, speed, false)
+  }
+
+  _handleAppStateChange(nextAppState) {
+    if (nextAppState === 'active') {
+      this.props.checkAdCodeExpiration()
+    }
   }
 
   _handleTemperatureChange(temp) {
@@ -267,5 +280,6 @@ var styles = StyleSheet.create({
 })
 
 export default connect((state) => ({state}), {
-  setUnits
+  setUnits,
+  checkAdCodeExpiration,
 })(App)

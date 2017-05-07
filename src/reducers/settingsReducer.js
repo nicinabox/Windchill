@@ -1,11 +1,15 @@
 import { getLocaleUnits } from '../utils/unitSystem'
 import { shouldShowAds } from '../utils/purchases'
 import {
-  SET_UNITS
+  SET_UNITS,
 } from '../actions/settingsActions'
 import {
   PURCHASE_PRODUCT,
   RESTORE_PURCHASES,
+  RESET_PURCHASES,
+  RECEIVE_AD_CODE,
+  RESET_AD_CODE,
+  AD_CODE_EXPIRED,
 } from '../actions/productActions'
 
 const initialState = {
@@ -21,6 +25,14 @@ export default function (state = initialState, action) {
         units: action.units
       }
 
+    case RECEIVE_AD_CODE:
+    case RESET_AD_CODE:
+    case AD_CODE_EXPIRED:
+      return {
+        ...state,
+        shouldShowAds: !action.adCode
+      }
+
     case PURCHASE_PRODUCT:
       return {
         ...state,
@@ -33,7 +45,7 @@ export default function (state = initialState, action) {
         shouldShowAds: shouldShowAds(action.purchases)
       }
 
-    case 'RESET_PURCHASES':
+    case RESET_PURCHASES:
       return {
         ...state,
         shouldShowAds: initialState.shouldShowAds

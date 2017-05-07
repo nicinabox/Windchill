@@ -1,15 +1,31 @@
 const toJSON = r => r.json()
 
 const checkStatus = (r) => {
-  if (r.ok) {
-    return r
-  }
+  if (r.ok) return r
 
-  let error = new Error(r.statusText)
-  error.response = r
-  throw error
+  return toJSON(r)
+    .then((body) => {
+      let error = new Error(r.statusText)
+      console.log(body);
+      error.body = body
+      error.response = r
+      throw error
+    })
 }
 
 export const get = (url, options = {}) => {
+  return fetch(url, options).then(checkStatus).then(toJSON)
+}
+
+export const post = (url, body, options = {}) => {
+  options = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accepts': 'application/json',
+    },
+    method: 'post',
+    body: JSON.stringify(body),
+    ...options,
+  }
   return fetch(url, options).then(checkStatus).then(toJSON)
 }
