@@ -8,7 +8,7 @@ import CurrentConditions from './CurrentConditions'
 import AdSpacer from './AdSpacer'
 import Settings from './Settings'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
-import { setUnits } from '../utils/unitSystem'
+import { setItem } from '../utils/storage'
 
 var {
   NativeAppEventEmitter,
@@ -54,7 +54,7 @@ export default class App extends Component {
     this._handleUnitChange = this._handleUnitChange.bind(this)
     this._handleConditionsPress = this._handleConditionsPress.bind(this)
 
-    let units = props.units
+    let { units } = props.settings
 
     this.state = {
       settingsVisible: false,
@@ -70,7 +70,7 @@ export default class App extends Component {
     })
 
     NativeAppEventEmitter.addListener('onRevmobBannerDidReceive', () => {
-      // RevMobManager.showBanner()
+      !__DEV__ && RevMobManager.showBanner()
     })
   }
 
@@ -98,7 +98,10 @@ export default class App extends Component {
   _handleUnitChange(units) {
     if (units === this.state.units) return
 
-    setUnits(units)
+    setItem('settings', {
+      ...this.props.settings,
+      units: this.state.units
+    })
 
     this.setState({
       units,
