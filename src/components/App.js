@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { RevMobManager } from 'react-native-revmob'
 import { windchill } from 'weather-tools'
 import ReactNative from 'react-native'
@@ -8,7 +9,7 @@ import CurrentConditions from './CurrentConditions'
 import AdSpacer from './AdSpacer'
 import Settings from './Settings'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
-import { setItem } from '../utils/storage'
+import { setUnits } from '../actions/settingsActions'
 
 var {
   NativeAppEventEmitter,
@@ -45,33 +46,50 @@ const BOUNDS = {
   }
 }
 
-export default class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props)
 
     this._handleTemperatureChange = this._handleTemperatureChange.bind(this)
     this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
-    this._handleUnitChange = this._handleUnitChange.bind(this)
     this._handleConditionsPress = this._handleConditionsPress.bind(this)
 
-    let { units } = props.settings
+    const { units } = props.state.settings
 
     this.state = {
       settingsVisible: false,
       speed: BOUNDS[units].speed.min,
       temp: BOUNDS[units].temp.max,
-      units
     }
   }
 
   componentDidMount() {
     RevMobManager.startSession(REVMOB_APP_ID, (err) => {
-      if (!err) RevMobManager.loadBanner()
+      if (err) {
+        console.log(err);
+        return
+      }
+      RevMobManager.loadBanner()
     })
 
     NativeAppEventEmitter.addListener('onRevmobBannerDidReceive', () => {
-      !__DEV__ && RevMobManager.showBanner()
+      this.props.state.settings.shouldShowAds && RevMobManager.showBanner()
     })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { units, shouldShowAds } = nextProps.state.settings
+
+    if (units !== this.props.state.settings.units) {
+      this.setState({
+        speed: Math.round(convertSpeed(this.state.speed, units)),
+        temp: Math.round(convertTemp(this.state.temp, units)),
+      })
+    }
+
+    if (shouldShowAds !== this.props.state.settings.shouldShowAds) {
+      shouldShowAds ? RevMobManager.showBanner() : RevMobManager.hideBanner()
+    }
   }
 
   componentWillUnmount () {
@@ -79,7 +97,8 @@ export default class App extends Component {
   }
 
   _calculateWindChill() {
-    let { temp, speed, units } = this.state
+    let { temp, speed } = this.state
+    const { units } = this.props.state.settings
     speed = speed >= BOUNDS[units].speed.min
       ? speed
       : BOUNDS[units].speed.min
@@ -95,27 +114,13 @@ export default class App extends Component {
     this.setState({ speed })
   }
 
-  _handleUnitChange(units) {
-    if (units === this.state.units) return
-
-    setItem('settings', {
-      ...this.props.settings,
-      units: this.state.units
-    })
-
-    this.setState({
-      units,
-      speed: Math.round(convertSpeed(this.state.speed, units)),
-      temp: Math.round(convertTemp(this.state.temp, units)),
-    })
-  }
-
   _handleConditionsPress(currently) {
     this.setState(currently)
   }
 
   render() {
-    let { units, speed, temp } = this.state
+    let { speed, temp } = this.state
+    let { units } = this.props.state.settings
     let feelsLike = this._calculateWindChill()
 
     return (
@@ -126,8 +131,6 @@ export default class App extends Component {
           animationType="slide">
           <Settings
             handleClose={() => this.setState({ settingsVisible: false })}
-            handleUnitChange={this._handleUnitChange}
-            units={units}
           />
         </Modal>
 
@@ -177,11 +180,15 @@ export default class App extends Component {
           </View>
         </View>
 
-        <Text style={styles.removeAdsText} onPress={() => this.setState({ settingsVisible: true })}>
-          REMOVE ADS
-        </Text>
+        {this.props.state.settings.shouldShowAds && (
+          <View>
+            <Text style={styles.removeAdsText} onPress={() => this.setState({ settingsVisible: true })}>
+              REMOVE ADS
+            </Text>
 
-        <AdSpacer height={50} />
+            <AdSpacer height={50} />
+          </View>
+        )}
       </View>
     )
   }
@@ -258,3 +265,7 @@ var styles = StyleSheet.create({
     padding: 30
   }
 })
+
+export default connect((state) => ({state}), {
+  setUnits
+})(App)

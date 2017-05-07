@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import ReactNative from 'react-native'
+import { connect } from 'react-redux'
 import NavigationBar from 'react-native-navbar'
 import ListSection from './ListSection'
 import ListRow from './ListRow'
 import { US, SI } from '../utils/conversions'
+import { setItem } from '../utils/storage'
+import { isPurchased } from '../utils/purchases'
+import { setUnits } from '../actions/settingsActions'
+import { loadProducts, purchaseProduct, restorePurchases } from '../actions/productActions'
 
 const {
   NativeModules,
@@ -16,70 +21,25 @@ const {
 } = ReactNative
 
 const { InAppUtils } = NativeModules
-const products = [
-  'com.nicinabox.windchill.removeads'
-]
 
-export default class Settings extends Component {
+export class Settings extends Component {
   constructor(props) {
     super(props)
 
-    this.buy = this.buy.bind(this)
-    this.restoreRemoveAds = this.restoreRemoveAds.bind(this)
-
-    this.state = {
-      products: []
-    }
+    this.purchase = this.purchase.bind(this)
+    this.restorePurchases = this.restorePurchases.bind(this)
   }
 
   componentDidMount() {
-    InAppUtils.loadProducts(products, (err, products) => {
-      if (err) {
-        return Alert.alert(err.message)
-      }
-      console.log(products);
-      this.setState({ products })
-    })
+    this.props.loadProducts()
   }
 
-  buy(id) {
-    InAppUtils.purchaseProduct(id, (err, resp) => {
-      if (err) {
-        return Alert.alert(err.message)
-      }
-
-      console.log(resp);
-
-      // if (resp && resp.productIdentifier) {
-      //   console.log('Purchase Successful', 'Your Transaction ID is ' + resp.transactionIdentifier)
-      // }
-    })
+  purchase(id) {
+    this.props.purchaseProduct(id)
   }
 
-  restoreRemoveAds() {
-    InAppUtils.restorePurchases((err, resp) => {
-      if (err) {
-        return Alert.alert('Could not connect to iTunes Store')
-      }
-      console.log(resp);
-
-      // if (error) {
-      //   console.log('itunes Error', 'Could not connect to itunes store.')
-      // } else {
-      //   console.log('Restore Successful', 'Successfully restores all your purchases.')
-      //
-      //   if (response.length === 0) {
-      //     console.log('No Purchases', "We didn't find any purchases to restore.")
-      //     return
-      //   }
-      //
-      //   response.forEach( function(purchase) {
-      //     if (purchase.productIdentifier === purchases[0]) {
-      //       // Handle purchased product.
-      //     }
-      //   })
-      // }
-    })
+  restorePurchases() {
+    this.props.restorePurchases()
   }
 
   render() {
@@ -103,32 +63,45 @@ export default class Settings extends Component {
                 <ListRow
                   key={`units-${u}`}
                   primaryText={u.toUpperCase()}
-                  onPress={() => this.props.handleUnitChange(u)}
-                  checked={this.props.units === u}
+                  onPress={() => this.props.setUnits(u)}
+                  checked={this.props.state.settings.units === u}
                 />
               )
             })}
           </ListSection>
 
           <ListSection header="PURCHASES">
-            {this.state.products.map((product) => (
-              <ListRow
-                key={product.identifier}
-                primaryText={product.title}
-                detailText={product.priceString}
-                renderAccessory={() => (
-                  <TouchableOpacity onPress={() => this.buy(product.identifier)}>
-                    <Text style={styles.buttonText}>Buy</Text>
-                  </TouchableOpacity>
-                )}
-              />
-            ))}
+            {this.props.state.products.products.map((product) => {
+              const isProductPurchased = isPurchased(product.identifier, this.props.state.products.purchases)
+              return (
+                <ListRow
+                  key={product.identifier}
+                  primaryText={product.title}
+                  detailText={!isProductPurchased && product.priceString}
+                  renderAccessory={() => isProductPurchased ? (
+                    <Text style={styles.textMuted}>Purchased!</Text>
+                  ) : (
+                    <TouchableOpacity onPress={() => this.purchase(product.identifier)}>
+                      <Text style={styles.buttonText}>Buy</Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              )
+            })}
 
             <ListRow
               primaryText="Restore Purchases"
-              onPress={this.restoreRemoveAds}
+              onPress={this.restorePurchases}
             />
           </ListSection>
+
+          {!this.props.state.settings.shouldShowAds && (
+            <View style={styles.thanks}>
+              <Text style={styles.thanksText}>
+                Thanks for supporting Windchill!
+              </Text>
+            </View>
+          )}
         </ScrollView>
       </View>
     )
@@ -147,5 +120,23 @@ var styles = StyleSheet.create({
   buttonText: {
     color: '#4990E2',
     fontSize: 17
+  },
+  textMuted: {
+    color: '#bbb'
+  },
+  thanks: {
+    flexDirection: 'row',
+    marginVertical: 30,
+    justifyContent: 'center'
+  },
+  thanksText: {
+    color: '#1acb58'
   }
 })
+
+export default connect((state) => ({state}), {
+  setUnits,
+  loadProducts,
+  purchaseProduct,
+  restorePurchases,
+})(Settings)

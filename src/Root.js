@@ -1,27 +1,29 @@
-import React from 'react'
+import React, { Component } from 'react'
 import App from './components/App'
-import { getLocaleUnits } from './utils/unitSystem'
+import { Provider } from 'react-redux'
 import { getItem } from './utils/storage'
+import createStore from './store'
 
-export default class Root extends React.Component {
+export default class Root extends Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
 
   componentDidMount() {
-    let defaultSettings = {
-      units: getLocaleUnits()
-    }
-
-    getItem('settings')
-      .then((settings) => settings || defaultSettings)
-      .then((settings) => {
-        this.setState({ settings })
+    getItem('store')
+      .then(state => state || {})
+      .then((initialState) => {
+        let store = createStore(initialState)
+        this.setState({ store })
       })
   }
 
   render() {
-    return this.state.settings ? <App {...this.state} /> : null
+    return this.state.store ? (
+      <Provider store={this.state.store}>
+        <App />
+      </Provider>
+    ) : null
   }
 }
