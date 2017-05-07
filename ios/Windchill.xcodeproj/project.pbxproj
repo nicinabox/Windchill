@@ -22,7 +22,6 @@
 		047DAF731EBE1FB700D33A1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF721EBE1FB700D33A1C /* CoreLocation.framework */; };
 		047DAF751EBE1FBF00D33A1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF741EBE1FBF00D33A1C /* Foundation.framework */; };
 		047DAF771EBE1FC600D33A1C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF761EBE1FC600D33A1C /* MediaPlayer.framework */; };
-		047DAF791EBE1FCE00D33A1C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF781EBE1FCE00D33A1C /* StoreKit.framework */; };
 		047DAF7B1EBE1FD200D33A1C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF7A1EBE1FD200D33A1C /* SystemConfiguration.framework */; };
 		047DAF7D1EBE203A00D33A1C /* RevMobAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF7C1EBE203A00D33A1C /* RevMobAds.framework */; };
 		047DAFBA1EBE2FAE00D33A1C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 047DAFB01EBE2FAE00D33A1C /* Entypo.ttf */; };
@@ -36,6 +35,7 @@
 		047DAFC21EBE2FAE00D33A1C /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 047DAFB81EBE2FAE00D33A1C /* SimpleLineIcons.ttf */; };
 		047DAFC31EBE2FAE00D33A1C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 047DAFB91EBE2FAE00D33A1C /* Zocial.ttf */; };
 		047DAFCD1EBE328800D33A1C /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAFCA1EBE322F00D33A1C /* libRCTAnimation.a */; };
+		04F771BF1EBE55F100A8959F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F771BE1EBE55F100A8959F /* StoreKit.framework */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -311,7 +311,6 @@
 		047DAF721EBE1FB700D33A1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		047DAF741EBE1FBF00D33A1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		047DAF761EBE1FC600D33A1C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		047DAF781EBE1FCE00D33A1C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		047DAF7A1EBE1FD200D33A1C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		047DAF7C1EBE203A00D33A1C /* RevMobAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RevMobAds.framework; sourceTree = "<group>"; };
 		047DAFB01EBE2FAE00D33A1C /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
@@ -325,6 +324,7 @@
 		047DAFB81EBE2FAE00D33A1C /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		047DAFB91EBE2FAE00D33A1C /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
 		047DAFC41EBE322F00D33A1C /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		04F771BE1EBE55F100A8959F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Windchill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Windchill.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -373,7 +373,6 @@
 			files = (
 				047DAFCD1EBE328800D33A1C /* libRCTAnimation.a in Frameworks */,
 				047DAF7B1EBE1FD200D33A1C /* SystemConfiguration.framework in Frameworks */,
-				047DAF791EBE1FCE00D33A1C /* StoreKit.framework in Frameworks */,
 				047DAF771EBE1FC600D33A1C /* MediaPlayer.framework in Frameworks */,
 				047DAF751EBE1FBF00D33A1C /* Foundation.framework in Frameworks */,
 				047DAF731EBE1FB700D33A1C /* CoreLocation.framework in Frameworks */,
@@ -383,6 +382,7 @@
 				047DAF6B1EBE1D2000D33A1C /* libRCTRevMob.a in Frameworks */,
 				0424A8C71DDA7AF700B2292A /* libBugsnagReactNative.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
+				04F771BF1EBE55F100A8959F /* StoreKit.framework in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
@@ -662,9 +662,9 @@
 		F6C51211C3CE4126B708B6A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04F771BE1EBE55F100A8959F /* StoreKit.framework */,
 				047DAF7C1EBE203A00D33A1C /* RevMobAds.framework */,
 				047DAF7A1EBE1FD200D33A1C /* SystemConfiguration.framework */,
-				047DAF781EBE1FCE00D33A1C /* StoreKit.framework */,
 				047DAF761EBE1FC600D33A1C /* MediaPlayer.framework */,
 				047DAF741EBE1FBF00D33A1C /* Foundation.framework */,
 				047DAF721EBE1FB700D33A1C /* CoreLocation.framework */,
@@ -733,6 +733,11 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = M55932FLPL;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1333,8 +1338,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicinabox.windchill;
 				PRODUCT_NAME = Windchill;
-				PROVISIONING_PROFILE = "6656ed57-a9f5-4015-95f7-a0f2fed1f31b";
-				PROVISIONING_PROFILE_SPECIFIER = Development;
+				PROVISIONING_PROFILE = "9831cd45-8be4-4110-a07f-56a6adce018a";
+				PROVISIONING_PROFILE_SPECIFIER = "Windchill Development";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1370,8 +1375,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicinabox.windchill;
 				PRODUCT_NAME = Windchill;
-				PROVISIONING_PROFILE = "fae39076-f6c6-4409-ad1d-d1bb7987c1d0";
-				PROVISIONING_PROFILE_SPECIFIER = "Nicinabox Distribution Profile";
+				PROVISIONING_PROFILE = "5d39b821-27f6-4f23-a152-c7bc597fff78";
+				PROVISIONING_PROFILE_SPECIFIER = "Windchill Distribution";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
