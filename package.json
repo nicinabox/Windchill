@@ -19,6 +19,9 @@
     "react-native-navbar": "^1.7.1",
     "react-native-revmob": "^9.2.2",
     "react-native-vector-icons": "^4.1.0",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "weather-tools": "^2.0.1"
   },
   "devDependencies": {
@@ -28,6 +31,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "enzyme": "^2.8.2",
     "react-native-version": "^2.3.1",
+    "redux-devtools": "^3.4.0",
     "unexpected": "^10.27.0"
   }
 }
