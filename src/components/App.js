@@ -137,6 +137,7 @@ export class App extends Component {
     let { speed, temp } = this.state
     let { units } = this.props.state.settings
     let feelsLike = this._calculateWindChill()
+    let fontSize = this.props.state.settings.shouldShowAds ? 123 : 153
 
     return (
       <View style={styles.container}>
@@ -160,7 +161,7 @@ export class App extends Component {
             <Text style={styles.feelsLikeText}>
               Feels like
             </Text>
-            <Text style={styles.feelsLikeTempText}>
+            <Text style={[styles.feelsLikeTempText, { fontSize, maxHeight: fontSize }]}>
               {feelsLike}
             </Text>
           </View>
