@@ -9,6 +9,7 @@ import CurrentConditions from './CurrentConditions'
 import AdSpacer from './AdSpacer'
 import Settings from './Settings'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
+import errorReporter from '../utils/errorReporter'
 import { setUnits } from '../actions/settingsActions'
 import { checkAdCodeExpiration } from '../actions/productActions'
 
@@ -72,7 +73,7 @@ export class App extends Component {
 
     RevMobManager.startSession(REVMOB_APP_ID, (err) => {
       if (err) {
-        console.log(err);
+        errorReporter.notify(err)
         return
       }
       RevMobManager.loadBanner()
