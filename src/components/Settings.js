@@ -148,11 +148,11 @@ export class Settings extends Component {
             <View style={styles.thanks}>
               {this.props.state.products.adCode ? (
                 <Text style={styles.thanksText}>
-                  Enjoy Windchill ad-free until {format(this.props.state.products.adCode.expiration, 'MMM D, YYYY')}!
+                  🎉 Enjoy Windchill ad-free until {format(this.props.state.products.adCode.expiration, 'MMM D, YYYY')}!
                 </Text>
               ) : (
                 <Text style={styles.thanksText}>
-                  Thanks for supporting Windchill!
+                  🎉 Thanks for supporting Windchill!
                 </Text>
               )}
             </View>
