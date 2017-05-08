@@ -198,9 +198,11 @@ export class App extends Component {
 
         {this.props.state.settings.shouldShowAds && (
           <View>
-            <Text style={styles.removeAdsText} onPress={() => this.setState({ settingsVisible: true })}>
-              REMOVE ADS
-            </Text>
+            <TouchableOpacity onPress={() => this.setState({ settingsVisible: true })}>
+              <Text style={styles.removeAdsText}>
+                REMOVE ADS
+              </Text>
+            </TouchableOpacity>
 
             <AdSpacer height={50} />
           </View>
