@@ -1,6 +1,7 @@
 import { NativeModules, Alert } from 'react-native'
 import { isAfter } from 'date-fns'
 import { post } from '../utils/http'
+import errorReporter from '../utils/errorReporter'
 import { PRODUCTS } from '../utils/purchases'
 
 const { InAppUtils } = NativeModules
@@ -38,6 +39,7 @@ export function validateAdCode(code) {
         })
       })
       .catch((err) => {
+        errorReporter.notify(err)
         if (err.body && err.body.error) {
           Alert.alert(err.body.error.message)
         }
@@ -49,6 +51,7 @@ export function loadProducts() {
   return (dispatch) => {
     InAppUtils.loadProducts(PRODUCTS, (err, products) => {
       if (err) {
+        errorReporter.notify(err)
         return Alert.alert(err.message)
       }
 
@@ -64,6 +67,7 @@ export function purchaseProduct(id) {
   return (dispatch) => {
     InAppUtils.purchaseProduct(id, (err, resp) => {
       if (err) {
+        errorReporter.notify(err)
         return Alert.alert(err.message)
       }
 
@@ -81,6 +85,7 @@ export function restorePurchases() {
   return (dispatch) => {
     InAppUtils.restorePurchases((err, resp) => {
       if (err) {
+        errorReporter.notify(err)
         return Alert.alert('Could not connect to iTunes Store')
       }
 
