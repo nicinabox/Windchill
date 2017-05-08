@@ -105,11 +105,12 @@ export default class CurrentConnditions extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 10,
   },
   text: {
     color: '#444',
     padding: 10,
+    fontSize: 16,
   }
 })

@@ -165,12 +165,12 @@ export class App extends Component {
               {feelsLike}
             </Text>
           </View>
-
-          <CurrentConditions
-            units={units}
-            onPress={this._handleConditionsPress}
-          />
         </View>
+
+        <CurrentConditions
+          units={units}
+          onPress={this._handleConditionsPress}
+        />
 
         <View style={styles.controls}>
           <View style={styles.linearGauge}>
@@ -215,7 +215,7 @@ var styles = StyleSheet.create({
     fontSize: 12,
     color: '#4990E2',
     textAlign: 'center',
-    padding: 10
+    padding: 6
   },
   container: {
     flex: 1,
@@ -254,7 +254,6 @@ var styles = StyleSheet.create({
     color: '#4A4A4A'
   },
   controls: {
-    flex: 1,
     justifyContent: 'center',
   },
   feelsLike: {
@@ -263,15 +262,15 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
   },
   feelsLikeText: {
-    fontSize: 28,
-    maxHeight: 28,
+    fontSize: 31,
+    maxHeight: 31,
     color: '#4990E2',
     fontWeight: '200',
     textAlign: 'center',
   },
   feelsLikeTempText: {
-    fontSize: 124,
-    maxHeight: 124,
+    fontSize: 153,
+    maxHeight: 153,
     fontWeight: '100',
     color: '#4990E2',
     textAlign: 'center',
