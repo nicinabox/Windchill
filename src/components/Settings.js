@@ -116,7 +116,7 @@ export class Settings extends Component {
             />
           </ListSection>
 
-          {!this.props.state.products.adCode && (
+          {this.props.state.settings.shouldShowAds && (
             <ListSection
               header="Share Windchill on your favorite social media site or forum and get a year ad-free!"
               footer={() => (
