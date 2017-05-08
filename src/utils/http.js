@@ -6,7 +6,6 @@ const checkStatus = (r) => {
   return toJSON(r)
     .then((body) => {
       let error = new Error(r.statusText)
-      console.log(body);
       error.body = body
       error.response = r
       throw error
