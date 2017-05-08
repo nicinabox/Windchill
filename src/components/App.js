@@ -56,6 +56,7 @@ export class App extends Component {
     this._handleTemperatureChange = this._handleTemperatureChange.bind(this)
     this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
     this._handleConditionsPress = this._handleConditionsPress.bind(this)
+    this._handleAppStateChange = this._handleAppStateChange.bind(this)
 
     const { units } = props.state.settings
 
