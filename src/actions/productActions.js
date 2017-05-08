@@ -41,7 +41,7 @@ export function validateAdCode(code) {
       .catch((err) => {
         errorReporter.notify(err)
         if (err.body && err.body.error) {
-          Alert.alert(err.body.error.message)
+          Alert.alert(err.body.error)
         }
       })
   }
