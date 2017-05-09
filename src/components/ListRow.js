@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, TouchableHighlight, View, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import ListSeparator from './ListSeparator'
+import * as colors from '../styles/colors'
 
 export default function ListRow (props) {
   let Wrapper = View
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   checkmark: {
-    color: '#4990E2',
+    color: colors.brandPrimary,
     fontSize: 40,
     maxHeight: 36,
   }

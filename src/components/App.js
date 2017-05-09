@@ -12,6 +12,7 @@ import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 import errorReporter from '../utils/errorReporter'
 import { setUnits } from '../actions/settingsActions'
 import { checkAdCodeExpiration } from '../actions/productActions'
+import * as colors from '../styles/colors'
 
 var {
   NativeAppEventEmitter,
@@ -19,6 +20,8 @@ var {
   Dimensions,
   TouchableOpacity,
   AppState,
+  StatusBar,
+  Image,
   Modal,
   View,
   Text,
@@ -141,6 +144,18 @@ export class App extends Component {
 
     return (
       <View style={styles.container}>
+        <StatusBar
+          barStyle={this.state.settingsVisible ? 'dark-content' : 'light-content'}
+        />
+
+        <Image
+          source={require('../images/background-gradient.png')}
+          resizeMode="cover"
+          style={{
+            position: 'absolute'
+          }}
+        />
+
         <Modal
           transparent={false}
           visible={this.state.settingsVisible}
@@ -176,6 +191,7 @@ export class App extends Component {
           <View style={styles.linearGauge}>
             <Text style={styles.linearGaugeValue}>{speed} {UNITS[units].speed}</Text>
             <LineGauge
+              styles={lineGaugeStyles}
               onChange={this._handleWindSpeedChange}
               value={speed}
               {...BOUNDS[units].speed}
@@ -187,6 +203,7 @@ export class App extends Component {
           <View style={styles.linearGauge}>
             <Text style={styles.linearGaugeValue}>{temp} {UNITS[units].temperature}</Text>
             <LineGauge
+              styles={lineGaugeStyles}
               onChange={this._handleTemperatureChange}
               value={temp}
               {...BOUNDS[units].temp}
@@ -213,17 +230,12 @@ export class App extends Component {
 }
 
 var styles = StyleSheet.create({
-  removeAdsText: {
-    fontSize: 12,
-    color: '#4990E2',
-    textAlign: 'center',
-    padding: 6
-  },
   container: {
     flex: 1,
-    marginTop: 20,
+    paddingTop: 20,
     flexDirection: 'column',
     justifyContent: 'space-around',
+    backgroundColor: 'transparent'
   },
   header: {
     flexDirection: 'row',
@@ -234,26 +246,13 @@ var styles = StyleSheet.create({
     padding: 8,
     alignSelf: 'flex-end',
     position: 'absolute',
-    top: 0,
+    top: 20,
     right: 0,
     zIndex: 1,
-  },
-  settingsText: {
-    color: '#666',
-    fontSize: 23,
   },
   linearGauge: {
     marginBottom: 20,
     justifyContent: 'space-between',
-  },
-  linearGaugeValue: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 20
-  },
-  linearGaugeLabel: {
-    textAlign: 'center',
-    color: '#4A4A4A'
   },
   controls: {
     justifyContent: 'center',
@@ -263,10 +262,30 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  removeAdsText: {
+    fontSize: 12,
+    color: '#fff',
+    textAlign: 'center',
+    padding: 6
+  },
+  settingsText: {
+    color: '#fff',
+    fontSize: 23,
+  },
+  linearGaugeValue: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 20
+  },
+  linearGaugeLabel: {
+    textAlign: 'center',
+    color: '#fff',
+  },
   feelsLikeText: {
     fontSize: 31,
     maxHeight: 31,
-    color: '#4990E2',
+    color: '#fff',
     fontWeight: '200',
     textAlign: 'center',
   },
@@ -274,12 +293,28 @@ var styles = StyleSheet.create({
     fontSize: 153,
     maxHeight: 153,
     fontWeight: '100',
-    color: '#4990E2',
+    color: '#fff',
     textAlign: 'center',
   },
-  errorText: {
-    color: '#D13856',
-    padding: 30
+})
+
+var lineGaugeStyles = StyleSheet.create({
+  container: {
+    borderTopColor: 'rgba(0,0,0,0.4)',
+    borderBottomColor: 'rgba(0,0,0,0.4)',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
+  interval: {
+    backgroundColor: 'rgba(255,255,255,0.6)',
+  },
+  intervalValue: {
+    color: '#fff',
+  },
+  large: {
+    backgroundColor: '#fff',
+  },
+  centerline: {
+    backgroundColor: '#50E3C2',
   }
 })
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, Text } from 'react-native'
+import * as colors from '../styles/colors'
 
 export default function Button (props) {
   return (
@@ -13,7 +14,7 @@ export default function Button (props) {
 
 const styles = StyleSheet.create({
   buttonText: {
-    color: '#4990E2',
+    color: colors.brandPrimary,
     fontSize: 17
   },
 })

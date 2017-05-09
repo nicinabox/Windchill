@@ -109,8 +109,8 @@ var styles = StyleSheet.create({
     marginVertical: 10,
   },
   text: {
-    color: '#444',
+    color: '#fff',
     padding: 10,
-    fontSize: 16,
-  }
+    fontSize: 16
+  },
 })

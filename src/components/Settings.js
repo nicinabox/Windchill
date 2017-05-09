@@ -17,6 +17,7 @@ import {
   purchaseProduct,
   restorePurchases
 } from '../actions/productActions'
+import * as colors from '../styles/colors'
 
 const {
   StyleSheet,
@@ -172,14 +173,14 @@ export class Settings extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: colors.backgroundColor,
   },
   navbarStyle: {
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#bbb'
+    borderBottomColor: colors.borderColor
   },
   textMuted: {
-    color: '#bbb'
+    color: colors.borderColor
   },
   thanks: {
     flexDirection: 'row',
@@ -187,7 +188,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   thanksText: {
-    color: '#16ac4b'
+    color: colors.brandSuccess
   },
   input: {
     height: 40,

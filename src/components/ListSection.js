@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactNative from 'react-native'
 import ListSeparator from './ListSeparator'
+import * as colors from '../styles/colors'
 
 var {
   StyleSheet,
@@ -59,7 +60,7 @@ var styles = StyleSheet.create({
     marginBottom: 8,
   },
   sectionHeaderText: {
-    color: '#888',
+    color: colors.lightGray,
     fontWeight: '500',
     fontSize: 14,
   },
@@ -68,7 +69,7 @@ var styles = StyleSheet.create({
     marginVertical: 8,
   },
   sectionFooterText: {
-    color: '#888',
+    color: colors.lightGray,
     textAlign: 'center',
     fontSize: 13,
   }
