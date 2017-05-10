@@ -18,6 +18,7 @@
 		044B73D91EC176A600BB229C /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAFAC1EBE2E6900D33A1C /* libRNVectorIcons.a */; };
 		044B73DA1EC176AD00BB229C /* libInAppUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAFE51EBE4DAD00D33A1C /* libInAppUtils.a */; };
 		044B74101EC2972600BB229C /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044B740F1EC2972600BB229C /* GoogleMobileAds.framework */; };
+		044B74111EC29D7C00BB229C /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 044B740C1EC2966E00BB229C /* libRNAdMobManager.a */; };
 		047DAFBA1EBE2FAE00D33A1C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 047DAFB01EBE2FAE00D33A1C /* Entypo.ttf */; };
 		047DAFBB1EBE2FAE00D33A1C /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 047DAFB11EBE2FAE00D33A1C /* EvilIcons.ttf */; };
 		047DAFBC1EBE2FAE00D33A1C /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 047DAFB21EBE2FAE00D33A1C /* FontAwesome.ttf */; };
@@ -48,7 +49,6 @@
 		96EB6A0FD4244FBA8F9D0C85 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43D89CEF2D1748CFAF2C4BA9 /* Entypo.ttf */; };
 		996557077612472E99D70BF0 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6963A3BC292A457593ACD549 /* Zocial.ttf */; };
 		9D3347B3491F42F985AFC77B /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 776102C2D6A5477BAB2D35A6 /* Ionicons.ttf */; };
-		BBE38687F78348E69CD7BD71 /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F327632F2D4843748AB82928 /* libRNAdMobManager.a */; };
 		D094DB333BFE43F5B5192793 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1DDE569EA9A144FB835B544F /* MaterialCommunityIcons.ttf */; };
 		D192B372C55C430B8AC94728 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EABE84BEE14049DAA652B561 /* EvilIcons.ttf */; };
 /* End PBXBuildFile section */
@@ -343,7 +343,6 @@
 		9F4584936E77436481D1448A /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		D3568392EE99412C82F540C5 /* RCTLocale.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTLocale.xcodeproj; path = "../node_modules/react-native-locale/ios/RCTLocale.xcodeproj"; sourceTree = "<group>"; };
 		EABE84BEE14049DAA652B561 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		F327632F2D4843748AB82928 /* libRNAdMobManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAdMobManager.a; sourceTree = "<group>"; };
 		FECDF34D19FF4013BED700C5 /* InAppUtils.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = InAppUtils.xcodeproj; path = "../node_modules/react-native-in-app-utils/InAppUtils.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -360,6 +359,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044B74111EC29D7C00BB229C /* libRNAdMobManager.a in Frameworks */,
 				044B74101EC2972600BB229C /* GoogleMobileAds.framework in Frameworks */,
 				044B73DA1EC176AD00BB229C /* libInAppUtils.a in Frameworks */,
 				044B73D91EC176A600BB229C /* libRNVectorIcons.a in Frameworks */,
@@ -377,7 +377,6 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				685C987FAE064E33B35D7216 /* libz.tbd in Frameworks */,
-				BBE38687F78348E69CD7BD71 /* libRNAdMobManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
