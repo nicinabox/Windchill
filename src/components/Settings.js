@@ -6,6 +6,7 @@ import { format } from 'date-fns'
 import NavigationBar from 'react-native-navbar'
 import ListSection from './ListSection'
 import ListRow from './ListRow'
+import ListSpacer from './ListSpacer'
 import Button from './Button'
 import { US, SI } from '../utils/conversions'
 import { setItem } from '../utils/storage'
@@ -36,7 +37,8 @@ export class Settings extends Component {
 
     this.purchase = this.purchase.bind(this)
     this.restorePurchases = this.restorePurchases.bind(this)
-    this.handleContact = this.handleContact.bind(this)
+    this.handleEmailContact = this.handleEmailContact.bind(this)
+    this.handleTwitterContact = this.handleTwitterContact.bind(this)
     this.handleRemoveAdsCodeSubmit = this.handleRemoveAdsCodeSubmit.bind(this)
 
     this.state = {}
@@ -54,8 +56,12 @@ export class Settings extends Component {
     this.props.restorePurchases()
   }
 
-  handleContact() {
+  handleEmailContact() {
     Linking.openURL('mailto:nic@nicinabox.com?subject=Windchill Ad-free Code')
+  }
+
+  handleTwitterContact() {
+    Linking.openURL('https://twitter.com/nicinabox')
   }
 
   handleRemoveAdsCodeSubmit() {
@@ -120,14 +126,7 @@ export class Settings extends Component {
           {this.props.state.settings.shouldShowAds && (
             <ListSection
               header="Share Windchill on your favorite social media site or forum and get a year ad-free!"
-              footer={() => (
-                <Text>
-                  <Text onPress={this.handleContact} style={styles.footerLink}>
-                    Contact me
-                  </Text>
-                  {' '}with a link to your post and I'll send you a code.
-                </Text>
-              )}>
+              footer="Contact me with a link to your post and I'll send you a code.">
               <ListRow
                 primaryText="Enter Code"
                 renderAccessory={() => (
@@ -145,6 +144,19 @@ export class Settings extends Component {
             </ListSection>
           )}
 
+          <ListSection header="CONTACT">
+            <ListRow
+              primaryText="Email"
+              detailText="nic@nicinabox.com"
+              onPress={this.handleEmailContact}
+            />
+            <ListRow
+              primaryText="Twitter"
+              detailText="@nicinabox"
+              onPress={this.handleTwitterContact}
+            />
+          </ListSection>
+
           {!this.props.state.settings.shouldShowAds && (
             <View style={styles.thanks}>
               {this.props.state.products.adCode ? (
@@ -158,6 +170,8 @@ export class Settings extends Component {
               )}
             </View>
           )}
+
+          <ListSpacer />
         </ScrollView>
 
         <KeyboardSpacer onToggle={(isOpen) => {
