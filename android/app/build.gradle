@@ -126,6 +126,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-admob')
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-revmob')
     compile project(':bugsnag-react-native')
     compile project(':react-native-locale')
     compile fileTree(dir: "libs", include: ["*.jar"])

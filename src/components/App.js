@@ -1,18 +1,33 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { windchill } from 'weather-tools'
 import ReactNative from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 import LineGauge from 'react-native-line-gauge'
+import { AdMobBanner, PublisherBanner } from 'react-native-admob'
 import CurrentConditions from './CurrentConditions'
-import UnitSystemControls from './UnitSystemControls'
+import AdSpacer from './AdSpacer'
+import Settings from './Settings'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
-import { setUnits } from '../utils/unitSystem'
+import errorReporter from '../utils/errorReporter'
+import { setUnits } from '../actions/settingsActions'
+import { checkAdCodeExpiration } from '../actions/productActions'
+import * as colors from '../styles/colors'
 
 var {
+  NativeAppEventEmitter,
   StyleSheet,
   Dimensions,
+  TouchableOpacity,
+  AppState,
+  StatusBar,
+  Image,
+  Modal,
   View,
   Text,
 } = ReactNative
+
+const ADMOB_APP_ID = 'ca-app-pub-2980728243430969~3811207535'
 
 const BOUNDS = {
   [SI]: {
@@ -37,31 +52,60 @@ const BOUNDS = {
   }
 }
 
-export default class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props)
 
     this._handleTemperatureChange = this._handleTemperatureChange.bind(this)
     this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
-    this._handleUnitChange = this._handleUnitChange.bind(this)
     this._handleConditionsPress = this._handleConditionsPress.bind(this)
+    this._handleAppStateChange = this._handleAppStateChange.bind(this)
 
-    let units = props.units
+    const { units } = props.state.settings
 
     this.state = {
+      settingsVisible: false,
       speed: BOUNDS[units].speed.min,
       temp: BOUNDS[units].temp.max,
-      units
     }
   }
 
+  componentDidMount() {
+    this.props.checkAdCodeExpiration()
+
+    AppState.addEventListener('change', this._handleAppStateChange)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { units } = nextProps.state.settings
+
+    if (units !== this.props.state.settings.units) {
+      this.setState({
+        speed: Math.round(convertSpeed(this.state.speed, units)),
+        temp: Math.round(convertTemp(this.state.temp, units)),
+      })
+    }
+  }
+
+  componentWillUnmount () {
+    NativeAppEventEmitter.removeAllListeners()
+    AppState.removeEventListener('change', this._handleAppStateChange)
+  }
+
   _calculateWindChill() {
-    let { temp, speed, units } = this.state
+    let { temp, speed } = this.state
+    const { units } = this.props.state.settings
     speed = speed >= BOUNDS[units].speed.min
       ? speed
       : BOUNDS[units].speed.min
 
     return windchill[units](temp, speed, false)
+  }
+
+  _handleAppStateChange(nextAppState) {
+    if (nextAppState === 'active') {
+      this.props.checkAdCodeExpiration()
+    }
   }
 
   _handleTemperatureChange(temp) {
@@ -72,50 +116,70 @@ export default class App extends Component {
     this.setState({ speed })
   }
 
-  _handleUnitChange(units) {
-    if (units === this.state.units) return
-
-    setUnits(units)
-
-    this.setState({
-      units,
-      speed: Math.round(convertSpeed(this.state.speed, units)),
-      temp: Math.round(convertTemp(this.state.temp, units)),
-    })
-  }
-
   _handleConditionsPress(currently) {
     this.setState(currently)
   }
 
   render() {
-    let { units, speed, temp } = this.state
+    let { speed, temp } = this.state
+    let { units } = this.props.state.settings
     let feelsLike = this._calculateWindChill()
+    let fontSize = this.props.state.settings.shouldShowAds ? 123 : 153
 
     return (
       <View style={styles.container}>
-        <CurrentConditions
-          units={units}
-          onPress={this._handleConditionsPress} />
+        <StatusBar
+          barStyle={this.state.settingsVisible ? 'dark-content' : 'light-content'}
+        />
+
+        <Image
+          source={require('../images/background-gradient.png')}
+          resizeMode="cover"
+          style={{
+            position: 'absolute'
+          }}
+        />
+
+        <Modal
+          transparent={false}
+          visible={this.state.settingsVisible}
+          animationType="slide">
+          <Settings
+            handleClose={() => this.setState({ settingsVisible: false })}
+          />
+        </Modal>
+
+        <TouchableOpacity
+          style={styles.settingsButton}
+          onPress={() => this.setState({ settingsVisible: true })}>
+          <Icon name="ios-settings-outline" style={styles.settingsText} />
+        </TouchableOpacity>
 
         <View style={styles.feelsLike}>
           <View>
             <Text style={styles.feelsLikeText}>
               Feels like
             </Text>
-            <Text style={styles.feelsLikeTempText}>
+            <Text style={[styles.feelsLikeTempText, { fontSize, maxHeight: fontSize }]}>
               {feelsLike}
             </Text>
           </View>
         </View>
 
+        <CurrentConditions
+          units={units}
+          onPress={this._handleConditionsPress}
+        />
+
         <View style={styles.controls}>
           <View style={styles.linearGauge}>
             <Text style={styles.linearGaugeValue}>{speed} {UNITS[units].speed}</Text>
             <LineGauge
+              styles={lineGaugeStyles}
               onChange={this._handleWindSpeedChange}
               value={speed}
-              {...BOUNDS[units].speed} />
+              {...BOUNDS[units].speed}
+            />
 
             <Text style={styles.linearGaugeLabel}>Wind speed</Text>
           </View>
@@ -123,15 +187,33 @@ export default class App extends Component {
           <View style={styles.linearGauge}>
             <Text style={styles.linearGaugeValue}>{temp} {UNITS[units].temperature}</Text>
             <LineGauge
+              styles={lineGaugeStyles}
               onChange={this._handleTemperatureChange}
               value={temp}
-              {...BOUNDS[units].temp} />
+              {...BOUNDS[units].temp}
+            />
 
             <Text style={styles.linearGaugeLabel}>Temperature</Text>
           </View>
         </View>
 
-        <UnitSystemControls units={units} onPress={this._handleUnitChange} />
+        {this.props.state.settings.shouldShowAds && (
+          <View>
+            <TouchableOpacity onPress={() => this.setState({ settingsVisible: true })}>
+              <Text style={styles.removeAdsText}>
+                REMOVE ADS
+              </Text>
+            </TouchableOpacity>
+
+            <AdMobBanner
+              adUnitID="ca-app-pub-2980728243430969/5287940733"
+              testDeviceID={__DEV__ ? 'EMULATOR' : null}
+              bannerSize="smartBannerPortrait"
+              didFailToReceiveAdWithError={errorReporter.notify}
+              adViewDidReceiveAd={null}
+            />
+          </View>
+        )}
       </View>
     )
   }
@@ -140,24 +222,29 @@ export default class App extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 20,
     flexDirection: 'column',
     justifyContent: 'space-around',
+    backgroundColor: 'transparent'
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  settingsButton: {
+    padding: 8,
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    top: 20,
+    right: 0,
+    zIndex: 1,
   },
   linearGauge: {
     marginBottom: 20,
     justifyContent: 'space-between',
   },
-  linearGaugeValue: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 20
-  },
-  linearGaugeLabel: {
-    textAlign: 'center',
-    color: '#4A4A4A'
-  },
   controls: {
-    flex: 1,
     justifyContent: 'center',
   },
   feelsLike: {
@@ -165,20 +252,63 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  removeAdsText: {
+    fontSize: 12,
+    color: '#fff',
+    textAlign: 'center',
+    padding: 6
+  },
+  settingsText: {
+    color: '#fff',
+    fontSize: 23,
+  },
+  linearGaugeValue: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 20
+  },
+  linearGaugeLabel: {
+    textAlign: 'center',
+    color: '#fff',
+  },
   feelsLikeText: {
-    fontSize: 38,
-    color: '#4990E2',
+    fontSize: 31,
+    maxHeight: 31,
+    color: '#fff',
     fontWeight: '200',
     textAlign: 'center',
   },
   feelsLikeTempText: {
-    fontSize: 144,
+    fontSize: 153,
+    maxHeight: 153,
     fontWeight: '100',
-    color: '#4990E2',
+    color: '#fff',
     textAlign: 'center',
   },
-  errorText: {
-    color: '#D13856',
-    padding: 30
+})
+
+var lineGaugeStyles = StyleSheet.create({
+  container: {
+    borderTopColor: 'rgba(0,0,0,0.4)',
+    borderBottomColor: 'rgba(0,0,0,0.4)',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
+  interval: {
+    backgroundColor: 'rgba(255,255,255,0.6)',
+  },
+  intervalValue: {
+    color: '#fff',
+  },
+  large: {
+    backgroundColor: '#fff',
+  },
+  centerline: {
+    backgroundColor: '#50E3C2',
   }
 })
+
+export default connect((state) => ({state}), {
+  setUnits,
+  checkAdCodeExpiration,
+})(App)
