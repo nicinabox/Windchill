@@ -207,8 +207,10 @@ export class App extends Component {
 
             <AdMobBanner
               adUnitID="ca-app-pub-2980728243430969/5287940733"
-              testDeviceID="EMULATOR"
+              testDeviceID={__DEV__ ? 'EMULATOR' : null}
               bannerSize="smartBannerPortrait"
+              didFailToReceiveAdWithError={errorReporter.notify}
+              adViewDidReceiveAd={null}
             />
           </View>
         )}
