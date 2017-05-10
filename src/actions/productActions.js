@@ -89,12 +89,10 @@ export function restorePurchases() {
         return Alert.alert('Could not connect to iTunes Store')
       }
 
-      if (resp.length) {
-        dispatch({
-          type: RESTORE_PURCHASES,
-          purchases: resp
-        })
-      }
+      dispatch({
+        type: RESTORE_PURCHASES,
+        purchases: resp
+      })
     })
   }
 }

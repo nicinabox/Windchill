@@ -3017,6 +3017,10 @@ react-devtools-core@^2.0.8:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-admob@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-admob/-/react-native-admob-1.3.0.tgz#7f313c28a9b8bebeee410ba8fbab920315750b03"
+
 react-native-in-app-utils@^5.2.3:
   version "5.2.3"
   resolved "https://registry.yarnpkg.com/react-native-in-app-utils/-/react-native-in-app-utils-5.2.3.tgz#25eb0eeb1ff597679322db924f8d61188ebb1dd3"
@@ -3038,10 +3042,6 @@ react-native-locale@0.0.16:
 react-native-navbar@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/react-native-navbar/-/react-native-navbar-1.7.1.tgz#de0e6f8c2156c7e984bb43c76732bd2437b7df0f"
-
-react-native-revmob@^9.2.2:
-  version "9.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-revmob/-/react-native-revmob-9.2.2.tgz#232fe68dd7d2b7365cb0001ae037993398c148bb"
 
 react-native-vector-icons@^4.1.0:
   version "4.1.0"

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { RevMobManager } from 'react-native-revmob'
 import { windchill } from 'weather-tools'
 import ReactNative from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import LineGauge from 'react-native-line-gauge'
+import { AdMobBanner, PublisherBanner } from 'react-native-admob'
 import CurrentConditions from './CurrentConditions'
 import AdSpacer from './AdSpacer'
 import Settings from './Settings'
@@ -27,7 +27,7 @@ var {
   Text,
 } = ReactNative
 
-const REVMOB_APP_ID = '590de166328d84955c988752'
+const ADMOB_APP_ID = 'ca-app-pub-2980728243430969~3811207535'
 
 const BOUNDS = {
   [SI]: {
@@ -74,32 +74,16 @@ export class App extends Component {
     this.props.checkAdCodeExpiration()
 
     AppState.addEventListener('change', this._handleAppStateChange)
-
-    RevMobManager.startSession(REVMOB_APP_ID, (err) => {
-      if (err) {
-        errorReporter.notify(err)
-        return
-      }
-      RevMobManager.loadBanner()
-    })
-
-    NativeAppEventEmitter.addListener('onRevmobBannerDidReceive', () => {
-      this.props.state.settings.shouldShowAds && RevMobManager.showBanner()
-    })
   }
 
   componentWillReceiveProps(nextProps) {
-    const { units, shouldShowAds } = nextProps.state.settings
+    const { units } = nextProps.state.settings
 
     if (units !== this.props.state.settings.units) {
       this.setState({
         speed: Math.round(convertSpeed(this.state.speed, units)),
         temp: Math.round(convertTemp(this.state.temp, units)),
       })
-    }
-
-    if (shouldShowAds !== this.props.state.settings.shouldShowAds) {
-      shouldShowAds ? RevMobManager.showBanner() : RevMobManager.hideBanner()
     }
   }
 
@@ -221,7 +205,11 @@ export class App extends Component {
               </Text>
             </TouchableOpacity>
 
-            <AdSpacer height={50} />
+            <AdMobBanner
+              adUnitID="ca-app-pub-2980728243430969/5287940733"
+              testDeviceID="EMULATOR"
+              bannerSize="smartBannerPortrait"
+            />
           </View>
         )}
       </View>
