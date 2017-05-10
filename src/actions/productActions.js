@@ -39,7 +39,6 @@ export function validateAdCode(code) {
         })
       })
       .catch((err) => {
-        errorReporter.notify(err)
         if (err.body && err.body.error) {
           Alert.alert(err.body.error)
         }
@@ -51,7 +50,7 @@ export function loadProducts() {
   return (dispatch) => {
     InAppUtils.loadProducts(PRODUCTS, (err, products) => {
       if (err) {
-        errorReporter.notify(err)
+        errorReporter.notify(err.message)
         return Alert.alert(err.message)
       }
 
@@ -67,7 +66,7 @@ export function purchaseProduct(id) {
   return (dispatch) => {
     InAppUtils.purchaseProduct(id, (err, resp) => {
       if (err) {
-        errorReporter.notify(err)
+        errorReporter.notify(err.message)
         return Alert.alert(err.message)
       }
 
@@ -85,7 +84,7 @@ export function restorePurchases() {
   return (dispatch) => {
     InAppUtils.restorePurchases((err, resp) => {
       if (err) {
-        errorReporter.notify(err)
+        errorReporter.notify(err, 'Could not restore purchases')
         return Alert.alert('Could not connect to iTunes Store')
       }
 
