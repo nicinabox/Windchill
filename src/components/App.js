@@ -279,7 +279,7 @@ var styles = StyleSheet.create({
   feelsLikeText: {
     fontSize: 31,
     maxHeight: 31,
-    color: '#fff',
+    color: 'rgba(0,0,0,0.5)',
     fontWeight: '200',
     textAlign: 'center',
   },
@@ -293,8 +293,8 @@ var styles = StyleSheet.create({
 
 var lineGaugeStyles = StyleSheet.create({
   container: {
-    borderTopColor: 'rgba(0,0,0,0.4)',
-    borderBottomColor: 'rgba(0,0,0,0.4)',
+    borderTopColor: 'rgba(0,0,0,0.1)',
+    borderBottomColor: 'rgba(0,0,0,0.1)',
     backgroundColor: 'rgba(0,0,0,0.3)',
   },
   interval: {
