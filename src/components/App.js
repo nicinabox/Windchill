@@ -21,6 +21,7 @@ var {
   TouchableOpacity,
   AppState,
   StatusBar,
+  PixelRatio,
   Image,
   Modal,
   View,
@@ -51,6 +52,8 @@ const BOUNDS = {
     }
   }
 }
+
+const { height } = Dimensions.get('window')
 
 export class App extends Component {
   constructor(props) {
@@ -122,9 +125,10 @@ export class App extends Component {
 
   render() {
     let { speed, temp } = this.state
-    let { units } = this.props.state.settings
+    let { units, shouldShowAds } = this.props.state.settings
     let feelsLike = this._calculateWindChill()
-    let fontSize = this.props.state.settings.shouldShowAds ? 123 : 153
+    let baseFontSize = height <= 568 && shouldShowAds ? 50 : 76
+    let fontSize = baseFontSize * PixelRatio.get()
 
     return (
       <View style={styles.container}>
@@ -197,7 +201,7 @@ export class App extends Component {
           </View>
         </View>
 
-        {this.props.state.settings.shouldShowAds && (
+        {shouldShowAds && (
           <View>
             <TouchableOpacity onPress={() => this.setState({ settingsVisible: true })}>
               <Text style={styles.removeAdsText}>
@@ -280,11 +284,10 @@ var styles = StyleSheet.create({
     textAlign: 'center',
   },
   feelsLikeTempText: {
-    fontSize: 153,
-    maxHeight: 153,
     fontWeight: '100',
     color: '#fff',
     textAlign: 'center',
+    flex: 1,
   },
 })
 
