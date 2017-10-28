@@ -36,6 +36,11 @@ public class MainApplication extends Application implements ReactApplication {
             new RCTLocalePackage()
       );
     }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
   };
 
   @Override
