@@ -2,7 +2,7 @@ import { Client } from 'bugsnag-react-native'
 
 const mockReporter = {
   notify(err) {
-    console.log(err)
+    console.trace(err)
   }
 }
 
