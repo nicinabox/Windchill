@@ -7,8 +7,10 @@ import LineGauge from 'react-native-line-gauge'
 import { AdMobBanner, PublisherBanner } from 'react-native-admob'
 import CurrentConditions from './CurrentConditions'
 import Settings from './Settings'
+import IPhoneXSpacer from './IPhoneXSpacer'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 import errorReporter from '../utils/errorReporter'
+import isIphoneX from '../utils/isIphoneX'
 import { setUnits } from '../actions/settingsActions'
 import { checkAdCodeExpiration } from '../actions/productActions'
 
@@ -51,7 +53,7 @@ const BOUNDS = {
   }
 }
 
-const { height } = Dimensions.get('window')
+const { height: HEIGHT } = Dimensions.get('window')
 
 export class App extends Component {
   constructor(props) {
@@ -121,12 +123,29 @@ export class App extends Component {
     this.setState(currently)
   }
 
+  _getFontSize(shouldShowAds) {
+    const heightMap = {
+      // iPhone X
+      812: 57,
+
+      // iPhone 8+
+      736: 57,
+
+      // iPhone 8
+      667: 70,
+
+      // iPhone 5
+      568: shouldShowAds ? 40 : 60,
+    }
+
+    return heightMap[HEIGHT] * PixelRatio.get()
+  }
+
   render() {
     let { speed, temp } = this.state
     let { units, shouldShowAds } = this.props.state.settings
     let feelsLike = this._calculateWindChill()
-    let baseFontSize = height <= 568 && shouldShowAds ? 50 : 76
-    let fontSize = baseFontSize * PixelRatio.get()
+    let fontSize = this._getFontSize(shouldShowAds)
 
     return (
       <View style={styles.container}>
@@ -138,7 +157,7 @@ export class App extends Component {
           source={require('../images/background-gradient.png')}
           resizeMode="cover"
           style={{
-            position: 'absolute'
+            position: 'absolute',
           }}
         />
 
@@ -215,6 +234,8 @@ export class App extends Component {
             />
           </View>
         )}
+
+        <IPhoneXSpacer />
       </View>
     )
   }
@@ -237,7 +258,7 @@ var styles = StyleSheet.create({
     padding: 8,
     alignSelf: 'flex-end',
     position: 'absolute',
-    top: 20,
+    top: isIphoneX() ? 44 : 20,
     right: 0,
     zIndex: 1,
   },
@@ -277,7 +298,7 @@ var styles = StyleSheet.create({
     fontSize: 31,
     maxHeight: 31,
     color: 'rgba(0,0,0,0.5)',
-    fontWeight: '200',
+    fontWeight: '300',
     textAlign: 'center',
   },
   feelsLikeTempText: {
