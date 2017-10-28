@@ -1,7 +1,6 @@
 import { get } from '../utils/http'
-import toBoolean from '../utils/toBoolean'
 
-const FORECAST_API_KEY = process.env.FORECAST_API_KEY
+const FORECAST_API_KEY = process.env.FORECAST_API_KEY // eslint-disable-line
 
 const mockConditions = () => {
   return Promise.resolve(require('../../mocks/conditions.json'))

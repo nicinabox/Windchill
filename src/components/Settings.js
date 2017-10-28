@@ -9,7 +9,6 @@ import ListRow from './ListRow'
 import ListSpacer from './ListSpacer'
 import Button from './Button'
 import { US, SI } from '../utils/conversions'
-import { setItem } from '../utils/storage'
 import { isPurchased } from '../utils/purchases'
 import { setUnits } from '../actions/settingsActions'
 import {
@@ -23,12 +22,10 @@ import * as colors from '../styles/colors'
 const {
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
   View,
   Text,
   TextInput,
   Linking,
-  Alert,
 } = ReactNative
 
 export class Settings extends Component {
@@ -206,7 +203,7 @@ var styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    flex: 1,
+    width: '100%',
     fontFamily: 'Menlo',
     textAlign: 'right',
   },

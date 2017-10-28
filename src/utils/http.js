@@ -13,18 +13,23 @@ const checkStatus = (r) => {
 }
 
 export const get = (url, options = {}) => {
-  return fetch(url, options).then(checkStatus).then(toJSON)
+  return fetch(url, options)
+    .then(checkStatus)
+    .then(toJSON)
 }
 
-export const post = (url, body, options = {}) => {
-  options = {
+export const post = (url, body, opts = {}) => {
+  let options = {
     headers: {
       'Content-Type': 'application/json',
       'Accepts': 'application/json',
     },
     method: 'post',
     body: JSON.stringify(body),
-    ...options,
+    ...opts,
   }
-  return fetch(url, options).then(checkStatus).then(toJSON)
+
+  return fetch(url, options)
+    .then(checkStatus)
+    .then(toJSON)
 }

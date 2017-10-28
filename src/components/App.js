@@ -6,13 +6,11 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import LineGauge from 'react-native-line-gauge'
 import { AdMobBanner, PublisherBanner } from 'react-native-admob'
 import CurrentConditions from './CurrentConditions'
-import AdSpacer from './AdSpacer'
 import Settings from './Settings'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 import errorReporter from '../utils/errorReporter'
 import { setUnits } from '../actions/settingsActions'
 import { checkAdCodeExpiration } from '../actions/productActions'
-import * as colors from '../styles/colors'
 
 var {
   NativeAppEventEmitter,
@@ -28,7 +26,7 @@ var {
   Text,
 } = ReactNative
 
-const ADMOB_APP_ID = 'ca-app-pub-2980728243430969~3811207535'
+// const ADMOB_APP_ID = 'ca-app-pub-2980728243430969~3811207535'
 
 const BOUNDS = {
   [SI]: {
@@ -210,11 +208,10 @@ export class App extends Component {
             </TouchableOpacity>
 
             <AdMobBanner
+              adSize="smartBannerPortrait"
               adUnitID="ca-app-pub-2980728243430969/5287940733"
-              testDeviceID={__DEV__ ? 'EMULATOR' : null}
-              bannerSize="smartBannerPortrait"
-              didFailToReceiveAdWithError={errorReporter.notify}
-              adViewDidReceiveAd={null}
+              testDevices={[PublisherBanner.simulatorId]}
+              onAdFailedToLoad={errorReporter.notify}
             />
           </View>
         )}

@@ -39,9 +39,11 @@ export function validateAdCode(code) {
         })
       })
       .catch((err) => {
+        let error = err
         if (err.body && err.body.error) {
-          Alert.alert(err.body.error)
+          error = err.body.error // eslint-disable-line
         }
+        Alert.alert(error)
       })
   }
 }

@@ -27,11 +27,11 @@ export default function ListRow (props) {
           </View>
 
           <View style={styles.accessory}>
+            {props.renderAccessory && props.renderAccessory()}
+
             {props.checked ? (
               <Icon name="ios-checkmark" style={styles.checkmark} />
             ) : null}
-
-            {props.renderAccessory && props.renderAccessory()}
           </View>
         </View>
 
@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginLeft: 15,
     minHeight: 42,
-
     paddingVertical: 3,
     flexDirection: 'row',
     alignItems: 'center',
