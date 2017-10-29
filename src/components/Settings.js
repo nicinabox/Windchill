@@ -8,6 +8,7 @@ import ListSection from './ListSection'
 import ListRow from './ListRow'
 import ListSpacer from './ListSpacer'
 import Button from './Button'
+import isIphoneX from '../utils/isIphoneX'
 import { US, SI } from '../utils/conversions'
 import { isPurchased } from '../utils/purchases'
 import { setUnits } from '../actions/settingsActions'
@@ -188,7 +189,8 @@ var styles = StyleSheet.create({
   },
   navbarStyle: {
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: colors.borderColor
+    borderBottomColor: colors.borderColor,
+    paddingTop: isIphoneX() ? 24 : 0,
   },
   textMuted: {
     color: colors.borderColor
