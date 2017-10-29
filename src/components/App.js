@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { windchill } from 'weather-tools'
+import { debounce } from 'lodash'
 import ReactNative from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import LineGauge from 'react-native-line-gauge'
@@ -13,6 +14,8 @@ import errorReporter from '../utils/errorReporter'
 import isIphoneX from '../utils/isIphoneX'
 import { setUnits } from '../actions/settingsActions'
 import { checkAdCodeExpiration } from '../actions/productActions'
+import { trackAppOpened } from '../actions/analyticsActions'
+import * as StoreReview from 'react-native-store-review'
 
 var {
   NativeAppEventEmitter,
@@ -61,6 +64,7 @@ export class App extends Component {
     this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
     this._handleConditionsPress = this._handleConditionsPress.bind(this)
     this._handleAppStateChange = this._handleAppStateChange.bind(this)
+    this._requestReview = debounce(this._requestReview.bind(this), 3000)
 
     const { units } = props.state.settings
 
@@ -73,6 +77,7 @@ export class App extends Component {
 
   componentDidMount() {
     this.props.checkAdCodeExpiration()
+    this.props.trackAppOpened()
 
     AppState.addEventListener('change', this._handleAppStateChange)
   }
@@ -106,19 +111,32 @@ export class App extends Component {
   _handleAppStateChange(nextAppState) {
     if (nextAppState === 'active') {
       this.props.checkAdCodeExpiration()
+      this.props.trackAppOpened()
     }
   }
 
   _handleTemperatureChange(temp) {
     this.setState({ temp })
+    this._requestReview()
   }
 
   _handleWindSpeedChange(speed) {
     this.setState({ speed })
+    this._requestReview()
   }
 
   _handleConditionsPress(currently) {
     this.setState(currently)
+  }
+
+  _shouldRequestReview() {
+    return this.props.state.analytics.opens >= 5
+  }
+
+  _requestReview() {
+    if (StoreReview.isAvailable && this._shouldRequestReview()) {
+      StoreReview.requestReview()
+    }
   }
 
   _getFontSize(shouldShowAds) {
@@ -137,6 +155,20 @@ export class App extends Component {
     }
 
     return heightMap[HEIGHT] * PixelRatio.get()
+  }
+
+  _renderHeader() {
+    return (
+      <View style={styles.header}>
+        <View />
+
+        <TouchableOpacity
+          style={styles.headerButton}
+          onPress={() => this.setState({ settingsVisible: true })}>
+          <Icon name="ios-settings-outline" size={26} style={styles.headerButtonText} />
+        </TouchableOpacity>
+      </View>
+    )
   }
 
   render() {
@@ -168,11 +200,7 @@ export class App extends Component {
           />
         </Modal>
 
-        <TouchableOpacity
-          style={styles.settingsButton}
-          onPress={() => this.setState({ settingsVisible: true })}>
-          <Icon name="ios-settings-outline" style={styles.settingsText} />
-        </TouchableOpacity>
+        {this._renderHeader()}
 
         <View style={styles.feelsLike}>
           <View>
@@ -255,16 +283,15 @@ var styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: isIphoneX() ? 24 : 0,
   },
-  settingsButton: {
+  headerButton: {
     padding: 8,
-    alignSelf: 'flex-end',
-    position: 'absolute',
-    top: isIphoneX() ? 44 : 20,
-    right: 0,
-    zIndex: 1,
+  },
+  headerButtonText: {
+    color: '#fff',
   },
   linearGauge: {
     marginBottom: 20,
@@ -336,4 +363,5 @@ var lineGaugeStyles = StyleSheet.create({
 export default connect((state) => ({state}), {
   setUnits,
   checkAdCodeExpiration,
+  trackAppOpened,
 })(App)
