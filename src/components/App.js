@@ -192,7 +192,10 @@ export class App extends Component {
 
         <View style={styles.controls}>
           <View style={styles.linearGauge}>
-            <Text style={styles.linearGaugeValue}>{speed} {UNITS[units].speed}</Text>
+            <Text style={styles.linearGaugeValue}>
+              {speed} {UNITS[units].speed}
+            </Text>
+
             <LineGauge
               styles={lineGaugeStyles}
               onChange={this._handleWindSpeedChange}
@@ -204,7 +207,10 @@ export class App extends Component {
           </View>
 
           <View style={styles.linearGauge}>
-            <Text style={styles.linearGaugeValue}>{temp} {UNITS[units].temperature}</Text>
+            <Text style={styles.linearGaugeValue}>
+              {temp} {UNITS[units].temperature}
+            </Text>
+
             <LineGauge
               styles={lineGaugeStyles}
               onChange={this._handleTemperatureChange}
