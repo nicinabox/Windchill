@@ -3576,9 +3576,9 @@ react-native-keyboard-spacer@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/react-native-keyboard-spacer/-/react-native-keyboard-spacer-0.4.1.tgz#46f18a320432098a25ea9fa89f5143dd254d332d"
 
-react-native-line-gauge@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-line-gauge/-/react-native-line-gauge-1.2.0.tgz#0b2e4c4bad8deb5e63a63633b09f50ff7cea562c"
+react-native-line-gauge@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-line-gauge/-/react-native-line-gauge-1.2.1.tgz#5e42d1cfdb249d207f95a6a6893849ac8e7c4501"
   dependencies:
     lodash.times "^4.3.2"
     prop-types "^15.5.8"
@@ -3592,6 +3592,10 @@ react-native-navbar@^2.0.1:
   resolved "https://registry.yarnpkg.com/react-native-navbar/-/react-native-navbar-2.0.1.tgz#f92098b3748b64430b803e3c3fe3666f2d3b45cb"
   dependencies:
     prop-types "^15.5.10"
+
+react-native-store-review@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-store-review/-/react-native-store-review-0.1.3.tgz#55929cd95bcc82fd1f25da963e1eb406739ac23a"
 
 react-native-vector-icons@^4.4.2:
   version "4.4.2"
