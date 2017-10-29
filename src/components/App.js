@@ -28,8 +28,6 @@ var {
   Text,
 } = ReactNative
 
-// const ADMOB_APP_ID = 'ca-app-pub-2980728243430969~3811207535'
-
 const BOUNDS = {
   [SI]: {
     speed: {
