@@ -26,6 +26,17 @@
 
 ## Changelog
 
+### 1.4.0
+
+* UI Tweaks
+* Support for iPhone X
+* Add App Store review prompt
+
+### 1.3.0
+
+* Refreshed UI and app icon
+* Change ad-supported
+
 ### 1.2.0
 
 * Attempt to calculate windchill with out of bounds temperature instead of showing error
