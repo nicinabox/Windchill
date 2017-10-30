@@ -8,7 +8,7 @@ import getPosition from '../utils/getPosition'
 var {
   StyleSheet,
   AppState,
-  TouchableOpacity,
+  TouchableHighlight,
   Text,
   View,
 } = ReactNative
@@ -88,11 +88,14 @@ export default class CurrentConnditions extends Component {
     return (
       <View style={styles.container}>
         {currently ? (
-          <TouchableOpacity onPress={() => this.props.onPress({ temp, speed })}>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor="#334284"
+            onPress={() => this.props.onPress({ temp, speed })}>
             <Text style={styles.text}>
               Currently {temp}{UNITS[this.props.units].temperature} and wind is {speed}{UNITS[this.props.units].speed}
             </Text>
-          </TouchableOpacity>
+          </TouchableHighlight>
           ) : (
           <Text style={styles.text}>
             Getting current conditions...
@@ -106,11 +109,16 @@ export default class CurrentConnditions extends Component {
 var styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginVertical: 10,
+    marginVertical: 15,
+  },
+  button: {
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    borderRadius: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 5,
   },
   text: {
     color: '#fff',
-    padding: 10,
-    fontSize: 16
+    fontSize: 15
   },
 })
