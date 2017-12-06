@@ -204,10 +204,10 @@ export class App extends Component {
 
         <View style={styles.feelsLike}>
           <View>
-            <Text style={styles.feelsLikeText}>
+            <Text allowFontScaling={false} style={styles.feelsLikeText}>
               Feels like
             </Text>
-            <Text style={[styles.feelsLikeTempText, { fontSize, maxHeight: fontSize }]}>
+            <Text allowFontScaling={false} style={[styles.feelsLikeTempText, { fontSize, maxHeight: fontSize }]}>
               {feelsLike}
             </Text>
           </View>
