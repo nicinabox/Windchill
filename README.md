@@ -26,6 +26,10 @@
 
 ## Changelog
 
+### 1.5.0
+
+* Fix clipping related to font size preferences
+
 ### 1.4.0
 
 * UI Tweaks
