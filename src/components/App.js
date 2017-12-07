@@ -9,7 +9,7 @@ import FeelsLike from './FeelsLike'
 import Settings from './Settings'
 import IPhoneXSpacer from './IPhoneXSpacer'
 import Header from './Header'
-import BannerAd from './BannerAd'
+import AdBanner from './AdBanner'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 import { setUnits } from '../actions/settingsActions'
 import { checkAdCodeExpiration } from '../actions/productActions'
@@ -26,7 +26,6 @@ var {
   Image,
   Modal,
   View,
-  Text,
 } = ReactNative
 
 const BOUNDS = {
@@ -51,8 +50,6 @@ const BOUNDS = {
     }
   }
 }
-
-const { height: HEIGHT } = Dimensions.get('window')
 
 export class App extends Component {
   constructor(props) {
@@ -137,29 +134,10 @@ export class App extends Component {
     }
   }
 
-  _getFontSize(shouldShowAds) {
-    const heightMap = {
-      // iPhone X
-      812: 57,
-
-      // iPhone 8+
-      736: 57,
-
-      // iPhone 8
-      667: 70,
-
-      // iPhone 5
-      568: shouldShowAds ? 40 : 60,
-    }
-
-    return heightMap[HEIGHT] * PixelRatio.get()
-  }
-
   render() {
     let { speed, temp } = this.state
     let { units, shouldShowAds } = this.props.state.settings
     let feelsLike = this._calculateWindChill()
-    let fontSize = this._getFontSize(shouldShowAds)
 
     return (
       <View style={styles.container}>
@@ -190,17 +168,17 @@ export class App extends Component {
 
         <FeelsLike
           value={feelsLike}
-          largeTextStyle={{ fontSize, maxHeight: fontSize }}
-        />
-
-        <CurrentConditions
-          units={units}
-          onPress={this._handleConditionsPress}
+          shouldShowAds={shouldShowAds}
         />
 
         <View style={styles.controls}>
+          <CurrentConditions
+            units={units}
+            onPress={this._handleConditionsPress}
+          />
+
           <LineGaugeInput
-            label="Wind speed"
+            label="Wind Speed"
             value={speed}
             units={UNITS[units].speed}
             bounds={BOUNDS[units].speed}
@@ -216,9 +194,8 @@ export class App extends Component {
           />
         </View>
 
-        <BannerAd
+        <AdBanner
           shouldShowAds={shouldShowAds}
-          onSettingsPress={() => this.setState({ settingsVisible: true })}
         />
 
         <IPhoneXSpacer />

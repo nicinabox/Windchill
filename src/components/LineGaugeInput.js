@@ -4,8 +4,8 @@ import LineGauge from 'react-native-line-gauge'
 
 export default function LineGaugeInput ({label, value, units, bounds, onChange}) {
   return (
-    <View style={styles.linearGauge}>
-      <Text style={styles.linearGaugeValue} allowFontScaling={false}>
+    <View style={styles.container}>
+      <Text style={styles.value} allowFontScaling={false}>
         {value} {units}
       </Text>
 
@@ -16,7 +16,7 @@ export default function LineGaugeInput ({label, value, units, bounds, onChange})
         {...bounds}
       />
 
-      <Text style={styles.linearGaugeLabel}>
+      <Text style={styles.label}>
         {label}
       </Text>
     </View>
@@ -24,19 +24,20 @@ export default function LineGaugeInput ({label, value, units, bounds, onChange})
 }
 
 const styles = StyleSheet.create({
-  linearGauge: {
-    marginBottom: 20,
+  container: {
     justifyContent: 'space-between',
+    marginBottom: 20,
   },
-  linearGaugeValue: {
+  value: {
     color: '#fff',
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 20
   },
-  linearGaugeLabel: {
+  label: {
     textAlign: 'center',
     color: '#fff',
+    fontSize: 15,
   },
 })
 

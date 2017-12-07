@@ -11,21 +11,21 @@ const {
 
 export default function Header ({onSettingsPress}) {
   return (
-    <View style={styles.header}>
+    <View style={styles.container}>
       <View>
       </View>
 
       <TouchableOpacity
         style={styles.headerButton}
         onPress={onSettingsPress}>
-        <Icon name="ios-settings-outline" size={26} style={styles.headerButtonText} />
+        <Icon name="ios-settings-outline" size={26} style={styles.buttonText} />
       </TouchableOpacity>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  header: {
+  container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -33,9 +33,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     height: 48,
   },
-  headerButton: {
-  },
-  headerButtonText: {
+  buttonText: {
     color: '#fff',
   },
 })

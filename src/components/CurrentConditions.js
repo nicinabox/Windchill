@@ -109,7 +109,7 @@ export default class CurrentConnditions extends Component {
 var styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginVertical: 15,
+    marginBottom: 15,
   },
   button: {
     backgroundColor: 'rgba(0,0,0,0.3)',
