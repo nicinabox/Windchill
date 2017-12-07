@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     top: isIphoneX() ? 44 : 20,
     left: 0,
     right: 0,
+    zIndex: 1,
   },
   buttonText: {
     color: '#fff',

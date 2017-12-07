@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 21
   },
   label: {
     textAlign: 'center',
     color: '#fff',
-    fontSize: 15,
+    fontSize: 16,
   },
 })
 

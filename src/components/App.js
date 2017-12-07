@@ -19,10 +19,8 @@ import * as StoreReview from 'react-native-store-review'
 var {
   NativeAppEventEmitter,
   StyleSheet,
-  Dimensions,
   AppState,
   StatusBar,
-  PixelRatio,
   Image,
   Modal,
   View,
@@ -137,7 +135,6 @@ export class App extends Component {
   render() {
     let { speed, temp } = this.state
     let { units, shouldShowAds } = this.props.state.settings
-    let feelsLike = this._calculateWindChill()
 
     return (
       <View style={styles.container}>
@@ -166,10 +163,7 @@ export class App extends Component {
           onSettingsPress={() => this.setState({ settingsVisible: true })}
         />
 
-        <FeelsLike
-          value={feelsLike}
-          shouldShowAds={shouldShowAds}
-        />
+        <FeelsLike value={this._calculateWindChill()} />
 
         <View style={styles.controls}>
           <CurrentConditions
@@ -194,10 +188,7 @@ export class App extends Component {
           />
         </View>
 
-        <AdBanner
-          shouldShowAds={shouldShowAds}
-        />
-
+        <AdBanner shouldShowAds={shouldShowAds} />
         <IPhoneXSpacer />
       </View>
     )
