@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string>Your location is used to determine the current weather conditions in your area.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
