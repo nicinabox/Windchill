@@ -55,7 +55,7 @@ export class Settings extends Component {
   }
 
   handleEmailContact() {
-    Linking.openURL('mailto:nic@nicinabox.com?subject=Windchill Ad-free Code')
+    Linking.openURL('mailto:nic@nicinabox.com?subject=Windchill')
   }
 
   handleTwitterContact() {

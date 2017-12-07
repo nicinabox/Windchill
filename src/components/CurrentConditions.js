@@ -92,7 +92,7 @@ export default class CurrentConnditions extends Component {
             style={styles.button}
             underlayColor="#334284"
             onPress={() => this.props.onPress({ temp, speed })}>
-            <Text style={styles.text}>
+            <Text style={styles.text} allowFontScaling={false}>
               Currently {temp}{UNITS[this.props.units].temperature} and wind is {speed}{UNITS[this.props.units].speed}
             </Text>
           </TouchableHighlight>
@@ -119,6 +119,6 @@ var styles = StyleSheet.create({
   },
   text: {
     color: '#fff',
-    fontSize: 15
+    fontSize: 17
   },
 })

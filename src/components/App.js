@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
+import ReactNative from 'react-native'
 import { connect } from 'react-redux'
 import { windchill } from 'weather-tools'
 import { debounce } from 'lodash'
-import ReactNative from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import LineGauge from 'react-native-line-gauge'
-import { AdMobBanner, PublisherBanner } from 'react-native-admob'
 import CurrentConditions from './CurrentConditions'
+import LineGaugeInput from './LineGaugeInput'
+import FeelsLike from './FeelsLike'
 import Settings from './Settings'
 import IPhoneXSpacer from './IPhoneXSpacer'
+import Header from './Header'
+import BannerAd from './BannerAd'
 import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
-import errorReporter from '../utils/errorReporter'
-import isIphoneX from '../utils/isIphoneX'
 import { setUnits } from '../actions/settingsActions'
 import { checkAdCodeExpiration } from '../actions/productActions'
 import { trackAppOpened } from '../actions/analyticsActions'
@@ -21,7 +20,6 @@ var {
   NativeAppEventEmitter,
   StyleSheet,
   Dimensions,
-  TouchableOpacity,
   AppState,
   StatusBar,
   PixelRatio,
@@ -157,20 +155,6 @@ export class App extends Component {
     return heightMap[HEIGHT] * PixelRatio.get()
   }
 
-  _renderHeader() {
-    return (
-      <View style={styles.header}>
-        <View />
-
-        <TouchableOpacity
-          style={styles.headerButton}
-          onPress={() => this.setState({ settingsVisible: true })}>
-          <Icon name="ios-settings-outline" size={26} style={styles.headerButtonText} />
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
   render() {
     let { speed, temp } = this.state
     let { units, shouldShowAds } = this.props.state.settings
@@ -200,18 +184,14 @@ export class App extends Component {
           />
         </Modal>
 
-        {this._renderHeader()}
+        <Header
+          onSettingsPress={() => this.setState({ settingsVisible: true })}
+        />
 
-        <View style={styles.feelsLike}>
-          <View>
-            <Text allowFontScaling={false} style={styles.feelsLikeText}>
-              Feels like
-            </Text>
-            <Text allowFontScaling={false} style={[styles.feelsLikeTempText, { fontSize, maxHeight: fontSize }]}>
-              {feelsLike}
-            </Text>
-          </View>
-        </View>
+        <FeelsLike
+          value={feelsLike}
+          largeTextStyle={{ fontSize, maxHeight: fontSize }}
+        />
 
         <CurrentConditions
           units={units}
@@ -219,53 +199,27 @@ export class App extends Component {
         />
 
         <View style={styles.controls}>
-          <View style={styles.linearGauge}>
-            <Text style={styles.linearGaugeValue}>
-              {speed} {UNITS[units].speed}
-            </Text>
+          <LineGaugeInput
+            label="Wind speed"
+            value={speed}
+            units={UNITS[units].speed}
+            bounds={BOUNDS[units].speed}
+            onChange={this._handleWindSpeedChange}
+          />
 
-            <LineGauge
-              styles={lineGaugeStyles}
-              onChange={this._handleWindSpeedChange}
-              value={speed}
-              {...BOUNDS[units].speed}
-            />
-
-            <Text style={styles.linearGaugeLabel}>Wind speed</Text>
-          </View>
-
-          <View style={styles.linearGauge}>
-            <Text style={styles.linearGaugeValue}>
-              {temp} {UNITS[units].temperature}
-            </Text>
-
-            <LineGauge
-              styles={lineGaugeStyles}
-              onChange={this._handleTemperatureChange}
-              value={temp}
-              {...BOUNDS[units].temp}
-            />
-
-            <Text style={styles.linearGaugeLabel}>Temperature</Text>
-          </View>
+          <LineGaugeInput
+            label="Temperature"
+            value={temp}
+            units={UNITS[units].temperature}
+            bounds={BOUNDS[units].temp}
+            onChange={this._handleTemperatureChange}
+          />
         </View>
 
-        {shouldShowAds && (
-          <View>
-            <TouchableOpacity onPress={() => this.setState({ settingsVisible: true })}>
-              <Text style={styles.removeAdsText}>
-                REMOVE ADS
-              </Text>
-            </TouchableOpacity>
-
-            <AdMobBanner
-              adSize="smartBannerPortrait"
-              adUnitID="ca-app-pub-2980728243430969/5287940733"
-              testDevices={[PublisherBanner.simulatorId]}
-              onAdFailedToLoad={errorReporter.notify}
-            />
-          </View>
-        )}
+        <BannerAd
+          shouldShowAds={shouldShowAds}
+          onSettingsPress={() => this.setState({ settingsVisible: true })}
+        />
 
         <IPhoneXSpacer />
       </View>
@@ -273,7 +227,7 @@ export class App extends Component {
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
@@ -281,83 +235,13 @@ var styles = StyleSheet.create({
     justifyContent: 'space-around',
     backgroundColor: 'transparent'
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: isIphoneX() ? 24 : 0,
-  },
-  headerButton: {
-    padding: 8,
-  },
-  headerButtonText: {
-    color: '#fff',
-  },
-  linearGauge: {
-    marginBottom: 20,
-    justifyContent: 'space-between',
-  },
   controls: {
     justifyContent: 'center',
-  },
-  feelsLike: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  removeAdsText: {
-    fontSize: 12,
-    color: '#fff',
-    textAlign: 'center',
-    padding: 6
   },
   settingsText: {
     color: '#fff',
     fontSize: 23,
   },
-  linearGaugeValue: {
-    color: '#fff',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 20
-  },
-  linearGaugeLabel: {
-    textAlign: 'center',
-    color: '#fff',
-  },
-  feelsLikeText: {
-    fontSize: 31,
-    maxHeight: 31,
-    color: 'rgba(0,0,0,0.5)',
-    fontWeight: '300',
-    textAlign: 'center',
-  },
-  feelsLikeTempText: {
-    fontWeight: '100',
-    color: '#fff',
-    textAlign: 'center',
-    flex: 1,
-  },
-})
-
-var lineGaugeStyles = StyleSheet.create({
-  container: {
-    borderTopColor: 'rgba(0,0,0,0.1)',
-    borderBottomColor: 'rgba(0,0,0,0.1)',
-    backgroundColor: 'rgba(0,0,0,0.3)',
-  },
-  interval: {
-    backgroundColor: 'rgba(255,255,255,0.6)',
-  },
-  intervalValue: {
-    color: '#fff',
-  },
-  large: {
-    backgroundColor: '#fff',
-  },
-  centerline: {
-    backgroundColor: '#50E3C2',
-  }
 })
 
 export default connect((state) => ({state}), {
