@@ -29,6 +29,7 @@
 ### 1.5.0
 
 * Fix clipping related to font size preferences
+* Add description when requesting location
 
 ### 1.4.0
 
