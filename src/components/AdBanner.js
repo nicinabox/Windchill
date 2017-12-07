@@ -3,17 +3,11 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { AdMobBanner, PublisherBanner } from 'react-native-admob'
 import errorReporter from '../utils/errorReporter'
 
-export default function BannerAd ({shouldShowAds, onSettingsPress}) {
+export default function AdBanner ({shouldShowAds}) {
   if (!shouldShowAds) return false
 
   return (
-    <View>
-      <TouchableOpacity onPress={onSettingsPress}>
-        <Text style={styles.removeAdsText}>
-          REMOVE ADS
-        </Text>
-      </TouchableOpacity>
-
+    <View style={styles.container}>
       <AdMobBanner
         adSize="smartBannerPortrait"
         adUnitID="ca-app-pub-2980728243430969/5287940733"
@@ -25,6 +19,9 @@ export default function BannerAd ({shouldShowAds, onSettingsPress}) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'rgba(0,0,0,0.2)'
+  },
   removeAdsText: {
     fontSize: 12,
     color: '#fff',
