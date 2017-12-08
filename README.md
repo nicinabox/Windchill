@@ -26,6 +26,11 @@
 
 ## Changelog
 
+### 1.6.0
+
+* Improve layout on small screens and with font size preferences
+* Show emoji of current conditions (sunny, rainy, snowy, windy, etc)
+
 ### 1.5.0
 
 * Fix clipping related to font size preferences
