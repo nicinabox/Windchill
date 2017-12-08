@@ -26,7 +26,7 @@ export default function FeelsLike ({value}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>
+      <Text style={styles.label} allowFontScaling={false}>
         Feels like
       </Text>
 
