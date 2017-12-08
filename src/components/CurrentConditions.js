@@ -17,6 +17,19 @@ const now = () => +(new Date)
 const ONE_MIN = 60
 const FIVE_MIN = ONE_MIN * 5
 
+const icons = {
+  'clear-day': '☀️',
+  'clear-night': '☀️',
+  rain: '🌧️',
+  snow: '❄️',
+  sleet: '❄️',
+  wind: '💨',
+  fog: '☁️',
+  cloudy: '☁️',
+  'partly-cloudy-day': '⛅️',
+  'partly-cloudy-night': '⛅️',
+}
+
 export default class CurrentConnditions extends Component {
   constructor(props) {
     super(props)
@@ -92,9 +105,13 @@ export default class CurrentConnditions extends Component {
             style={styles.button}
             underlayColor="#334284"
             onPress={() => this.props.onPress({ temp, speed })}>
-            <Text style={styles.text} allowFontScaling={false}>
-              Currently {temp}{UNITS[this.props.units].temperature} and wind is {speed}{UNITS[this.props.units].speed}
-            </Text>
+              <Text style={styles.text} allowFontScaling={false}>
+                {temp}{UNITS[this.props.units].temperature}
+
+                {' '}{icons[currently.icon]}{' '}
+
+                {speed}{UNITS[this.props.units].speed}
+              </Text>
           </TouchableHighlight>
           ) : (
           <Text style={styles.text}>
@@ -116,6 +133,12 @@ var styles = StyleSheet.create({
     borderRadius: 4,
     paddingHorizontal: 8,
     paddingVertical: 5,
+  },
+  buttonInner: {
+    flexDirection: 'row',
+  },
+  spacer: {
+    width: 20,
   },
   text: {
     color: '#fff',
