@@ -19,6 +19,7 @@ import {
   restorePurchases
 } from '../actions/productActions'
 import * as colors from '../styles/colors'
+import pkg from '../../package.json'
 
 const {
   StyleSheet,
@@ -55,7 +56,7 @@ export class Settings extends Component {
   }
 
   handleEmailContact() {
-    Linking.openURL('mailto:nic@nicinabox.com?subject=Windchill')
+    Linking.openURL(`mailto:nic@nicinabox.com?subject=Windchill (${pkg.version})`)
   }
 
   handleTwitterContact() {
@@ -83,6 +84,21 @@ export class Settings extends Component {
         <ScrollView
           ref={r => this.scrollView = r}
           style={{flex:1}}>
+
+          {!this.props.state.settings.shouldShowAds && (
+            <View style={styles.thanks}>
+              {this.props.state.products.adCode ? (
+                <Text style={styles.thanksText}>
+                  🎉 Enjoy Windchill ad-free until {format(this.props.state.products.adCode.expiration, 'MMM D, YYYY')}!
+                </Text>
+              ) : (
+                <Text style={styles.thanksText}>
+                  🎉 Thanks for supporting Windchill!
+                </Text>
+              )}
+            </View>
+          )}
+
           <ListSection header="UNITS">
             {[US, SI].map((u) => {
               return (
@@ -155,19 +171,11 @@ export class Settings extends Component {
             />
           </ListSection>
 
-          {!this.props.state.settings.shouldShowAds && (
-            <View style={styles.thanks}>
-              {this.props.state.products.adCode ? (
-                <Text style={styles.thanksText}>
-                  🎉 Enjoy Windchill ad-free until {format(this.props.state.products.adCode.expiration, 'MMM D, YYYY')}!
-                </Text>
-              ) : (
-                <Text style={styles.thanksText}>
-                  🎉 Thanks for supporting Windchill!
-                </Text>
-              )}
-            </View>
-          )}
+          <View style={styles.footer}>
+            <Text style={styles.textMuted}>
+              v{pkg.version}
+            </Text>
+          </View>
 
           <ListSpacer />
         </ScrollView>
@@ -197,7 +205,7 @@ var styles = StyleSheet.create({
   },
   thanks: {
     flexDirection: 'row',
-    marginVertical: 30,
+    marginTop: 30,
     justifyContent: 'center'
   },
   thanksText: {
@@ -212,6 +220,11 @@ var styles = StyleSheet.create({
   footerLink: {
     textDecorationLine: 'underline',
   },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 30,
+  }
 })
 
 export default connect((state) => ({state}), {
