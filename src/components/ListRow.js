@@ -16,7 +16,7 @@ export default function ListRow (props) {
         <View style={styles.contentContainer}>
 
           <View style={styles.content}>
-            <Text style={styles.primaryText}>
+            <Text style={[styles.primaryText, props.button ? styles.buttonText : null]}>
               {props.primaryText}
             </Text>
             {props.detailText && (
@@ -60,6 +60,9 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 12,
+  },
+  buttonText: {
+    color: colors.brandPrimary,
   },
   content: {
   },

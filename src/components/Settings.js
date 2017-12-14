@@ -134,6 +134,7 @@ export class Settings extends Component {
             <ListRow
               primaryText="Restore Purchases"
               onPress={this.restorePurchases}
+              button={true}
             />
           </ListSection>
 
