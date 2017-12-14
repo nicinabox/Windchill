@@ -9,7 +9,6 @@ import FeelsLike from './FeelsLike'
 
 var {
   StyleSheet,
-  Image,
   View,
 } = ReactNative
 
@@ -94,18 +93,6 @@ export class Windchill extends Component {
 
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../images/background-gradient.png')}
-          resizeMode="cover"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-          }}
-        />
-
         <FeelsLike value={this._calculateWindChill()} />
 
         <View style={styles.controls}>

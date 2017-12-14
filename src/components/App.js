@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { debounce } from 'lodash'
 import * as StoreReview from 'react-native-store-review'
 import Settings from './Settings'
-import IPhoneXSpacer from './IPhoneXSpacer'
 import Header from './Header'
 import AdBanner from './AdBanner'
 import Windchill from './Windchill'
@@ -18,8 +17,11 @@ var {
   AppState,
   StatusBar,
   Modal,
-  View,
+  ImageBackground,
+  SafeAreaView,
 } = ReactNative
+
+const backgroundGradient = require('../images/background-gradient.png')
 
 export class App extends Component {
   constructor(props) {
@@ -27,6 +29,7 @@ export class App extends Component {
 
     this._handleAppStateChange = this._handleAppStateChange.bind(this)
     this._requestReview = debounce(this._requestReview.bind(this), 3000)
+    this._toggleModal = this._toggleModal.bind(this)
 
     this.state = {
       settingsVisible: false,
@@ -62,34 +65,34 @@ export class App extends Component {
     }
   }
 
+  _toggleModal() {
+    this.setState({ settingsVisible: !this.state.settingsVisible })
+  }
+
   render() {
     let { shouldShowAds } = this.props.state.settings
 
     return (
-      <View style={styles.container}>
-        <StatusBar
-          barStyle={this.state.settingsVisible ? 'dark-content' : 'light-content'}
-        />
-
-        <Modal
-          transparent={false}
-          visible={this.state.settingsVisible}
-          animationType="slide">
-          <Settings
-            handleClose={() => this.setState({ settingsVisible: false })}
+      <ImageBackground source={backgroundGradient} style={{width: '100%', height: '100%'}}>
+        <SafeAreaView style={styles.container}>
+          <StatusBar
+            barStyle={this.state.settingsVisible ? 'dark-content' : 'light-content'}
           />
-        </Modal>
 
-        <Header
-          onSettingsPress={() => this.setState({ settingsVisible: true })}
-        />
+          <Modal
+            transparent={false}
+            visible={this.state.settingsVisible}
+            animationType="slide">
+            <Settings handleClose={this._toggleModal} />
+          </Modal>
 
-        <Windchill onChange={this._requestReview} />
+          <Header onSettingsPress={this._toggleModal} />
 
-        <AdBanner shouldShowAds={shouldShowAds} />
+          <Windchill onChange={this._requestReview} />
 
-        <IPhoneXSpacer />
-      </View>
+          <AdBanner shouldShowAds={shouldShowAds} />
+        </SafeAreaView>
+      </ImageBackground>
     )
   }
 }
