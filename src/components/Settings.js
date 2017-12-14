@@ -220,7 +220,8 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   thanksText: {
-    color: colors.brandSuccess
+    color: colors.brandSuccess,
+    fontSize: 16,
   },
   input: {
     height: 40,
