@@ -46,7 +46,6 @@ export class Windchill extends Component {
     const { unitSystem } = props.state.settings
 
     this.state = {
-      settingsVisible: false,
       speed: BOUNDS[unitSystem].speed.min,
       temperature: BOUNDS[unitSystem].temperature.max,
     }
@@ -66,6 +65,7 @@ export class Windchill extends Component {
   _calculateWindChill() {
     let { temperature, speed } = this.state
     const { unitSystem } = this.props.state.settings
+
     speed = speed >= BOUNDS[unitSystem].speed.min
       ? speed
       : BOUNDS[unitSystem].speed.min
