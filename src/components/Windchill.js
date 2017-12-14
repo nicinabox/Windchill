@@ -39,8 +39,7 @@ export class Windchill extends Component {
   constructor(props) {
     super(props)
 
-    this._handleTemperatureChange = this._handleTemperatureChange.bind(this)
-    this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
+    this._handleChange = this._handleChange.bind(this)
     this._handleConditionsPress = this._handleConditionsPress.bind(this)
 
     const { unitSystem } = props.state.settings
@@ -73,13 +72,8 @@ export class Windchill extends Component {
     return windchill[unitSystem](temperature, speed, false)
   }
 
-  _handleTemperatureChange(temperature) {
-    this.setState({ temperature })
-    this.props.onChange()
-  }
-
-  _handleWindSpeedChange(speed) {
-    this.setState({ speed })
+  _handleChange(nextState) {
+    this.setState(nextState)
     this.props.onChange()
   }
 
@@ -106,7 +100,7 @@ export class Windchill extends Component {
             value={speed}
             units={UNITS[unitSystem].speed}
             bounds={BOUNDS[unitSystem].speed}
-            onChange={this._handleWindSpeedChange}
+            onChange={(speed) => this._handleChange({ speed })}
           />
 
           <LineGaugeInput
@@ -114,7 +108,7 @@ export class Windchill extends Component {
             value={temperature}
             units={UNITS[unitSystem].temperature}
             bounds={BOUNDS[unitSystem].temperature}
-            onChange={this._handleTemperatureChange}
+            onChange={(temperature) => this._handleChange({ temperature })}
           />
         </View>
       </View>
