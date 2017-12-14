@@ -18,7 +18,7 @@ const BOUNDS = {
       min: 5,
       max: 170,
     },
-    temp: {
+    temperature: {
       min: -45,
       max: 10,
     }
@@ -28,7 +28,7 @@ const BOUNDS = {
       min: 3,
       max: 100,
     },
-    temp: {
+    temperature: {
       min: -50,
       max: 50,
     }
@@ -48,7 +48,7 @@ export class Windchill extends Component {
     this.state = {
       settingsVisible: false,
       speed: BOUNDS[unitSystem].speed.min,
-      temp: BOUNDS[unitSystem].temp.max,
+      temperature: BOUNDS[unitSystem].temperature.max,
     }
   }
 
@@ -58,23 +58,23 @@ export class Windchill extends Component {
     if (unitSystem !== this.props.state.settings.unitSystem) {
       this.setState({
         speed: Math.round(convertSpeed(this.state.speed, unitSystem)),
-        temp: Math.round(convertTemp(this.state.temp, unitSystem)),
+        temperature: Math.round(convertTemp(this.state.temperature, unitSystem)),
       })
     }
   }
 
   _calculateWindChill() {
-    let { temp, speed } = this.state
+    let { temperature, speed } = this.state
     const { unitSystem } = this.props.state.settings
     speed = speed >= BOUNDS[unitSystem].speed.min
       ? speed
       : BOUNDS[unitSystem].speed.min
 
-    return windchill[unitSystem](temp, speed, false)
+    return windchill[unitSystem](temperature, speed, false)
   }
 
-  _handleTemperatureChange(temp) {
-    this.setState({ temp })
+  _handleTemperatureChange(temperature) {
+    this.setState({ temperature })
     this.props.onChange()
   }
 
@@ -88,7 +88,7 @@ export class Windchill extends Component {
   }
 
   render() {
-    let { speed, temp } = this.state
+    let { speed, temperature } = this.state
     let { unitSystem } = this.props.state.settings
 
     return (
@@ -111,9 +111,9 @@ export class Windchill extends Component {
 
           <LineGaugeInput
             label="Temperature"
-            value={temp}
+            value={temperature}
             units={UNITS[unitSystem].temperature}
-            bounds={BOUNDS[unitSystem].temp}
+            bounds={BOUNDS[unitSystem].temperature}
             onChange={this._handleTemperatureChange}
           />
         </View>
