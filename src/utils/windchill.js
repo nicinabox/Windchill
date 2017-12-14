@@ -1,5 +1,5 @@
 import { windchill } from 'weather-tools'
-import { UK, CA, US, SI, BOUNDS, convertSpeed, convertTemp } from './conversions'
+import { UK, CA, US, SI, UNITS, convertSpeed, convertTemp } from './conversions'
 
 export default (temperature, speed, unitSystem) => {
   let nextUnitSystem = unitSystem
@@ -16,7 +16,7 @@ export default (temperature, speed, unitSystem) => {
     nextTemp = convertSpeed(speed, nextUnitSystem)
   }
 
-  const minSpeed = BOUNDS[nextUnitSystem].speed.min
+  const minSpeed = UNITS[nextUnitSystem].speed.bounds.min
   nextSpeed = nextSpeed <= minSpeed ? minSpeed : nextSpeed
 
   return windchill[nextUnitSystem](nextTemp, nextSpeed, false)

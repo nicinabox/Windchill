@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactNative from 'react-native'
 import { connect } from 'react-redux'
 import windchill from '../utils/windchill'
-import { BOUNDS, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
+import { UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 import CurrentConditions from './CurrentConditions'
 import LineGaugeInput from './LineGaugeInput'
 import FeelsLike from './FeelsLike'
@@ -22,8 +22,8 @@ export class Windchill extends Component {
     const { unitSystem } = props.state.settings
 
     this.state = {
-      speed: BOUNDS[unitSystem].speed.min,
-      temperature: BOUNDS[unitSystem].temperature.max,
+      speed: UNITS[unitSystem].speed.bounds.min,
+      temperature: UNITS[unitSystem].temperature.bounds.max,
     }
   }
 
@@ -56,6 +56,7 @@ export class Windchill extends Component {
 
   render() {
     const { unitSystem } = this.props.state.settings
+    const { speed, temperature } = UNITS[unitSystem]
 
     return (
       <View style={styles.container}>
@@ -70,16 +71,16 @@ export class Windchill extends Component {
           <LineGaugeInput
             label="Wind Speed"
             value={this.state.speed}
-            units={UNITS[unitSystem].speed}
-            bounds={BOUNDS[unitSystem].speed}
+            units={speed.unit}
+            bounds={speed.bounds}
             onChange={(value) => this.handleChange({ speed: value })}
           />
 
           <LineGaugeInput
             label="Temperature"
             value={this.state.temperature}
-            units={UNITS[unitSystem].temperature}
-            bounds={BOUNDS[unitSystem].temperature}
+            units={temperature.unit}
+            bounds={temperature.bounds}
             onChange={(value) => this.handleChange({ temperature: value })}
           />
         </View>

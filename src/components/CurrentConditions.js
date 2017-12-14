@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactNative from 'react-native'
 import errorReporter from '../utils/errorReporter'
-import { UNITS, convert } from '../utils/conversions'
+import { UNITS, DARK_SKY, convert } from '../utils/conversions'
 import fetchCurrentConditions from '../utils/fetchCurrentConditions'
 import getPosition from '../utils/getPosition'
 
@@ -16,25 +16,6 @@ var {
 const now = () => +(new Date)
 const ONE_MIN = 60
 const FIVE_MIN = ONE_MIN * 5
-
-const DARK_SKY = {
-  icons: {
-    'clear-day': '☀️',
-    'clear-night': '☀️',
-    rain: '🌧️',
-    snow: '❄️',
-    sleet: '❄️',
-    wind: '💨',
-    fog: '☁️',
-    cloudy: '☁️',
-    'partly-cloudy-day': '⛅️',
-    'partly-cloudy-night': '⛅️',
-  },
-  translations: {
-    speed: 'windSpeed',
-    temperature: 'temperature',
-  }
-}
 
 export default class CurrentConnditions extends Component {
   constructor(props) {
@@ -109,7 +90,7 @@ export default class CurrentConnditions extends Component {
       ...acc,
       [name]: {
         value: this.getCurrentCondition(name),
-        units: localeUnits[name],
+        unit: localeUnits[name].unit,
       },
     }), {})
   }
@@ -142,9 +123,9 @@ export default class CurrentConnditions extends Component {
         speed: speed.value
       }),
       children: this.renderText([
-        `${temperature.value}${temperature.units}`,
+        `${temperature.value}${temperature.unit}`,
         DARK_SKY.icons[this.state.currently.icon],
-        `${speed.value}${speed.units}`,
+        `${speed.value}${speed.unit}`,
       ].join(' '))
     })
   }

@@ -1,4 +1,5 @@
 import { get } from '../utils/http'
+import { DARK_SKY } from './conversions'
 
 const FORECAST_API_KEY = process.env.FORECAST_API_KEY // eslint-disable-line
 
@@ -12,6 +13,12 @@ export default ({ latitude, longitude }, unitSystem) => {
       .then((resp) => ({ unitSystem, ...resp.currently }))
   }
 
-  const url = `https://api.forecast.io/forecast/${FORECAST_API_KEY}/${[latitude, longitude].join(',')}?units=${unitSystem}`
+  const units = DARK_SKY.translations[unitSystem] || unitSystem
+
+  const url = [
+    'https://api.forecast.io/forecast',
+    [latitude, longitude].join(','),
+  ].join('/') + `?units=${units}`
+
   return get(url).then((resp) => ({ unitSystem, ...resp.currently }))
 }
