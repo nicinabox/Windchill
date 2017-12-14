@@ -3,21 +3,21 @@ import { Dimensions, StyleSheet, View, Text, PixelRatio } from 'react-native'
 
 const { height: HEIGHT } = Dimensions.get('window')
 
+const heightMap = {
+  // iPhone X
+  812: 60,
+
+  // iPhone 8+
+  736: 60,
+
+  // iPhone 8
+  667: 70,
+
+  // iPhone 5
+  568: 55
+}
+
 const getFontSize = () => {
-  const heightMap = {
-    // iPhone X
-    812: 60,
-
-    // iPhone 8+
-    736: 60,
-
-    // iPhone 8
-    667: 70,
-
-    // iPhone 5
-    568: 55
-  }
-
   return heightMap[HEIGHT] * PixelRatio.get()
 }
 
