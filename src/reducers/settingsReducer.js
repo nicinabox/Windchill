@@ -1,3 +1,4 @@
+import migrate from '../utils/migrate'
 import { getLocaleUnits } from '../utils/unitSystem'
 import { shouldShowAds } from '../utils/purchases'
 import {
@@ -13,16 +14,23 @@ import {
 } from '../actions/productActions'
 
 const initialState = {
-  units: getLocaleUnits(),
+  unitSystem: getLocaleUnits(),
   shouldShowAds: true,
 }
 
-export default function (state = initialState, action) {
+const migrateUnits = (state) => {
+  return {
+    ...state,
+    unitSystem: state.unitSystem || state.units,
+  }
+}
+
+const settingsReducer = (state, action) => {
   switch (action.type) {
     case SET_UNITS:
       return {
         ...state,
-        units: action.units
+        unitSystem: action.unitSystem
       }
 
     case RECEIVE_AD_CODE:
@@ -55,3 +63,5 @@ export default function (state = initialState, action) {
       return state
   }
 }
+
+export default migrate(settingsReducer, migrateUnits, initialState)

@@ -62,7 +62,7 @@ export default class CurrentConnditions extends Component {
 
     getPosition()
       .then((position) => {
-        return fetchCurrentConditions(position.coords, this.props.units)
+        return fetchCurrentConditions(position.coords, this.props.unitSystem)
       })
       .then((currently) => {
         this.setState({
@@ -76,8 +76,8 @@ export default class CurrentConnditions extends Component {
   _getTemp() {
     let temp = this.state.currently.temperature
 
-    if (this.props.units !== this.state.currently.units) {
-      temp = convertTemp(temp, this.props.units)
+    if (this.props.unitSystem !== this.state.currently.unitSystem) {
+      temp = convertTemp(temp, this.props.unitSystem)
     }
 
     return Math.round(temp)
@@ -86,8 +86,8 @@ export default class CurrentConnditions extends Component {
   _getSpeed() {
     let speed  = this.state.currently.windSpeed
 
-    if (this.props.units !== this.state.currently.units) {
-      speed = convertSpeed(speed, this.props.units)
+    if (this.props.unitSystem !== this.state.currently.unitSystem) {
+      speed = convertSpeed(speed, this.props.unitSystem)
     }
 
     return Math.round(speed)
@@ -106,11 +106,11 @@ export default class CurrentConnditions extends Component {
             underlayColor="#334284"
             onPress={() => this.props.onPress({ temp, speed })}>
               <Text style={styles.text} allowFontScaling={false}>
-                {temp}{UNITS[this.props.units].temperature}
+                {temp}{UNITS[this.props.unitSystem].temperature}
 
                 {' '}{icons[currently.icon]}{' '}
 
-                {speed}{UNITS[this.props.units].speed}
+                {speed}{UNITS[this.props.unitSystem].speed}
               </Text>
           </TouchableHighlight>
           ) : (

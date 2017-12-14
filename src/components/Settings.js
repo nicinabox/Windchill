@@ -116,7 +116,7 @@ export class Settings extends Component {
                   key={`units-${u}`}
                   primaryText={u.toUpperCase()}
                   onPress={() => this.props.setUnits(u)}
-                  checked={this.props.state.settings.units === u}
+                  checked={this.props.state.settings.unitSystem === u}
                 />
               )
             })}

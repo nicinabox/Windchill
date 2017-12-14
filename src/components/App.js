@@ -7,7 +7,6 @@ import Settings from './Settings'
 import Header from './Header'
 import AdBanner from './AdBanner'
 import Windchill from './Windchill'
-import { setUnits } from '../actions/settingsActions'
 import { checkAdCodeExpiration } from '../actions/productActions'
 import { trackAppOpened } from '../actions/analyticsActions'
 
@@ -107,7 +106,6 @@ const styles = StyleSheet.create({
 })
 
 export default connect((state) => ({state}), {
-  setUnits,
   checkAdCodeExpiration,
   trackAppOpened,
 })(App)

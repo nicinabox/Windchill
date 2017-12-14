@@ -43,34 +43,34 @@ export class Windchill extends Component {
     this._handleWindSpeedChange = this._handleWindSpeedChange.bind(this)
     this._handleConditionsPress = this._handleConditionsPress.bind(this)
 
-    const { units } = props.state.settings
+    const { unitSystem } = props.state.settings
 
     this.state = {
       settingsVisible: false,
-      speed: BOUNDS[units].speed.min,
-      temp: BOUNDS[units].temp.max,
+      speed: BOUNDS[unitSystem].speed.min,
+      temp: BOUNDS[unitSystem].temp.max,
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { units } = nextProps.state.settings
+    const { unitSystem } = nextProps.state.settings
 
-    if (units !== this.props.state.settings.units) {
+    if (unitSystem !== this.props.state.settings.unitSystem) {
       this.setState({
-        speed: Math.round(convertSpeed(this.state.speed, units)),
-        temp: Math.round(convertTemp(this.state.temp, units)),
+        speed: Math.round(convertSpeed(this.state.speed, unitSystem)),
+        temp: Math.round(convertTemp(this.state.temp, unitSystem)),
       })
     }
   }
 
   _calculateWindChill() {
     let { temp, speed } = this.state
-    const { units } = this.props.state.settings
-    speed = speed >= BOUNDS[units].speed.min
+    const { unitSystem } = this.props.state.settings
+    speed = speed >= BOUNDS[unitSystem].speed.min
       ? speed
-      : BOUNDS[units].speed.min
+      : BOUNDS[unitSystem].speed.min
 
-    return windchill[units](temp, speed, false)
+    return windchill[unitSystem](temp, speed, false)
   }
 
   _handleTemperatureChange(temp) {
@@ -89,7 +89,7 @@ export class Windchill extends Component {
 
   render() {
     let { speed, temp } = this.state
-    let { units } = this.props.state.settings
+    let { unitSystem } = this.props.state.settings
 
     return (
       <View style={styles.container}>
@@ -97,23 +97,23 @@ export class Windchill extends Component {
 
         <View style={styles.controls}>
           <CurrentConditions
-            units={units}
+            unitSystem={unitSystem}
             onPress={this._handleConditionsPress}
           />
 
           <LineGaugeInput
             label="Wind Speed"
             value={speed}
-            units={UNITS[units].speed}
-            bounds={BOUNDS[units].speed}
+            units={UNITS[unitSystem].speed}
+            bounds={BOUNDS[unitSystem].speed}
             onChange={this._handleWindSpeedChange}
           />
 
           <LineGaugeInput
             label="Temperature"
             value={temp}
-            units={UNITS[units].temperature}
-            bounds={BOUNDS[units].temp}
+            units={UNITS[unitSystem].temperature}
+            bounds={BOUNDS[unitSystem].temp}
             onChange={this._handleTemperatureChange}
           />
         </View>
