@@ -19,9 +19,11 @@ const initialState = {
 }
 
 const migrateUnits = (state) => {
+  if (state.unitSystem) return state
+
   return {
     ...state,
-    unitSystem: state.unitSystem || state.units,
+    unitSystem: state.units,
   }
 }
 
