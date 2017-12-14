@@ -2,8 +2,11 @@
 
 ## Unreleased
 
-* Tweaks to styling (mostly in Settings)
-* Layout improvements iPhone X
+* Support for UK and CA units!
+* Fix spacing between value and unit in gauge
+* Fix jump when current conditions loaded
+* Tweak some styles in Settings
+* Layout improvements for iPhone X
 
 ## 1.6.0
 
