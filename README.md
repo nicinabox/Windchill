@@ -26,6 +26,11 @@
 
 ## Changelog
 
+### Unreleased
+
+* Tweaks to styling (mostly in Settings)
+* Layout improvements iPhone X
+
 ### 1.6.0
 
 * Improve layout on small screens and with font size preferences
