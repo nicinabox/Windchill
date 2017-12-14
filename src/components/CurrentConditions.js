@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactNative from 'react-native'
 import errorReporter from '../utils/errorReporter'
-import { UNITS, convertTemp, convertSpeed } from '../utils/conversions'
+import { UNITS, convert } from '../utils/conversions'
 import fetchCurrentConditions from '../utils/fetchCurrentConditions'
 import getPosition from '../utils/getPosition'
 
@@ -17,17 +17,23 @@ const now = () => +(new Date)
 const ONE_MIN = 60
 const FIVE_MIN = ONE_MIN * 5
 
-const icons = {
-  'clear-day': '☀️',
-  'clear-night': '☀️',
-  rain: '🌧️',
-  snow: '❄️',
-  sleet: '❄️',
-  wind: '💨',
-  fog: '☁️',
-  cloudy: '☁️',
-  'partly-cloudy-day': '⛅️',
-  'partly-cloudy-night': '⛅️',
+const DARK_SKY = {
+  icons: {
+    'clear-day': '☀️',
+    'clear-night': '☀️',
+    rain: '🌧️',
+    snow: '❄️',
+    sleet: '❄️',
+    wind: '💨',
+    fog: '☁️',
+    cloudy: '☁️',
+    'partly-cloudy-day': '⛅️',
+    'partly-cloudy-night': '⛅️',
+  },
+  translations: {
+    speed: 'windSpeed',
+    temperature: 'temperature',
+  }
 }
 
 export default class CurrentConnditions extends Component {
@@ -35,9 +41,11 @@ export default class CurrentConnditions extends Component {
     super(props)
 
     this._handleAppStateChange = this._handleAppStateChange.bind(this)
+    this._getCurrentForecast = this._getCurrentForecast.bind(this)
 
     this.state = {
-      currently: false
+      currently: {},
+      isLoading: true,
     }
   }
 
@@ -60,6 +68,8 @@ export default class CurrentConnditions extends Component {
   _getCurrentForecast() {
     if (now() < this.state.lastUpdate + FIVE_MIN) return
 
+    this.setState({ isLoading: true, error: false })
+
     getPosition()
       .then((position) => {
         return fetchCurrentConditions(position.coords, this.props.unitSystem)
@@ -67,57 +77,95 @@ export default class CurrentConnditions extends Component {
       .then((currently) => {
         this.setState({
           currently,
+          isLoading: false,
+          error: false,
           lastUpdate: now()
         })
       })
-      .catch(errorReporter.notify)
+      .catch((error) => {
+        errorReporter.notify(error)
+
+        this.setState({
+          isLoading: false,
+          error: error.message,
+        })
+      })
   }
 
-  _getTemp() {
-    let temp = this.state.currently.temperature
+  getCurrentCondition(name) {
+    let value  = this.state.currently[DARK_SKY.translations[name]]
 
     if (this.props.unitSystem !== this.state.currently.unitSystem) {
-      temp = convertTemp(temp, this.props.unitSystem)
+      value = convert(name, value, this.props.unitSystem)
     }
 
-    return Math.round(temp)
+    return Math.round(value)
   }
 
-  _getSpeed() {
-    let speed  = this.state.currently.windSpeed
+  getConditions() {
+    const localeUnits = UNITS[this.props.unitSystem]
 
-    if (this.props.unitSystem !== this.state.currently.unitSystem) {
-      speed = convertSpeed(speed, this.props.unitSystem)
-    }
+    return ['temperature', 'speed'].reduce((acc, name) => ({
+      ...acc,
+      [name]: {
+        value: this.getCurrentCondition(name),
+        units: localeUnits[name],
+      },
+    }), {})
+  }
 
-    return Math.round(speed)
+  renderText(text) {
+    return (
+      <Text style={styles.text} allowFontScaling={false}>
+        {text}
+      </Text>
+    )
+  }
+
+  renderButton({onPress, children}) {
+    return (
+      <TouchableHighlight
+        style={styles.button}
+        underlayColor="#334284"
+        onPress={onPress}>
+          {children}
+      </TouchableHighlight>
+    )
+  }
+
+  renderConditions() {
+    let { temperature, speed } = this.getConditions()
+
+    return this.renderButton({
+      onPress: () => this.props.onPress({
+        temperature: temperature.value,
+        speed: speed.value
+      }),
+      children: this.renderText([
+        `${temperature.value}${temperature.units}`,
+        DARK_SKY.icons[this.state.currently.icon],
+        `${speed.value}${speed.units}`,
+      ].join(' '))
+    })
   }
 
   render() {
-    let { currently } = this.state
-    let temp = this._getTemp()
-    let speed = this._getSpeed()
+    let children = this.renderText('Getting current conditions...')
+
+    if (this.state.error) {
+      children = this.renderButton({
+        onPress: this._getCurrentForecast,
+        children: this.renderText(this.state.error)
+      })
+    }
+
+    if (!this.state.isLoading && !this.state.error) {
+      children = this.renderConditions()
+    }
 
     return (
       <View style={styles.container}>
-        {currently ? (
-          <TouchableHighlight
-            style={styles.button}
-            underlayColor="#334284"
-            onPress={() => this.props.onPress({ temp, speed })}>
-              <Text style={styles.text} allowFontScaling={false}>
-                {temp}{UNITS[this.props.unitSystem].temperature}
-
-                {' '}{icons[currently.icon]}{' '}
-
-                {speed}{UNITS[this.props.unitSystem].speed}
-              </Text>
-          </TouchableHighlight>
-          ) : (
-          <Text style={styles.text}>
-            Getting current conditions...
-          </Text>
-        )}
+        {children}
       </View>
     )
   }
@@ -131,8 +179,6 @@ var styles = StyleSheet.create({
   button: {
     backgroundColor: 'rgba(0,0,0,0.3)',
     borderRadius: 4,
-    paddingHorizontal: 8,
-    paddingVertical: 5,
   },
   buttonInner: {
     flexDirection: 'row',
@@ -142,6 +188,8 @@ var styles = StyleSheet.create({
   },
   text: {
     color: '#fff',
-    fontSize: 17
+    fontSize: 17,
+    paddingHorizontal: 8,
+    paddingVertical: 5,
   },
 })

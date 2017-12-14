@@ -30,3 +30,13 @@ export const convertTemp = (temp, convertTo = SI) => {
 
   return toF(temp)
 }
+
+export const convert = (name, value, convertTo) => {
+  if (name === 'speed') {
+    return convertSpeed(value, convertTo)
+  }
+
+  if (name === 'temperature') {
+    return convertTemp(value, convertTo)
+  }
+}

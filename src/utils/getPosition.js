@@ -1,9 +1,13 @@
 const mockPosition = () => {
-  return Promise.resolve({
-    coords: {
-      latitude: '',
-      longitude: '',
-    }
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        coords: {
+          latitude: '',
+          longitude: '',
+        }
+      })
+    }, 1000)
   })
 }
 
