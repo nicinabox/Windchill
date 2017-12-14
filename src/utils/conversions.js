@@ -3,16 +3,69 @@ const toF = (t) => ((t * 9 / 5) + 32).toFixed(1)
 
 export const US = 'us'
 export const SI = 'si'
+export const UK = 'uk'
+export const CA = 'ca'
 
 export const UNITS = {
   [SI]: {
+    speed: 'kph',
     temperature: 'C',
-    speed: 'kph'
   },
   [US]: {
+    speed: 'mph',
     temperature: 'F',
-    speed: 'mph'
-  }
+  },
+  [UK]: {
+    speed: 'mph',
+    temperature: 'C',
+  },
+  [CA]: {
+    speed: 'kph',
+    temperature: 'F',
+  },
+}
+
+export const BOUNDS = {
+  [SI]: {
+    speed: {
+      min: 5,
+      max: 170,
+    },
+    temperature: {
+      min: -45,
+      max: 10,
+    }
+  },
+  [US]: {
+    speed: {
+      min: 3,
+      max: 100,
+    },
+    temperature: {
+      min: -50,
+      max: 50,
+    }
+  },
+  [UK]: {
+    speed: {
+      min: 3,
+      max: 100,
+    },
+    temperature: {
+      min: -45,
+      max: 10,
+    }
+  },
+  [CA]: {
+    speed: {
+      min: 5,
+      max: 170,
+    },
+    temperature: {
+      min: -50,
+      max: 50,
+    }
+  },
 }
 
 export const convertSpeed = (speed, convertTo = SI) => {

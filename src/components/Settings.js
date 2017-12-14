@@ -10,7 +10,7 @@ import ListRow from './ListRow'
 import ListSpacer from './ListSpacer'
 import Button from './Button'
 import isIphoneX from '../utils/isIphoneX'
-import { US, SI } from '../utils/conversions'
+import { UNITS } from '../utils/conversions'
 import { isPurchased } from '../utils/purchases'
 import { setUnits } from '../actions/settingsActions'
 import {
@@ -114,13 +114,13 @@ export class Settings extends Component {
           )}
 
           <ListSection header="UNITS">
-            {[US, SI].map((u) => {
+            {Object.keys(UNITS).map((unit) => {
               return (
                 <ListRow
-                  key={`units-${u}`}
-                  primaryText={u.toUpperCase()}
-                  onPress={() => this.props.setUnits(u)}
-                  checked={this.props.state.settings.unitSystem === u}
+                  key={unit}
+                  primaryText={unit.toUpperCase()}
+                  onPress={() => this.props.setUnits(unit)}
+                  checked={this.props.state.settings.unitSystem === unit}
                 />
               )
             })}

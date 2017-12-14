@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import ReactNative from 'react-native'
 import { connect } from 'react-redux'
-import { windchill } from 'weather-tools'
-import { US, SI, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
+import windchill from '../utils/windchill'
+import { BOUNDS, UNITS, convertTemp, convertSpeed } from '../utils/conversions'
 import CurrentConditions from './CurrentConditions'
 import LineGaugeInput from './LineGaugeInput'
 import FeelsLike from './FeelsLike'
@@ -11,29 +11,6 @@ var {
   StyleSheet,
   View,
 } = ReactNative
-
-const BOUNDS = {
-  [SI]: {
-    speed: {
-      min: 5,
-      max: 170,
-    },
-    temperature: {
-      min: -45,
-      max: 10,
-    }
-  },
-  [US]: {
-    speed: {
-      min: 3,
-      max: 100,
-    },
-    temperature: {
-      min: -50,
-      max: 50,
-    }
-  }
-}
 
 export class Windchill extends Component {
   constructor(props) {
@@ -65,11 +42,7 @@ export class Windchill extends Component {
     let { temperature, speed } = this.state
     const { unitSystem } = this.props.state.settings
 
-    speed = speed >= BOUNDS[unitSystem].speed.min
-      ? speed
-      : BOUNDS[unitSystem].speed.min
-
-    return windchill[unitSystem](temperature, speed, false)
+    return windchill(temperature, speed, unitSystem)
   }
 
   handleChange(nextState) {
