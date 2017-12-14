@@ -73,6 +73,10 @@ export class Settings extends Component {
     Linking.openURL('https://twitter.com/nicinabox')
   }
 
+  handleDarkSky() {
+    Linking.openURL('https://darksky.net/poweredby/')
+  }
+
   handleRemoveAdsCodeSubmit() {
     this.props.validateAdCode(this.state.removeAdsCode)
   }
@@ -185,6 +189,10 @@ export class Settings extends Component {
           <View style={styles.footer}>
             <Text style={styles.textMuted}>
               v{pkg.version}
+              {' • '}
+              <Text onPress={this.handleDarkSky}>
+                Powered by Dark Sky
+              </Text>
             </Text>
           </View>
 
