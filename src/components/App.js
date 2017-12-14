@@ -26,9 +26,9 @@ export class App extends Component {
   constructor(props) {
     super(props)
 
-    this._handleAppStateChange = this._handleAppStateChange.bind(this)
-    this._requestReview = debounce(this._requestReview.bind(this), 3000)
-    this._toggleModal = this._toggleModal.bind(this)
+    this.handleAppStateChange = this.handleAppStateChange.bind(this)
+    this.requestReview = debounce(this.requestReview.bind(this), 3000)
+    this.toggleModal = this.toggleModal.bind(this)
 
     this.state = {
       settingsVisible: false,
@@ -39,32 +39,32 @@ export class App extends Component {
     this.props.checkAdCodeExpiration()
     this.props.trackAppOpened()
 
-    AppState.addEventListener('change', this._handleAppStateChange)
+    AppState.addEventListener('change', this.handleAppStateChange)
   }
 
   componentWillUnmount () {
     NativeAppEventEmitter.removeAllListeners()
-    AppState.removeEventListener('change', this._handleAppStateChange)
+    AppState.removeEventListener('change', this.handleAppStateChange)
   }
 
-  _handleAppStateChange(nextAppState) {
+  handleAppStateChange(nextAppState) {
     if (nextAppState === 'active') {
       this.props.checkAdCodeExpiration()
       this.props.trackAppOpened()
     }
   }
 
-  _shouldRequestReview() {
+  shouldRequestReview() {
     return this.props.state.analytics.opens >= 5
   }
 
-  _requestReview() {
-    if (StoreReview.isAvailable && this._shouldRequestReview()) {
+  requestReview() {
+    if (StoreReview.isAvailable && this.shouldRequestReview()) {
       StoreReview.requestReview()
     }
   }
 
-  _toggleModal() {
+  toggleModal() {
     this.setState({ settingsVisible: !this.state.settingsVisible })
   }
 
@@ -82,12 +82,12 @@ export class App extends Component {
             transparent={false}
             visible={this.state.settingsVisible}
             animationType="slide">
-            <Settings handleClose={this._toggleModal} />
+            <Settings handleClose={this.toggleModal} />
           </Modal>
 
-          <Header onSettingsPress={this._toggleModal} />
+          <Header onSettingsPress={this.toggleModal} />
 
-          <Windchill onChange={this._requestReview} />
+          <Windchill onChange={this.requestReview} />
 
           <AdBanner shouldShowAds={shouldShowAds} />
         </SafeAreaView>

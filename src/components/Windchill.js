@@ -39,8 +39,8 @@ export class Windchill extends Component {
   constructor(props) {
     super(props)
 
-    this._handleChange = this._handleChange.bind(this)
-    this._handleConditionsPress = this._handleConditionsPress.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleConditionsPress = this.handleConditionsPress.bind(this)
 
     const { unitSystem } = props.state.settings
 
@@ -61,7 +61,7 @@ export class Windchill extends Component {
     }
   }
 
-  _calculateWindChill() {
+  calculateWindChill() {
     let { temperature, speed } = this.state
     const { unitSystem } = this.props.state.settings
 
@@ -72,43 +72,42 @@ export class Windchill extends Component {
     return windchill[unitSystem](temperature, speed, false)
   }
 
-  _handleChange(nextState) {
+  handleChange(nextState) {
     this.setState(nextState)
     this.props.onChange()
   }
 
-  _handleConditionsPress(currently) {
+  handleConditionsPress(currently) {
     this.setState(currently)
   }
 
   render() {
-    let { speed, temperature } = this.state
-    let { unitSystem } = this.props.state.settings
+    const { unitSystem } = this.props.state.settings
 
     return (
       <View style={styles.container}>
-        <FeelsLike value={this._calculateWindChill()} />
+        <FeelsLike value={this.calculateWindChill()} />
 
         <View style={styles.controls}>
           <CurrentConditions
             unitSystem={unitSystem}
-            onPress={this._handleConditionsPress}
+            onPress={this.handleConditionsPress}
           />
 
           <LineGaugeInput
             label="Wind Speed"
-            value={speed}
+            value={this.state.speed}
             units={UNITS[unitSystem].speed}
             bounds={BOUNDS[unitSystem].speed}
-            onChange={(speed) => this._handleChange({ speed })}
+            onChange={(value) => this.handleChange({ speed: value })}
           />
 
           <LineGaugeInput
             label="Temperature"
-            value={temperature}
+            value={this.state.temperature}
             units={UNITS[unitSystem].temperature}
             bounds={BOUNDS[unitSystem].temperature}
-            onChange={(temperature) => this._handleChange({ temperature })}
+            onChange={(value) => this.handleChange({ temperature: value })}
           />
         </View>
       </View>

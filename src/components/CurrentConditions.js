@@ -40,8 +40,8 @@ export default class CurrentConnditions extends Component {
   constructor(props) {
     super(props)
 
-    this._handleAppStateChange = this._handleAppStateChange.bind(this)
-    this._getCurrentForecast = this._getCurrentForecast.bind(this)
+    this.handleAppStateChange = this.handleAppStateChange.bind(this)
+    this.getCurrentForecast = this.getCurrentForecast.bind(this)
 
     this.state = {
       currently: {},
@@ -50,22 +50,22 @@ export default class CurrentConnditions extends Component {
   }
 
   componentDidMount() {
-    this._getCurrentForecast()
+    this.getCurrentForecast()
 
-    AppState.addEventListener('change', this._handleAppStateChange)
+    AppState.addEventListener('change', this.handleAppStateChange)
   }
 
   componentWillUnmount() {
-    AppState.removeEventListener('change', this._handleAppStateChange)
+    AppState.removeEventListener('change', this.handleAppStateChange)
   }
 
-  _handleAppStateChange(state) {
+  handleAppStateChange(state) {
     if (state === 'active') {
-      this._getCurrentForecast()
+      this.getCurrentForecast()
     }
   }
 
-  _getCurrentForecast() {
+  getCurrentForecast() {
     if (now() < this.state.lastUpdate + FIVE_MIN) return
 
     this.setState({ isLoading: true, error: false })
@@ -154,7 +154,7 @@ export default class CurrentConnditions extends Component {
 
     if (this.state.error) {
       children = this.renderButton({
-        onPress: this._getCurrentForecast,
+        onPress: this.getCurrentForecast,
         children: this.renderText(this.state.error)
       })
     }
