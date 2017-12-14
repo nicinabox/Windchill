@@ -1,5 +1,5 @@
 import migrate from '../utils/migrate'
-import { getLocaleUnits } from '../utils/unitSystem'
+import getLocaleUnits from '../utils/getLocaleUnits'
 import { shouldShowAds } from '../utils/purchases'
 import {
   SET_UNITS,
