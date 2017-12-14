@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactNative from 'react-native'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
+import { sample } from 'lodash'
 import { connect } from 'react-redux'
 import { format } from 'date-fns'
 import NavigationBar from 'react-native-navbar'
@@ -53,6 +54,15 @@ export class Settings extends Component {
 
   restorePurchases() {
     this.props.restorePurchases()
+  }
+
+  getBuyText() {
+    return sample([
+      'Buy',
+      'Banish Ads',
+      'Pew! Pew!',
+      'Remove Ads',
+    ])
   }
 
   handleEmailContact() {
@@ -124,7 +134,7 @@ export class Settings extends Component {
                     <Text style={styles.textMuted}>Purchased!</Text>
                   ) : (
                     <Button onPress={() => this.purchase(product.identifier)}>
-                      Buy
+                      {this.getBuyText()}
                     </Button>
                   )}
                 />
