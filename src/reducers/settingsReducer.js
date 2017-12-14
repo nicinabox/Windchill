@@ -25,7 +25,7 @@ const migrateUnits = (state) => {
   }
 }
 
-const settingsReducer = (state, action) => {
+export default migrate(migrateUnits, (state, action) => {
   switch (action.type) {
     case SET_UNITS:
       return {
@@ -62,6 +62,4 @@ const settingsReducer = (state, action) => {
     default:
       return state
   }
-}
-
-export default migrate(settingsReducer, migrateUnits, initialState)
+}, initialState)
