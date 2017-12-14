@@ -84,8 +84,7 @@ export class App extends Component {
           onSettingsPress={() => this.setState({ settingsVisible: true })}
         />
 
-          <Windchill onChange={this._requestReview} />
-        </View>
+        <Windchill onChange={this._requestReview} />
 
         <AdBanner shouldShowAds={shouldShowAds} />
 
@@ -101,13 +100,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     backgroundColor: 'transparent'
-  },
-  controls: {
-    justifyContent: 'center',
-  },
-  settingsText: {
-    color: '#fff',
-    fontSize: 23,
   },
 })
 
