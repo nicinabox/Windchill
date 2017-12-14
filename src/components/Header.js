@@ -2,11 +2,11 @@ import React from 'react'
 import ReactNative from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import isIphoneX from '../utils/isIphoneX'
+import Button from './Button'
 
 const {
   StyleSheet,
   View,
-  TouchableOpacity,
 } = ReactNative
 
 export default function Header ({onSettingsPress}) {
@@ -15,11 +15,9 @@ export default function Header ({onSettingsPress}) {
       <View>
       </View>
 
-      <TouchableOpacity
-        style={styles.headerButton}
-        onPress={onSettingsPress}>
+      <Button onPress={onSettingsPress}>
         <Icon name="ios-settings-outline" size={26} style={styles.buttonText} />
-      </TouchableOpacity>
+      </Button>
     </View>
   )
 }
