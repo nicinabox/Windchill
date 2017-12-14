@@ -74,13 +74,17 @@ export default class CurrentConnditions extends Component {
   }
 
   getCurrentCondition(name) {
-    let value  = this.state.currently[DARK_SKY.translations[name]]
+    let value = this.state.currently[DARK_SKY.translations[name]]
+    value = this.convert(name, value, this.state.currently.unitSystem, this.props.unitSystem)
+    return Math.round(value)
+  }
 
-    if (this.props.unitSystem !== this.state.currently.unitSystem) {
-      value = convert(name, value, this.props.unitSystem)
+  convert(name, value, from, to) { // eslint-disable-line
+    if (from === to || UNITS[from][name].unit === UNITS[to][name].unit) {
+      return value
     }
 
-    return Math.round(value)
+    return convert(name, value, to)
   }
 
   getConditions() {
