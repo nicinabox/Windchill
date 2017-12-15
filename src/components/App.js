@@ -82,10 +82,7 @@ export class App extends Component {
             transparent={false}
             visible={this.state.settingsVisible}
             animationType="slide">
-            <Settings
-              handleClose={this.toggleModal}
-              isVisible={this.state.settingsVisible}
-            />
+            <Settings handleClose={this.toggleModal} />
           </Modal>
 
           <Header onSettingsPress={this.toggleModal} />
