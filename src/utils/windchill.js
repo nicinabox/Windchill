@@ -1,23 +1,21 @@
 import { windchill } from 'weather-tools'
-import { UK, CA, US, SI, UNITS, convertSpeed, convertTemp } from './conversions'
+import { SI, US, UNITS, convertSpeed } from './conversions'
+
+const enhancedWindchill = {
+  ...windchill,
+
+  uk: (temp, speed, ...args) => {
+    return windchill.si(temp, convertSpeed(speed, SI), ...args)
+  },
+
+  ca: (temp, speed, ...args) => {
+    return windchill.us(temp, convertSpeed(speed, US), ...args)
+  }
+}
 
 export default (temperature, speed, unitSystem) => {
-  let nextUnitSystem = unitSystem
-  let nextSpeed = speed
-  let nextTemp = temperature
+  const minSpeed = UNITS[unitSystem].speed.bounds.min
+  let realSpeed = speed <= minSpeed ? minSpeed : speed
 
-  if (unitSystem === UK) {
-    nextUnitSystem = SI
-    nextTemp = convertTemp(temperature, nextUnitSystem)
-  }
-
-  if (unitSystem === CA) {
-    nextUnitSystem = SI
-    nextTemp = convertSpeed(speed, nextUnitSystem)
-  }
-
-  const minSpeed = UNITS[nextUnitSystem].speed.bounds.min
-  nextSpeed = nextSpeed <= minSpeed ? minSpeed : nextSpeed
-
-  return windchill[nextUnitSystem](nextTemp, nextSpeed, false)
+  return enhancedWindchill[unitSystem](temperature, realSpeed, false)
 }
