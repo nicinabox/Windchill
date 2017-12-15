@@ -65,6 +65,15 @@ export function loadProducts() {
 }
 
 export function purchaseProduct(id) {
+  if (__DEV__) {
+    return {
+      type: PURCHASE_PRODUCT,
+      purchase: {
+        productIdentifier: id
+      }
+    }
+  }
+
   return (dispatch) => {
     InAppUtils.purchaseProduct(id, (err, resp) => {
       if (err) {
