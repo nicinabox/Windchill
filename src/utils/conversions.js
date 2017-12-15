@@ -115,3 +115,11 @@ export const convert = (name, value, convertTo) => {
       return false
   }
 }
+
+export const convertFrom = (from, to) => (name, value) => {
+  if (from === to || UNITS[from][name].unit === UNITS[to][name].unit) {
+    return value
+  }
+
+  return convert(name, value, to)
+}

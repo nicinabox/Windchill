@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactNative from 'react-native'
 import errorReporter from '../utils/errorReporter'
-import { UNITS, DARK_SKY, convert } from '../utils/conversions'
+import { UNITS, DARK_SKY, convertFrom } from '../utils/conversions'
 import fetchCurrentConditions from '../utils/fetchCurrentConditions'
 import getPosition from '../utils/getPosition'
 
@@ -74,18 +74,12 @@ export default class CurrentConnditions extends Component {
   }
 
   getCurrentCondition(name) {
-    let value = this.state.currently[DARK_SKY.translations[name]]
-    value = this.convert(name, value, this.state.currently.unitSystem, this.props.unitSystem)
-    return Math.round(value)
+    const convert = convertFrom(this.state.currently.unitSystem, this.props.unitSystem)
+    const value = this.state.currently[DARK_SKY.translations[name]]
+
+    return Math.round(convert(name, value))
   }
 
-  convert(name, value, from, to) { // eslint-disable-line
-    if (from === to || UNITS[from][name].unit === UNITS[to][name].unit) {
-      return value
-    }
-
-    return convert(name, value, to)
-  }
 
   getConditions() {
     const localeUnits = UNITS[this.props.unitSystem]
