@@ -14,6 +14,7 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* WindchillTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WindchillTests.m */; };
 		01C5684E177D4F68ADFF7437 /* libRNStoreReview.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2643AD190CA348A58ADE821E /* libRNStoreReview.a */; };
+		04149F4E1FE426490062E244 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04149F4D1FE426490062E244 /* StoreKit.framework */; };
 		0424A8C71DDA7AF700B2292A /* libBugsnagReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0424A8B41DDA7AE900B2292A /* libBugsnagReactNative.a */; };
 		044B73D81EC1760300BB229C /* libRCTLocale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAF2D1EBE168A00D33A1C /* libRCTLocale.a */; };
 		044B73D91EC176A600BB229C /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 047DAFAC1EBE2E6900D33A1C /* libRNVectorIcons.a */; };
@@ -98,6 +99,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = Windchill;
+		};
+		04149F751FE426490062E244 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
+			remoteInfo = privatedata;
+		};
+		04149F771FE426490062E244 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
+			remoteInfo = "privatedata-tvOS";
 		};
 		0424A8B31DDA7AE900B2292A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -363,6 +378,7 @@
 		00E356EE1AD99517003FC87E /* WindchillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WindchillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* WindchillTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WindchillTests.m; sourceTree = "<group>"; };
+		04149F4D1FE426490062E244 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		044B740F1EC2972600BB229C /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		047DAFB01EBE2FAE00D33A1C /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		047DAFB11EBE2FAE00D33A1C /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
@@ -437,6 +453,7 @@
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
+				04149F4E1FE426490062E244 /* StoreKit.framework in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
@@ -639,6 +656,8 @@
 				04F56BD11FA537F400CBBBFD /* libthird-party.a */,
 				04F56BD31FA537F400CBBBFD /* libdouble-conversion.a */,
 				04F56BD51FA537F400CBBBFD /* libdouble-conversion.a */,
+				04149F761FE426490062E244 /* libprivatedata.a */,
+				04149F781FE426490062E244 /* libprivatedata-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -742,6 +761,7 @@
 		F6C51211C3CE4126B708B6A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04149F4D1FE426490062E244 /* StoreKit.framework */,
 				044B740F1EC2972600BB229C /* GoogleMobileAds.framework */,
 				166B71A38DCB41B692E7D5E6 /* libz.tbd */,
 			);
@@ -941,6 +961,20 @@
 			fileType = archive.ar;
 			path = libRCTVibration.a;
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		04149F761FE426490062E244 /* libprivatedata.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libprivatedata.a;
+			remoteRef = 04149F751FE426490062E244 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		04149F781FE426490062E244 /* libprivatedata-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libprivatedata-tvOS.a";
+			remoteRef = 04149F771FE426490062E244 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0424A8B41DDA7AE900B2292A /* libBugsnagReactNative.a */ = {
