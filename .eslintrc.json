@@ -2,7 +2,8 @@
     "env": {
         "browser": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "mocha": true
     },
     "extends": ["eslint:recommended", "plugin:react/recommended"],
     "parserOptions": {
@@ -16,7 +17,8 @@
         "react"
     ],
     "globals": {
-        "__DEV__": true
+        "__DEV__": true,
+        "expect": true
     },
     "rules": {
         "react/prop-types": 0,
