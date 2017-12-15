@@ -41,7 +41,9 @@ export class Settings extends Component {
     this.handleTwitterContact = this.handleTwitterContact.bind(this)
     this.handleRemoveAdsCodeSubmit = this.handleRemoveAdsCodeSubmit.bind(this)
 
-    this.state = {}
+    this.state = {
+      buyText: this.getBuyText()
+    }
   }
 
   componentDidMount() {
@@ -59,7 +61,7 @@ export class Settings extends Component {
   getBuyText() {
     return sample([
       'Buy',
-      'Banish Ads',
+      'Get',
       'Pew! Pew!',
       'Remove Ads',
     ])
@@ -138,7 +140,7 @@ export class Settings extends Component {
                     <Text style={styles.textMuted}>Purchased!</Text>
                   ) : (
                     <Button onPress={() => this.purchase(product.identifier)}>
-                      {this.getBuyText()}
+                      {this.state.buyText}
                     </Button>
                   )}
                 />
