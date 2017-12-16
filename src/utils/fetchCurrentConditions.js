@@ -17,8 +17,13 @@ export default ({ latitude, longitude }, unitSystem) => {
 
   const url = [
     'https://api.forecast.io/forecast',
-    [latitude, longitude].join(','),
-  ].join('/') + `?units=${units}`
+    FORECAST_API_KEY,
+    [latitude, longitude].join(',')
+  ].join('/')
 
-  return get(url).then((resp) => ({ unitSystem, ...resp.currently }))
+  const options = {
+    params: { units }
+  }
+
+  return get(url, options).then((resp) => ({ unitSystem, ...resp.currently }))
 }
