@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 1.7.1
+
+* Fix fetching forecast
+
+## 1.7.0
 
 * Support for UK and CA units!
 * Fix spacing between value and unit in gauge
