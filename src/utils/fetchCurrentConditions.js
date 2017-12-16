@@ -3,27 +3,25 @@ import { DARK_SKY } from './conversions'
 
 const FORECAST_API_KEY = process.env.FORECAST_API_KEY // eslint-disable-line
 
-const mockConditions = () => {
-  return Promise.resolve(require('../../mocks/conditions.json'))
+export const getUnits = (unitSystem) => {
+  return DARK_SKY.translations[unitSystem] || unitSystem
 }
 
-export default ({ latitude, longitude }, unitSystem) => {
-  if (__DEV__) {
-    return mockConditions()
-      .then((resp) => ({ unitSystem, ...resp.currently }))
-  }
-
-  const units = DARK_SKY.translations[unitSystem] || unitSystem
-
-  const url = [
+export const getUrl = ({latitude, longitude}) => {
+  return [
     'https://api.forecast.io/forecast',
     FORECAST_API_KEY,
     [latitude, longitude].join(',')
   ].join('/')
+}
 
+export default (coords, unitSystem) => {
   const options = {
-    params: { units }
+    params: {
+      units: getUnits(unitSystem)
+    }
   }
 
-  return get(url, options).then((resp) => ({ unitSystem, ...resp.currently }))
+  return get(getUrl(coords), options)
+    .then((resp) => ({ unitSystem, ...resp.currently }))
 }
