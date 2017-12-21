@@ -15,7 +15,7 @@ const enhancedWindchill = {
 
 export default (temperature, speed, unitSystem) => {
   const minSpeed = UNITS[unitSystem].speed.bounds.min
-  let realSpeed = speed <= minSpeed ? minSpeed : speed
+  const realSpeed = speed <= minSpeed ? minSpeed : speed
 
   return enhancedWindchill[unitSystem](temperature, realSpeed, false)
 }
