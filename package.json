@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "npm run lint",
+    "pretest": "npm run lint",
+    "test": "mocha",
     "lint": "eslint src/**/*.js",
     "postversion": "react-native-version"
   },
@@ -12,7 +13,6 @@
     "bugsnag-react-native": "^2.5.1",
     "date-fns": "^1.29.0",
     "lodash": "^4.17.4",
-    "nock": "^9.1.4",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-native": "^0.51.0",
@@ -38,6 +38,7 @@
     "eslint": "^4.10.0",
     "eslint-plugin-react": "^7.4.0",
     "isomorphic-fetch": "^2.2.1",
+    "nock": "^9.1.4",
     "react-native-version": "^2.3.1",
     "redux-devtools": "^3.4.0",
     "unexpected": "^10.36.0"

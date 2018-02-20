@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { AdMobBanner, PublisherBanner } from 'react-native-admob'
 import errorReporter from '../utils/errorReporter'
 
