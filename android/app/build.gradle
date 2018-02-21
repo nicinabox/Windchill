@@ -77,6 +77,7 @@ project.ext.react = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -99,8 +100,8 @@ android {
 
     defaultConfig {
         applicationId "com.windchill"
-        minSdkVersion 16
-        targetSdkVersion 22
+        minSdkVersion 19
+        targetSdkVersion 23
         versionCode 11
         versionName "1.7.1"
         ndk {
@@ -139,7 +140,6 @@ android {
 dependencies {
     compile project(':react-native-admob')
     compile project(':react-native-vector-icons')
-    compile project(':react-native-revmob')
     compile project(':bugsnag-react-native')
     compile project(':react-native-locale')
     compile fileTree(dir: "libs", include: ["*.jar"])

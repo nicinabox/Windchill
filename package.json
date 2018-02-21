@@ -15,7 +15,7 @@
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
-    "react-native": "^0.51.0",
+    "react-native": "0.53.3",
     "react-native-admob": "^2.0.0-beta.4",
     "react-native-in-app-utils": "^6.0.0",
     "react-native-keyboard-spacer": "^0.4.1",
