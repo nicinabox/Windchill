@@ -6,6 +6,6 @@ const mockReporter = {
   }
 }
 
-const client = __DEV__ ? mockReporter : new Client(process.env.BUGSNAG_API_KEY)
+const client = __DEV__ ? mockReporter : new Client()
 
 export default client
