@@ -116,13 +116,14 @@ export class Settings extends Component {
           )}
 
           <ListSection header="UNITS">
-            {Object.keys(UNITS).map((unit) => {
+            {Object.keys(UNITS).map((unitSystem) => {
               return (
                 <ListRow
-                  key={unit}
-                  primaryText={unit.toUpperCase()}
-                  onPress={() => this.props.setUnits(unit)}
-                  checked={this.props.state.settings.unitSystem === unit}
+                  key={unitSystem}
+                  primaryText={unitSystem.toUpperCase()}
+                  detailText={Object.values(UNITS[unitSystem]).map(({unit}) => unit).join(', ')}
+                  onPress={() => this.props.setUnits(unitSystem)}
+                  checked={this.props.state.settings.unitSystem === unitSystem}
                 />
               )
             })}

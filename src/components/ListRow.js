@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 12,
+    color: colors.lightGray,
   },
   buttonText: {
     color: colors.brandPrimary,
