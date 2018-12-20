@@ -4,6 +4,7 @@ import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { sample } from 'lodash'
 import { connect } from 'react-redux'
 import { format } from 'date-fns'
+import isIphoneX from '../utils/isIphoneX'
 import NavigationBar from 'react-native-navbar'
 import ListSection from './ListSection'
 import ListRow from './ListRow'
@@ -22,7 +23,6 @@ import * as colors from '../styles/colors'
 import pkg from '../../package.json'
 
 const {
-  SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
@@ -80,7 +80,7 @@ export class Settings extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <NavigationBar
           containerStyle={styles.navbarStyle}
           title={{
@@ -197,7 +197,7 @@ export class Settings extends Component {
             isOpen && this.scrollView.scrollToEnd()
           }, 1)
         }}/>
-      </SafeAreaView>
+      </View>
     )
   }
 }
@@ -206,10 +206,12 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
+    paddingBottom: isIphoneX() ? 24 : 0,
   },
   navbarStyle: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.borderColor,
+    paddingTop: isIphoneX() ? 24 : 0,
   },
   textMuted: {
     color: colors.borderColor

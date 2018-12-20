@@ -5,6 +5,6 @@ export default () => {
 
   return (
     Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS &&
-    (size.height === 812 || size.width === 812)
+    (size.height >= 812 || size.width === 812)
   )
 }
