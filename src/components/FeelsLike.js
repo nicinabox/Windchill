@@ -7,6 +7,9 @@ const heightMap = {
   // iPhone X
   812: 60,
 
+  // iPhone Xr
+  896: 60,
+
   // iPhone 8+
   736: 60,
 
