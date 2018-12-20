@@ -3,12 +3,12 @@ import { Dimensions, StyleSheet, View, Text, PixelRatio } from 'react-native'
 
 const { height: HEIGHT } = Dimensions.get('window')
 
-const heightMap = {
+const feelsLikeMap = {
   // iPhone X
   812: 60,
 
   // iPhone Xr
-  896: 60,
+  896: 85,
 
   // iPhone 8+
   736: 60,
@@ -20,12 +20,20 @@ const heightMap = {
   568: 55
 }
 
-const getFontSize = () => {
-  return heightMap[HEIGHT] * PixelRatio.get()
+const getFeelsLikeFontSize = () => {
+  return (feelsLikeMap[HEIGHT] || 10) * PixelRatio.get()
+}
+
+const getFeelsLikeLabelFontSize = () => {
+  if (HEIGHT >= 896) {
+    return 18 * PixelRatio.get()
+  }
+
+  return 12 * PixelRatio.get()
 }
 
 export default function FeelsLike ({value}) {
-  const fontSize = getFontSize()
+  const fontSize = getFeelsLikeFontSize()
 
   return (
     <View style={styles.container}>
@@ -54,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   label: {
-    fontSize: 12 * PixelRatio.get(),
+    fontSize: getFeelsLikeLabelFontSize(),
     color: 'rgba(0,0,0,0.5)',
     fontWeight: '300',
     textAlign: 'center',
