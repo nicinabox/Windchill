@@ -17,7 +17,7 @@ const now = () => +(new Date)
 const ONE_MIN = 60
 const FIVE_MIN = ONE_MIN * 5
 
-export default class CurrentConnditions extends Component {
+export default class CurrentConditions extends Component {
   constructor(props) {
     super(props)
 
