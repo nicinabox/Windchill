@@ -8,6 +8,14 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import io.fixd.rctlocale.RCTLocalePackage;
 import com.sbugert.rnadmob.RNAdMobPackage;
 import com.bugsnag.BugsnagReactNative;
+import com.oblador.vectoricons.VectorIconsPackage;
+import io.fixd.rctlocale.RCTLocalePackage;
+import com.sbugert.rnadmob.RNAdMobPackage;
+import com.bugsnag.BugsnagReactNative;
+import com.oblador.vectoricons.VectorIconsPackage;
+import io.fixd.rctlocale.RCTLocalePackage;
+import com.sbugert.rnadmob.RNAdMobPackage;
+import com.bugsnag.BugsnagReactNative;
 import com.facebook.soloader.SoLoader;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -35,6 +43,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
+            new RCTLocalePackage(),
+            new RNAdMobPackage(),
+            BugsnagReactNative.getPackage(),
+            new VectorIconsPackage(),
+            new RCTLocalePackage(),
+            new RNAdMobPackage(),
+            BugsnagReactNative.getPackage(),
             new VectorIconsPackage(),
             new RCTLocalePackage(),
             new RNAdMobPackage(),
