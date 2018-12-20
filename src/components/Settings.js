@@ -160,7 +160,7 @@ export class Settings extends Component {
               header="Share Windchill on your favorite social media site or forum and get a year ad-free!"
               footer="Contact me with a link to your post and I'll send you a code.">
               <ListRow
-                primaryText="Enter Code"
+                primaryText="Enter Ad-Free Code"
                 renderAccessory={() => (
                   <TextInput
                     style={styles.input}

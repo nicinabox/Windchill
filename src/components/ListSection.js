@@ -70,7 +70,6 @@ var styles = StyleSheet.create({
   },
   sectionFooterText: {
     color: colors.lightGray,
-    textAlign: 'center',
     fontSize: 13,
   }
 })

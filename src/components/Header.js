@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactNative from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import isIphoneX from '../utils/isIphoneX'
 import Button from './Button'
 
 const {
