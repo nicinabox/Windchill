@@ -4401,9 +4401,10 @@ react-native-line-gauge@^1.2.1:
     lodash.times "^4.3.2"
     prop-types "^15.5.8"
 
-react-native-locale@^0.0.18:
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/react-native-locale/-/react-native-locale-0.0.18.tgz#0d9207710dcbb41fe63400df6a6321c28b5c95cf"
+react-native-locale@^0.0.19:
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/react-native-locale/-/react-native-locale-0.0.19.tgz#336842dfb97510a539f98a39331fb7430acdc498"
+  integrity sha512-US+249Sl2PhFcM0k/yU7RFwK8eiU0Qh8vHTZGF4xw5VnhJyDu2oOn3x8Gshb4X+Xyx9AxSTkib280QROnjPFzQ==
 
 react-native-navbar@^2.0.1:
   version "2.1.0"
