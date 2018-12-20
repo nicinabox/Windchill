@@ -38,7 +38,6 @@ export class Settings extends Component {
     this.purchase = this.purchase.bind(this)
     this.restorePurchases = this.restorePurchases.bind(this)
     this.handleEmailContact = this.handleEmailContact.bind(this)
-    this.handleTwitterContact = this.handleTwitterContact.bind(this)
     this.handleRemoveAdsCodeSubmit = this.handleRemoveAdsCodeSubmit.bind(this)
 
     this.state = {
@@ -69,10 +68,6 @@ export class Settings extends Component {
 
   handleEmailContact() {
     Linking.openURL(`mailto:nic@nicinabox.com?subject=Windchill (${pkg.version})`)
-  }
-
-  handleTwitterContact() {
-    Linking.openURL('https://twitter.com/nicinabox')
   }
 
   handleDarkSky() {
@@ -181,11 +176,6 @@ export class Settings extends Component {
               primaryText="Email"
               detailText="nic@nicinabox.com"
               onPress={this.handleEmailContact}
-            />
-            <ListRow
-              primaryText="Twitter"
-              detailText="@nicinabox"
-              onPress={this.handleTwitterContact}
             />
           </ListSection>
 
