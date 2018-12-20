@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Fix layout on iPhone XR
+- Use SI units before CA units
+- Show unit names in settings
+
 ## 1.7.1
 
 * Fix fetching forecast
