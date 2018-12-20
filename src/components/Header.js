@@ -29,11 +29,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     height: 44,
-    position: 'absolute',
-    top: isIphoneX() ? 44 : 20,
-    left: 0,
-    right: 0,
-    zIndex: 1,
   },
   buttonText: {
     color: '#fff',

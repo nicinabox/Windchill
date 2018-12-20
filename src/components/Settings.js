@@ -23,6 +23,7 @@ import * as colors from '../styles/colors'
 import pkg from '../../package.json'
 
 const {
+  SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
@@ -85,7 +86,7 @@ export class Settings extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <NavigationBar
           containerStyle={styles.navbarStyle}
           title={{
@@ -207,7 +208,7 @@ export class Settings extends Component {
             isOpen && this.scrollView.scrollToEnd()
           }, 1)
         }}/>
-      </View>
+      </SafeAreaView>
     )
   }
 }
@@ -220,7 +221,6 @@ var styles = StyleSheet.create({
   navbarStyle: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.borderColor,
-    paddingTop: isIphoneX() ? 24 : 0,
   },
   textMuted: {
     color: colors.borderColor
