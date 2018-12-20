@@ -27,7 +27,7 @@
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.2.0",
-    "weather-tools": "^2.1.1"
+    "weather-tools": "^3.0.0"
   },
   "devDependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",

@@ -5442,9 +5442,10 @@ watch@~0.18.0:
     exec-sh "^0.2.0"
     minimist "^1.2.0"
 
-weather-tools@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/weather-tools/-/weather-tools-2.1.1.tgz#9c09573e5abeae32fea0fa9312f25cd6118e8857"
+weather-tools@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/weather-tools/-/weather-tools-3.0.0.tgz#95872b06cc2f43b13a435f408d063e0e5d671a79"
+  integrity sha512-RbrpVfOqAWdodYmEpUrq68LSGvW/RF08be09YHqzfPMiKqqFlNrdluyxCzIjf6zob0VlAecoL4OKe5WZ4rw96Q==
 
 whatwg-fetch@>=0.10.0:
   version "3.0.0"
