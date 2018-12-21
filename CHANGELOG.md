@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.8.0
 
 - Fix layout on iPhone Xr and friends
 - Select SI units before CA units for Canadian users
