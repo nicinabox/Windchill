@@ -2,9 +2,10 @@
 
 ## Unreleased
 
-- Fix layout on iPhone XR
-- Use SI units before CA units
+- Fix layout on iPhone Xr and friends
+- Select SI units before CA units for Canadian users
 - Show unit names in settings
+- Misc fixes and tweaks
 
 ## 1.7.1
 
