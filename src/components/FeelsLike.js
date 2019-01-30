@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   largeText: {
+    fontVariant: ['tabular-nums'],
     fontWeight: '100',
     color: '#fff',
     textAlign: 'center',
