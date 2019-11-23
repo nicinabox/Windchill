@@ -1,0 +1,28 @@
+{
+  "name": "react-native-locale",
+  "version": "0.0.19",
+  "summary": "Simple locale information and methods for react native",
+  "description": "Simple locale information and methods for react native",
+  "license": "MIT",
+  "authors": "Fixd",
+  "homepage": "https://github.com/fixdio/react-native-locale.git",
+  "source": {
+    "git": "https://github.com/fixdio/react-native-locale.git",
+    "tag": "0.0.19"
+  },
+  "requires_arc": true,
+  "platforms": {
+    "ios": "7.0"
+  },
+  "preserve_paths": [
+    "README.md",
+    "package.json",
+    "index.ios.js"
+  ],
+  "source_files": "ios/RCTLocale/*.{h,m}",
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}
