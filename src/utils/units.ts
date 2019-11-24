@@ -64,6 +64,10 @@ export const C: Unit = {
   }
 }
 
+export const speedUnits = [MPH, KPH, MPS, KNOTS]
+
+export const temperatureUnits = [F, C]
+
 export default [MPH, KPH, KNOTS, MPS, F, C].reduce((acc, unit) => {
   return {
     ...acc,

@@ -35,10 +35,15 @@ interface SettingsProps {
     products: ProductsState
   }
   handleClose: () => void
+  setUnits: () => void
+  validateAdCode: () => void
+  loadProducts: () => void
+  purchaseProduct: () => void
+  restorePurchases: () => void
 }
 
-export const Settings: React.FC<SettingsProps> = ({ state, handleClose }) => {
-  let scrollView
+export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits, validateAdCode, loadProducts, purchaseProduct, restorePurchases }) => {
+   let scrollView
 
   function handleOpenDarkSky() {
     Linking.openURL('https://darksky.net/poweredby/')
@@ -77,6 +82,7 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose }) => {
 
         <UnitSettings
           settings={state.settings}
+          onChange={setUnits}
         />
 
         <PurchaseSettings
