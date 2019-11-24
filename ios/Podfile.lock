@@ -218,6 +218,8 @@ PODS:
   - React-jsinspector (0.61.4)
   - react-native-admob (2.0.0-beta.6):
     - React
+  - react-native-geolocation (2.0.2):
+    - React
   - react-native-in-app-utils (6.0.2):
     - React
   - react-native-locale (0.0.19):
@@ -285,6 +287,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-admob (from `../node_modules/react-native-admob`)
+  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-in-app-utils (from `../node_modules/react-native-in-app-utils`)
   - react-native-locale (from `../node_modules/react-native-locale`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -344,6 +347,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-admob:
     :path: "../node_modules/react-native-admob"
+  react-native-geolocation:
+    :path: "../node_modules/@react-native-community/geolocation"
   react-native-in-app-utils:
     :path: "../node_modules/react-native-in-app-utils"
   react-native-locale:
@@ -399,6 +404,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 8dfb73b987afa9324e4009bdce62a18ce23d983c
   React-jsinspector: d15478d0a8ada19864aa4d1cc1c697b41b3fa92f
   react-native-admob: cb7f9e5e7d6f1e68bfbf1df8f72b2e23963bc7db
+  react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-in-app-utils: 07ea1df4bb6e8cbb27337d42a65ffe4cf7a35e97
   react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
   React-RCTActionSheet: 7369b7c85f99b6299491333affd9f01f5a130c22
