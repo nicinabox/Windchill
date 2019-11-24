@@ -11,7 +11,7 @@ import {
   AD_CODE_EXPIRED,
 } from '../actions/productActions'
 
-export interface Settings {
+export interface SettingsState {
   units: {
     speed: Unit
     temperature: Unit
@@ -19,7 +19,7 @@ export interface Settings {
   shouldShowAds: boolean
 }
 
-const initialState: Settings = {
+const initialState: SettingsState = {
   units: {
     speed: MPH,
     temperature: F,

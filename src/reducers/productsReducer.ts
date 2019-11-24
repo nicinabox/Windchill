@@ -1,6 +1,16 @@
 import omit from 'lodash/omit'
+import { AnyAction } from 'redux'
+import * as API from 'src/interfaces/api'
 
-const initialState = {
+export interface ProductsState {
+  products: API.Product[]
+  purchases: API.Purchase[]
+  adCode?: {
+    expiration: number
+  }
+}
+
+const initialState: ProductsState = {
   products: [],
   purchases: [],
 }
@@ -15,7 +25,7 @@ import {
   AD_CODE_EXPIRED,
 } from '../actions/productActions'
 
-export default function (state = initialState, action) {
+export default function (state = initialState, action: AnyAction) {
   switch (action.type) {
     case RECEIVE_PRODUCTS:
       return {
