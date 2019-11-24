@@ -14,7 +14,7 @@ export default class Root extends Component {
     getItem('store')
       .then(state => state || {})
       .then((initialState) => {
-        let store = createStore(initialState)
+        const store = createStore(initialState)
         this.setState({ store })
       })
   }

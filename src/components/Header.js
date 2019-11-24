@@ -15,7 +15,7 @@ export default function Header ({onSettingsPress}) {
       </View>
 
       <Button onPress={onSettingsPress}>
-        <Icon name="ios-settings-outline" size={26} style={styles.buttonText} />
+        <Icon name="ios-settings" size={26} style={styles.buttonText} />
       </Button>
     </View>
   )
