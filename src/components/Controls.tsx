@@ -25,6 +25,7 @@ export const Controls: React.FC<ControlsProps> = ({ units, onChange }) => {
   return (
     <View style={styles.controls}>
       <CurrentConditions
+        units={units}
         onPress={handleConditionsPress}
       />
 

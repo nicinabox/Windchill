@@ -1,3 +1,5 @@
+import { DarkSkyConversions } from "src/interfaces/api"
+
 export const US = 'us'
 export const SI = 'si'
 export const UK = 'uk'
@@ -64,10 +66,10 @@ export const UNITS = {
   },
 }
 
-export const DARK_SKY = {
+export const DARK_SKY: DarkSkyConversions = {
   icons: {
     'clear-day': '☀️',
-    'clear-night': '☀️',
+    'clear-night': '🌕',
     rain: '🌧️',
     snow: '❄️',
     sleet: '❄️',

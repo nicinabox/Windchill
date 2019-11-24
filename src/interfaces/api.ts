@@ -1,9 +1,17 @@
-export interface DarkSkyConditions {
-  currently: {
-    windSpeed: number
-    temperature: number
-    icon: string
-    unitSystem: string
+export interface DarkSkyConditionsCurrently {
+  [key: string]: any
+  windSpeed: number
+  temperature: number
+  icon: string
+  unitSystem: string
+}
+
+export interface DarkSkyConversions {
+  icons: {
+    [key: string]: string;
+  }
+  translations: {
+    [key: string]: string;
   }
 }
 
@@ -15,4 +23,8 @@ export interface Product {
 
 export interface Purchase {
 
+}
+
+export interface Geolocation {
+  coords: {}
 }

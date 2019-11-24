@@ -15,13 +15,9 @@ export const getUrl = ({latitude, longitude}) => {
   ].join('/')
 }
 
-export default (coords, unitSystem) => {
-  const options = {
-    params: {
-      units: getUnits(unitSystem)
-    }
-  }
+export default (coords) => {
+  const options = {}
 
   return get(getUrl(coords), options)
-    .then((resp) => ({ unitSystem, ...resp.currently }))
+    .then((resp) => resp.currently)
 }

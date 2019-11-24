@@ -1,4 +1,5 @@
 export interface Units {
+  [key: string]: Unit
   speed: Unit
   temperature: Unit
 }
