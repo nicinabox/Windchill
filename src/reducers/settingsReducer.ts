@@ -1,9 +1,7 @@
-import migrate from '../utils/migrate'
-import getLocaleUnits from '../utils/getLocaleUnits'
+import { AnyAction } from 'redux'
+import { Unit, MPH, F } from '../utils/units'
 import { shouldShowAds } from '../utils/purchases'
-import {
-  SET_UNITS,
-} from '../actions/settingsActions'
+import { SET_UNITS } from '../actions/settingsActions'
 import {
   PURCHASE_PRODUCT,
   RESTORE_PURCHASES,
@@ -13,26 +11,31 @@ import {
   AD_CODE_EXPIRED,
 } from '../actions/productActions'
 
-const initialState = {
-  unitSystem: getLocaleUnits(),
+export interface Settings {
+  units: {
+    speed: Unit
+    temperature: Unit
+  }
+  shouldShowAds: boolean
+}
+
+const initialState: Settings = {
+  units: {
+    speed: MPH,
+    temperature: F,
+  },
   shouldShowAds: true,
 }
 
-const migrateUnits = (state) => {
-  if (state.unitSystem) return state
-
-  return {
-    ...state,
-    unitSystem: state.units,
-  }
-}
-
-export default migrate(migrateUnits, (state, action) => {
+export default (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case SET_UNITS:
       return {
         ...state,
-        unitSystem: action.unitSystem
+        units: {
+          ...state.units,
+          [action.measurement]: action.unit
+        }
       }
 
     case RECEIVE_AD_CODE:
@@ -64,4 +67,4 @@ export default migrate(migrateUnits, (state, action) => {
     default:
       return state
   }
-}, initialState)
+}
