@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { borderColor } from '../styles/colors'
 
-export default function ListSeparator () {
+export const ListSeparator: React.FC<ListSeparatorProps> = () => {
   return <View style={styles.separator} />
 }
 
@@ -13,3 +13,5 @@ const styles = StyleSheet.create({
     borderColor,
   }
 })
+
+export default ListSeparator

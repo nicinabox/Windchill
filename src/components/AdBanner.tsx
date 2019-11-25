@@ -3,9 +3,11 @@ import { StyleSheet, View } from 'react-native'
 import { AdMobBanner, PublisherBanner } from 'react-native-admob'
 import errorReporter from '../utils/errorReporter'
 
-export default function AdBanner ({shouldShowAds}) {
-  if (!shouldShowAds) return false
+interface AdBannerProps {
+  shouldShowAds: boolean
+}
 
+export const AdBanner: React.FC<AdBannerProps> = ({ shouldShowAds = false }) => {
   return (
     <View style={styles.container}>
       <AdMobBanner
@@ -29,3 +31,5 @@ const styles = StyleSheet.create({
     padding: 6
   },
 })
+
+export default AdBanner

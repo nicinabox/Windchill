@@ -32,16 +32,14 @@ export const Controls: React.FC<ControlsProps> = ({ units, onChange }) => {
       <LineGaugeInput
         label="Wind Speed"
         value={speed}
-        units={units.speed.name}
-        bounds={units.speed.bounds}
+        unit={units.speed}
         onChange={setSpeed}
       />
 
       <LineGaugeInput
         label="Temperature"
         value={temperature}
-        units={units.temperature.name}
-        bounds={units.temperature.bounds}
+        unit={units.temperature}
         onChange={setTemperature}
       />
     </View>

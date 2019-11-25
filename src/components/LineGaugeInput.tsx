@@ -1,19 +1,27 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import LineGauge from 'react-native-line-gauge'
+import { Unit } from 'src/utils/units'
 
-export default function LineGaugeInput ({label, value, units, bounds, onChange}) {
+interface LineGaugeInputProps {
+  label: string
+  value: number
+  unit: Unit
+  onChange: () => void
+}
+
+export const LineGaugeInput: React.FC<LineGaugeInputProps> = ({ label, value, unit, onChange }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.value} allowFontScaling={false}>
-        {value} {units}
+        {value} {unit.name}
       </Text>
 
       <LineGauge
         styles={lineGaugeStyles}
         onChange={onChange}
         value={value}
-        {...bounds}
+        {...unit.bounds}
       />
 
       <Text style={styles.label}>
@@ -41,7 +49,7 @@ const styles = StyleSheet.create({
   },
 })
 
-var lineGaugeStyles = StyleSheet.create({
+const lineGaugeStyles = StyleSheet.create({
   container: {
     borderTopColor: 'rgba(0,0,0,0.1)',
     borderBottomColor: 'rgba(0,0,0,0.1)',
@@ -60,3 +68,5 @@ var lineGaugeStyles = StyleSheet.create({
     backgroundColor: '#50E3C2',
   }
 })
+
+export default LineGaugeInput

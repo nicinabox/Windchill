@@ -8,7 +8,11 @@ const {
   View,
 } = ReactNative
 
-export default function Header ({onSettingsPress}) {
+interface HeaderProps {
+  onSettingsPress: () => void
+}
+
+export const Header: React.FC<HeaderProps> = ({ onSettingsPress }) => {
   return (
     <View style={styles.container}>
       <View>
@@ -33,3 +37,5 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 })
+
+export default Header

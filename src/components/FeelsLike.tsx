@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet, View, Text, PixelRatio } from 'react-native'
 
 const { height: HEIGHT } = Dimensions.get('window')
 
-const feelsLikeMap = {
+const feelsLikeMap: { [key: number]: number } = {
   // iPhone X
   812: 60,
 
@@ -32,7 +32,11 @@ const getFeelsLikeLabelFontSize = () => {
   return 12 * PixelRatio.get()
 }
 
-export default function FeelsLike ({value}) {
+interface FeelsLikeProps {
+  value: number
+}
+
+export const FeelsLike: React.FC<FeelsLikeProps> = ({ value }) => {
   const fontSize = getFeelsLikeFontSize()
 
   return (
@@ -74,3 +78,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 })
+
+export default FeelsLike
