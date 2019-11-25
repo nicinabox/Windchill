@@ -1,35 +1,24 @@
 import React from 'react'
 import { Dimensions, StyleSheet, View, Text, PixelRatio } from 'react-native'
 
-const { height: HEIGHT } = Dimensions.get('window')
+const { height: HEIGHT, width: WIDTH } = Dimensions.get('window')
+const realWidth = HEIGHT > WIDTH ? WIDTH : HEIGHT;
 
-const feelsLikeMap: { [key: number]: number } = {
-  // iPhone X
-  812: 60,
-
-  // iPhone Xr
-  896: 85,
-
-  // iPhone 8+
-  736: 60,
-
-  // iPhone 8
-  667: 70,
-
-  // iPhone 5
-  568: 55
+interface ScaleTextProps {
+  deviceBaseWidth?: number
+  fontSize?: number
+  lineHeight?: number
 }
 
-const getFeelsLikeFontSize = () => {
-  return (feelsLikeMap[HEIGHT] || 10) * PixelRatio.get()
-}
-
-const getFeelsLikeLabelFontSize = () => {
-  if (HEIGHT >= 896) {
-    return 18 * PixelRatio.get()
-  }
-
-  return 12 * PixelRatio.get()
+export function scaleText({
+  deviceBaseWidth = 375,
+  fontSize = 14,
+  lineHeight = fontSize + 8,
+}: ScaleTextProps) {
+  return {
+    fontSize: Math.round((fontSize * realWidth) / deviceBaseWidth),
+    lineHeight: Math.round((lineHeight * realWidth) / deviceBaseWidth),
+  };
 }
 
 interface FeelsLikeProps {
@@ -37,21 +26,20 @@ interface FeelsLikeProps {
 }
 
 export const FeelsLike: React.FC<FeelsLikeProps> = ({ value }) => {
-  const fontSize = getFeelsLikeFontSize()
-
   return (
     <View style={styles.container}>
-      <Text style={styles.label} allowFontScaling={false}>
+      <Text allowFontScaling={false}
+        style={[
+          styles.label,
+          scaleText({ fontSize: 12 * PixelRatio.get() })
+        ]}>
         Feels like
       </Text>
 
       <Text allowFontScaling={false}
         style={[
           styles.largeText,
-          {
-            fontSize,
-            lineHeight: fontSize + 8,
-          }
+          scaleText({ fontSize: 50 * PixelRatio.get() })
         ]}>
         {value}
       </Text>
@@ -66,7 +54,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   label: {
-    fontSize: getFeelsLikeLabelFontSize(),
     color: 'rgba(0,0,0,0.5)',
     fontWeight: '300',
     textAlign: 'center',
