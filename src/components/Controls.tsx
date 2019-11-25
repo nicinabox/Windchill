@@ -14,6 +14,11 @@ export const Controls: React.FC<ControlsProps> = ({ units, onChange }) => {
   const [temperature, setTemperature] = useState(units.temperature.bounds.max)
 
   useEffect(() => {
+    setSpeed(units.speed.bounds.min)
+    setTemperature(units.temperature.bounds.max)
+  }, [units])
+
+  useEffect(() => {
     onChange({ speed, temperature })
   }, [speed, temperature])
 
