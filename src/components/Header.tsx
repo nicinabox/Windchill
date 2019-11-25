@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({ onSettingsPress }) => {
       <View>
       </View>
 
-      <Button onPress={onSettingsPress}>
+      <Button onPress={onSettingsPress} style={styles.button}>
         <Icon name="ios-settings" size={26} style={styles.buttonText} />
       </Button>
     </View>
@@ -32,6 +32,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     height: 44,
+  },
+  button: {
+    paddingVertical: 4,
+    paddingHorizontal: 8,
   },
   buttonText: {
     color: '#fff',
