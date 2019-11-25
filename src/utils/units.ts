@@ -44,8 +44,8 @@ export const MPS: Unit = {
 export const KPH: Unit = {
   name: 'kph',
   bounds: {
-    min: -45,
-    max: 170,
+    min: 5,
+    max: 160,
   }
 }
 

@@ -6,7 +6,7 @@ export default function LineGaugeInput ({label, value, units, bounds, onChange})
   return (
     <View style={styles.container}>
       <Text style={styles.value} allowFontScaling={false}>
-        {value}{units}
+        {value} {units}
       </Text>
 
       <LineGauge

@@ -1,12 +1,12 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactNative from 'react-native'
 import errorReporter from '../utils/errorReporter'
-import { DARK_SKY } from '../utils/conversions'
 import fetchCurrentConditions from '../utils/fetchCurrentConditions'
 import getPosition from '../utils/getPosition'
 import { DarkSkyConditionsCurrently } from 'src/interfaces/api'
 import { Units, Measurements, defaultMeasurements } from '../utils/units'
 import convert from '../utils/convert'
+import { DARK_SKY_TRANSLATIONS, DARK_SKY_ICONS } from '../utils/darkSky'
 
 var {
   StyleSheet,
@@ -71,7 +71,7 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
         return
     }
 
-    const value = conditions[DARK_SKY.translations[measurement]]
+    const value = conditions[DARK_SKY_TRANSLATIONS[measurement]]
     return Math.round(convert(value, defaultMeasurements[measurement], units[measurement]))
   }
 
@@ -121,9 +121,9 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
       })}>
         <StyledText>
           {[
-            `${temperature.value}${temperature.unitName}`,
-            DARK_SKY.icons[conditions.icon],
-            `${speed.value}${speed.unitName}`,
+            `${temperature.value} ${temperature.unitName}`,
+            DARK_SKY_ICONS[conditions.icon],
+            `${speed.value} ${speed.unitName}`,
           ].join(' ')}
         </StyledText>
       </Button>
@@ -159,10 +159,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     marginBottom: 15,
+    marginHorizontal: 5,
   },
   button: {
     backgroundColor: 'rgba(0,0,0,0.3)',
-    borderRadius: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 30,
   },
   buttonInner: {
     flexDirection: 'row',
@@ -175,6 +178,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     paddingHorizontal: 8,
     paddingVertical: 5,
+    textAlign: 'center',
   },
 })
 

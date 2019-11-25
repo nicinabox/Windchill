@@ -5,13 +5,12 @@ export interface DarkSkyConditionsCurrently {
   icon: string
 }
 
-export interface DarkSkyConversions {
-  icons: {
-    [key: string]: string;
-  }
-  translations: {
-    [key: string]: string;
-  }
+export interface DarkSkyIcons {
+  [key: string]: string;
+}
+
+export interface DarkSkyTranslations {
+  [key: string]: string;
 }
 
 export interface Product {
@@ -24,6 +23,11 @@ export interface Purchase {
 
 }
 
+export interface Coordinates {
+  latitude: number
+  longitude: number
+}
+
 export interface Geolocation {
-  coords: {}
+  coords: Coordinates
 }
