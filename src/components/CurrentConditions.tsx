@@ -1,11 +1,12 @@
 import React, { Component, useEffect, useState } from 'react'
 import ReactNative from 'react-native'
 import errorReporter from '../utils/errorReporter'
-import { UNITS, DARK_SKY, convertFrom } from '../utils/conversions'
+import { DARK_SKY } from '../utils/conversions'
 import fetchCurrentConditions from '../utils/fetchCurrentConditions'
 import getPosition from '../utils/getPosition'
 import { DarkSkyConditionsCurrently } from 'src/interfaces/api'
-import { Units, Measurements } from 'src/utils/units'
+import { Units, Measurements, defaultMeasurements } from '../utils/units'
+import convert from '../utils/convert'
 
 var {
   StyleSheet,
@@ -65,15 +66,13 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
     }
   }
 
-  function getCurrentCondition(name: string) {
+  function getCurrentCondition(measurement: string) {
     if (!conditions) {
         return
     }
 
-    // const convert = convertFrom(conditions.unitSystem, units)
-    const value = conditions[DARK_SKY.translations[name]]
-
-    return Math.round(value)
+    const value = conditions[DARK_SKY.translations[measurement]]
+    return Math.round(convert(value, defaultMeasurements[measurement], units[measurement]))
   }
 
   function getConditions() {
@@ -148,8 +147,6 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
   if (!isLoading && !error) {
     children = renderConditions()
   }
-
-  console.log(children)
 
   return (
     <View style={styles.container}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactNative from 'react-native'
 import { connect } from 'react-redux'
-import windchill from '../utils/windchill'
+import getWindchill from '../utils/windchill'
 import FeelsLike from './FeelsLike'
 import Controls from './Controls'
 import { Units, Measurements } from 'src/utils/units'
@@ -16,31 +16,22 @@ interface WindchillProps {
 }
 
 export const Windchill: React.FC<WindchillProps> = ({ units }) => {
+  const initialSpeed = units.speed.bounds.min
+  const initialTemperature = units.temperature.bounds.max
+
+  const [speed, setSpeed] = useState(initialSpeed)
+  const [temperature, setTemperature] = useState(initialTemperature)
   const [windchillValue, setWindchillValue] = useState(() => {
-    return windchill(
-      units.temperature.bounds.max,
-      units.speed.bounds.min,
-      units,
-    )
+    return getWindchill(initialTemperature, initialSpeed, units)
   })
 
   useEffect(() => {
-    console.log('units changed')
-  }, [units])
-
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   const { unitSystem } = nextProps.state.settings
-  //
-  //   if (unitSystem !== this.props.state.settings.unitSystem) {
-  //     this.setState({
-  //       speed: Math.round(convertSpeed(this.state.speed, unitSystem)),
-  //       temperature: Math.round(convertTemp(this.state.temperature, unitSystem)),
-  //     })
-  //   }
-  // }
+    setWindchillValue(Math.round(getWindchill(temperature, speed, units)))
+  }, [units, speed, temperature])
 
   function handleChange({ speed, temperature }: Measurements) {
-    setWindchillValue(windchill(temperature, speed, units))
+    setSpeed(speed)
+    setTemperature(temperature)
   }
 
   return (
