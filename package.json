@@ -12,6 +12,7 @@
     "@react-native-community/async-storage": "^1.6.3",
     "@react-native-community/geolocation": "^2.0.2",
     "bugsnag-react-native": "^2.23.2",
+    "convert-units": "^2.3.4",
     "date-fns": "^2.8.1",
     "lodash": "^4.17.15",
     "react": "16.9.0",

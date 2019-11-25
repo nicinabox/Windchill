@@ -1,5 +1,4 @@
 import { get } from '../utils/http'
-import { DARK_SKY } from './conversions'
 
 const FORECAST_API_KEY = process.env.FORECAST_API_KEY // eslint-disable-line
 

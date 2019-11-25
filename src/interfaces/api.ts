@@ -3,7 +3,6 @@ export interface DarkSkyConditionsCurrently {
   windSpeed: number
   temperature: number
   icon: string
-  unitSystem: string
 }
 
 export interface DarkSkyConversions {
