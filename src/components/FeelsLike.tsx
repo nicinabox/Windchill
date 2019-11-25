@@ -31,7 +31,7 @@ export const FeelsLike: React.FC<FeelsLikeProps> = ({ value }) => {
       <Text allowFontScaling={false}
         style={[
           styles.label,
-          scaleText({ fontSize: 12 * PixelRatio.get() })
+          scaleText({ fontSize: 21 })
         ]}>
         Feels like
       </Text>
@@ -39,7 +39,7 @@ export const FeelsLike: React.FC<FeelsLikeProps> = ({ value }) => {
       <Text allowFontScaling={false}
         style={[
           styles.largeText,
-          scaleText({ fontSize: 50 * PixelRatio.get() })
+          scaleText({ fontSize: 103 })
         ]}>
         {value}
       </Text>
@@ -54,15 +54,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   label: {
-    color: 'rgba(0,0,0,0.5)',
-    fontWeight: '300',
+    color: '#fff',
+    fontWeight: '400',
     textAlign: 'center',
   },
   largeText: {
     fontVariant: ['tabular-nums'],
-    fontWeight: '100',
+    fontWeight: '700',
     color: '#fff',
     textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: {
+      width: 0,
+      height: 2
+    },
+    textShadowRadius: 12,
   },
 })
 

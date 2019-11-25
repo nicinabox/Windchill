@@ -7,7 +7,7 @@ interface LineGaugeInputProps {
   label: string
   value: number
   unit: Unit
-  onChange: () => void
+  onChange: (value: number) => void
 }
 
 export const LineGaugeInput: React.FC<LineGaugeInputProps> = ({ label, value, unit, onChange }) => {
