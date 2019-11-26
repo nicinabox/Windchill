@@ -25,6 +25,24 @@ interface ComponentProps {
   onPress: (values: Measurements) => void
 }
 
+// @ts-ignore
+const StyledText = ({ children, style = undefined }) => {
+  return (
+    <Text style={[styles.text, style]} allowFontScaling={false}>
+      {children}
+    </Text>
+  )
+}
+
+// @ts-ignore
+const Button = ({ onPress, children }) => {
+  return (
+    <TouchableHighlight style={styles.button} underlayColor="#334284" onPress={onPress}>
+        {children}
+    </TouchableHighlight>
+  )
+}
+
 export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: propsOnPress }) => {
   const [conditions, setConditions] = useState<DarkSkyConditionsCurrently>()
   const [isLoading, setIsLoading] = useState(false)
@@ -54,7 +72,7 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
       setLastUpdate(now())
     } catch (error) {
       errorReporter.notify(error)
-      setError(error.message || 'There was an error fetching forecast. Try again?')
+      setError(error.message || 'There was an error getting the forecast.')
     } finally {
       setIsLoading(false)
     }
@@ -85,27 +103,6 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
     }), {})
   }
 
-  // @ts-ignore
-  function StyledText({ children }) {
-    return (
-      <Text style={styles.text} allowFontScaling={false}>
-        {children}
-      </Text>
-    )
-  }
-
-  // @ts-ignore
-  function Button({ onPress, children }) {
-    return (
-      <TouchableHighlight
-        style={styles.button}
-        underlayColor="#334284"
-        onPress={onPress}>
-          {children}
-      </TouchableHighlight>
-    )
-  }
-
   function renderConditions() {
     if (!conditions) {
       return null
@@ -132,15 +129,18 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
 
   let children: JSX.Element | null = (
     <StyledText>
-      Getting current conditions...
+      Getting forecast...
     </StyledText>
   )
 
   if (error) {
     children = (
-      <Button onPress={fetchForecast}>
+      <>
         <StyledText>{error}</StyledText>
-      </Button>
+        <Button onPress={fetchForecast}>
+          <StyledText>Try again</StyledText>
+        </Button>
+      </>
     )
   }
 
@@ -158,13 +158,14 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 25,
     marginHorizontal: 5,
   },
   button: {
     backgroundColor: 'rgba(0,0,0,0.3)',
     paddingHorizontal: 6,
     paddingVertical: 2,
+    marginVertical: 5,
     borderRadius: 30,
   },
   buttonInner: {
