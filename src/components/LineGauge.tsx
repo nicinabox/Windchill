@@ -7,11 +7,13 @@ import {
   Text,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  GestureResponderEvent,
 } from 'react-native'
 import { times } from 'lodash'
 import scale from '../utils/scale'
 
-const GAUGE_WIDTH = Math.floor(Dimensions.get('window').width)
+const { width: SCREEN_WIDTH } = Dimensions.get('window')
+const GAUGE_WIDTH = Math.floor(SCREEN_WIDTH)
 const INTERVAL_WIDTH = 12
 
 interface LineGaugeProps {
@@ -33,10 +35,12 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
 }) => {
   const scrollMin = 0
   const scrollMax = getScrollMax()
+
   const scrollView = useRef<ScrollView>(null)
-  const scrollValue = useRef(value)
   const scrollOffsetX = useRef(scaleValue(value))
   const bounds = useRef([min, max])
+
+  const [scrollValue, setScrollValue] = useState(value)
   const [isUserScrolling, setIsUserScrolling] = useState(false)
 
   useEffect(() => {
@@ -49,6 +53,12 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
       scrollView.current.scrollTo({ x: scaleValue(value) })
     }
   }, [min, max, value])
+
+  useEffect(() => {
+    if (scrollValue !== value) {
+      onChange(scrollValue)
+    }
+  }, [scrollValue])
 
   function scaleValue(value: number) {
     return scale(value, [min, max], [scrollMin, scrollMax])
@@ -69,28 +79,32 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
   }
 
   function handleScroll(event: NativeSyntheticEvent<NativeScrollEvent>) {
-    if (!isUserScrolling) {
-      return
-    }
-
     const offset = event.nativeEvent.contentOffset.x
-    scrollValue.current = scaleScrollOffset(offset)
-
-    if (scrollValue.current !== value) {
-      onChange(scrollValue.current)
-    }
+    setScrollValue(scaleScrollOffset(offset))
   }
 
   function handleScrollEnd() {
     setIsUserScrolling(false)
 
-    if (scrollView.current && scrollValue.current !== value) {
-      scrollValue.current = value
+    if (scrollView.current && scrollValue !== value) {
+      setScrollValue(value)
 
       scrollView.current.scrollTo({
         x: scaleValue(value),
         animated: true,
       })
+    }
+  }
+
+  function handleTouchEnd({ nativeEvent }: GestureResponderEvent) {
+    const { pageX } = nativeEvent
+
+    if (isUserScrolling || !scrollView.current) return
+
+    if (pageX < SCREEN_WIDTH / 2) {
+      scrollView.current.scrollTo({ x: scaleValue(scrollValue - 1) })
+    } else {
+      scrollView.current.scrollTo({ x: scaleValue(scrollValue + 1) })
     }
   }
 
@@ -126,6 +140,7 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
         onScroll={handleScroll}
         onMomentumScrollEnd={handleScrollEnd}
         onScrollBeginDrag={() => setIsUserScrolling(true)}
+        onTouchEnd={handleTouchEnd}
         scrollEventThrottle={1}
         contentOffset={{ x: scrollOffsetX.current, y: 0 }}>
         <View style={styles.intervals}>
@@ -173,6 +188,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontVariant: ['tabular-nums'],
     top: -14,
+    zIndex: 1,
     width: INTERVAL_WIDTH * 2,
   },
   small: {
@@ -184,10 +200,10 @@ const styles = StyleSheet.create({
   large: {
     backgroundColor: '#fff',
     width: 2,
-    height: 20,
+    height: 17,
   },
   centerline: {
-    height: 54,
+    height: 47,
     width: 1,
     backgroundColor: '#50E3C2',
     position: 'absolute',
