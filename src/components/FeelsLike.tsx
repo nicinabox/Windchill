@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions, StyleSheet, View, Text, PixelRatio } from 'react-native'
+import { Dimensions, StyleSheet, View, Text } from 'react-native'
 
 const { height: HEIGHT, width: WIDTH } = Dimensions.get('window')
 const realWidth = HEIGHT > WIDTH ? WIDTH : HEIGHT;

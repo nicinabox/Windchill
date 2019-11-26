@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 21
+    fontSize: 21,
+    fontVariant: ['tabular-nums'],
   },
   label: {
     textAlign: 'center',

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import ReactNative from 'react-native'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { connect } from 'react-redux'
@@ -43,7 +43,7 @@ interface SettingsProps {
 }
 
 export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits, validateAdCode, loadProducts, purchaseProduct, restorePurchases }) => {
-   let scrollView
+  const scrollView = useRef<ReactNative.ScrollView>(null)
 
   function handleOpenDarkSky() {
     Linking.openURL('https://darksky.net/poweredby/')
@@ -63,7 +63,7 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
       />
 
       <ScrollView
-        ref={r => scrollView = r}
+        ref={scrollView}
         style={{flex:1}}>
 
         {!state.settings.shouldShowAds && (
@@ -109,9 +109,9 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
         <ListSpacer />
       </ScrollView>
 
-      <KeyboardSpacer onToggle={(isOpen) => {
+      <KeyboardSpacer onToggle={(isOpen: boolean) => {
         setTimeout(() => {
-          isOpen && scrollView.scrollToEnd()
+          isOpen && scrollView.current && scrollView.current.scrollToEnd()
         }, 1)
       }}/>
     </View>

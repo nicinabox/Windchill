@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 
 interface ListSpacerProps {
-  height: number
+  height?: number
 }
 
 export const ListSpacer: React.FC<ListSpacerProps> = ({ height = 30 }) => {
