@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ReactNative from 'react-native'
+import ReactNative, { TextStyle } from 'react-native'
 import errorReporter from '../utils/errorReporter'
 import fetchCurrentConditions from '../utils/fetchCurrentConditions'
 import getPosition from '../utils/getPosition'
@@ -8,7 +8,7 @@ import { Units, Measurements, defaultMeasurements } from '../utils/units'
 import convert from '../utils/convert'
 import { DARK_SKY_TRANSLATIONS, DARK_SKY_ICONS } from '../utils/darkSky'
 
-var {
+const {
   StyleSheet,
   AppState,
   TouchableHighlight,
@@ -25,8 +25,11 @@ interface ComponentProps {
   onPress: (values: Measurements) => void
 }
 
-// @ts-ignore
-const StyledText = ({ children, style = undefined }) => {
+interface StyledTextProps {
+  style?: TextStyle
+}
+
+const StyledText: React.FC<StyledTextProps> = ({ children, style }) => {
   return (
     <Text style={[styles.text, style]} allowFontScaling={false}>
       {children}
