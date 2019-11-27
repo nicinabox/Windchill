@@ -124,7 +124,7 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
             `${temperature.value} ${temperature.unitName}`,
             DARK_SKY_ICONS[conditions.icon],
             `${speed.value} ${speed.unitName}`,
-          ].join(' ')}
+          ].join('  ')}
         </StyledText>
       </Button>
     )

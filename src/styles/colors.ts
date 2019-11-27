@@ -8,4 +8,4 @@ export const mediumGray = '#666'
 export const darkGray = '#444'
 
 export const backgroundColor = '#fafafa'
-export const borderColor = '#aaa'
+export const borderColor = '#ccc'

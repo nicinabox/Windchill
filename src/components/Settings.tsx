@@ -3,7 +3,6 @@ import ReactNative, { SafeAreaView, TouchableOpacity } from 'react-native'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { connect } from 'react-redux'
 import { format } from 'date-fns'
-import isIphoneX from '../utils/isIphoneX'
 import ListSpacer from './ListSpacer'
 import ContactSettings from './ContactSettings'
 import PurchaseSettings from './PurchaseSettings'
@@ -98,6 +97,8 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
           <Text style={styles.textMuted}>
             v{pkg.version}
             {' • '}
+            Made with ♥️
+            {' • '}
             <Text onPress={handleOpenDarkSky}>
               Powered by Dark Sky
             </Text>
@@ -127,6 +128,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    minHeight: 48,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.borderColor,
     backgroundColor: '#fff',
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   textMuted: {
-    color: colors.borderColor
+    color: colors.lightGray,
   },
   thanks: {
     flexDirection: 'row',

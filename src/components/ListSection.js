@@ -56,7 +56,7 @@ var styles = StyleSheet.create({
     marginTop: 30,
   },
   sectionHeader: {
-    marginHorizontal: 15,
+    marginHorizontal: 20,
     marginBottom: 8,
   },
   sectionHeaderText: {

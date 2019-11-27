@@ -7,10 +7,10 @@ import * as colors from '../styles/colors'
 interface ListRowProps {
   onPress?: () => void
   primaryText: string
-  detailText: string
+  detailText?: string
   renderAccessory: () => React.ReactNode
-  button: boolean
-  checked: boolean
+  button?: boolean
+  checked?: boolean
 }
 
 export const ListRow: React.FC<ListRowProps> = (props) => {
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   contentContainer: {
-    marginLeft: 15,
-    minHeight: 44,
+    marginLeft: 20,
+    minHeight: 48,
     paddingVertical: 3,
     flexDirection: 'row',
     alignItems: 'center',
