@@ -4,8 +4,8 @@ import * as colors from '../styles/colors'
 
 interface ButtonProps {
   onPress: () => void
-  style: ViewStyle
-  textStyle: TextStyle
+  style?: ViewStyle
+  textStyle?: TextStyle
 }
 
 export const Button: React.FC<ButtonProps> = ({ onPress, style, textStyle, children }) => {
