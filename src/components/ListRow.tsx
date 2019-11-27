@@ -4,14 +4,22 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import ListSeparator from './ListSeparator'
 import * as colors from '../styles/colors'
 
-export default function ListRow (props) {
-  let Wrapper = View
-  if (props.onPress) {
-    Wrapper = TouchableHighlight
-  }
+interface ListRowProps {
+  onPress?: () => void
+  primaryText: string
+  detailText: string
+  renderAccessory: () => React.ReactNode
+  button: boolean
+  checked: boolean
+}
+
+export const ListRow: React.FC<ListRowProps> = (props) => {
+  const Wrapper = props.onPress
+    ? ({ children }) => <TouchableHighlight style={styles.row}>{children}</TouchableHighlight>
+    : ({ children}) => <View style={styles.row}>{children}</View>
 
   return (
-    <Wrapper onPress={props.onPress} style={styles.row}>
+    <Wrapper>
       <View style={styles.rowInner}>
         <View style={styles.contentContainer}>
 
@@ -79,3 +87,5 @@ const styles = StyleSheet.create({
     maxHeight: 36,
   }
 })
+
+export default ListRow
