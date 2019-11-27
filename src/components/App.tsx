@@ -75,11 +75,10 @@ export class App extends Component {
       <ImageBackground source={backgroundGradient} style={{width: '100%', height: '100%'}}>
         <SafeAreaView style={styles.container}>
           <StatusBar
-            barStyle={this.state.settingsVisible ? 'dark-content' : 'light-content'}
+            barStyle={this.state.settingsVisible ? 'dark-content' : 'default'}
           />
 
           <Modal
-            transparent={false}
             visible={this.state.settingsVisible}
             onRequestClose={this.toggleModal}
             animationType="slide">
@@ -102,7 +101,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-around',
-    backgroundColor: 'transparent'
   },
 })
 
