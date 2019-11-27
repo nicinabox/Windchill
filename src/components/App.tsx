@@ -38,6 +38,7 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
   useEffect(() => {
     checkAdCodeExpiration()
     trackAppOpened()
+    requestReview()
   }, [])
 
   useEffect(() => {
@@ -88,7 +89,7 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
 
         <Header onSettingsPress={toggleModal} />
 
-        <Windchill onChange={requestReview} />
+        <Windchill units={state.settings.units} />
 
         <AdBanner shouldShowAds={shouldShowAds} />
       </SafeAreaView>

@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux'
-import { Unit, MPH, F } from 'src/utils/units'
+import { MPH, F, Units } from 'src/utils/units'
 import { shouldShowAds } from 'src/utils/purchases'
 import { SET_UNITS } from 'src/actions/settingsActions'
 import {
@@ -12,10 +12,7 @@ import {
 } from 'src/actions/productActions'
 
 export interface SettingsState {
-  units: {
-    speed: Unit
-    temperature: Unit
-  }
+  units: Units
   shouldShowAds: boolean
 }
 

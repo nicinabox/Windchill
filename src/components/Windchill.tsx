@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import ReactNative from 'react-native'
-import { connect } from 'react-redux'
 import { Measurements, Units } from 'src/utils/units'
 import getWindchill from 'src/utils/windchill'
 import Controls from './Controls'
 import FeelsLike from './FeelsLike'
 
-var {
+const {
   StyleSheet,
   View,
 } = ReactNative
@@ -53,6 +52,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect((state) => ({
-  units: state.settings.units
-}))(Windchill)
+export default Windchill
