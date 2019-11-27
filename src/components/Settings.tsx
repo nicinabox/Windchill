@@ -124,9 +124,9 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.backgroundColor,
   },
   scrollview: {
-    backgroundColor: colors.backgroundColor,
   },
   navBar: {
     flexDirection: 'row',
