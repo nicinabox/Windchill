@@ -161,8 +161,9 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginBottom: 25,
-    marginHorizontal: 5,
+    justifyContent: 'center',
+    marginHorizontal: 15,
+    minHeight: 80,
   },
   button: {
     backgroundColor: 'rgba(0,0,0,0.3)',
