@@ -16,15 +16,10 @@ export default class PurchaseSettings extends Component {
 
     this.handlePurchase = this.handlePurchase.bind(this)
     this.handleRestorePurchases = this.handleRestorePurchases.bind(this)
-    this.handleRemoveAdsCodeSubmit = this.handleRemoveAdsCodeSubmit.bind(this)
   }
 
   componentDidMount() {
     this.props.loadProducts()
-  }
-
-  handleRemoveAdsCodeSubmit() {
-    this.props.validateAdCode(this.state.removeAdsCode)
   }
 
   handlePurchase(id) {
@@ -74,27 +69,6 @@ export default class PurchaseSettings extends Component {
             button={true}
           />
         </ListSection>
-
-        {this.props.settings.shouldShowAds && (
-          <ListSection
-            header="Share Windchill on your favorite social media site or forum and get a year ad-free!"
-            footer="Contact me with a link to your post and I'll send you a code.">
-            <ListRow
-              primaryText="Enter Ad-Free Code"
-              renderAccessory={() => (
-                <TextInput
-                  style={styles.input}
-                  value={this.state.removeAdsCode}
-                  onChangeText={(removeAdsCode) => this.setState({ removeAdsCode })}
-                  onSubmitEditing={this.handleRemoveAdsCodeSubmit}
-                  autoCorrect={false}
-                  autoCapitalize="characters"
-                  returnKeyType="go"
-                />
-              )}
-            />
-          </ListSection>
-        )}
       </Fragment>
     )
   }
@@ -106,11 +80,5 @@ const styles = StyleSheet.create({
   },
   textMuted: {
     color: colors.borderColor
-  },
-  input: {
-    height: 40,
-    width: '100%',
-    fontFamily: 'Menlo',
-    textAlign: 'right',
   },
 })

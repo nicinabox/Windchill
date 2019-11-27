@@ -18,6 +18,7 @@ import * as colors from '../styles/colors'
 import pkg from '../../package.json'
 import { SettingsState } from 'src/reducers/settingsReducer'
 import { ProductsState } from 'src/reducers/productsReducer'
+import ShareSettings from './ShareSettings'
 
 const {
   StyleSheet,
@@ -85,13 +86,17 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
         <PurchaseSettings
           products={state.products}
           settings={state.settings}
-          validateAdCode={validateAdCode}
           loadProducts={loadProducts}
           purchaseProduct={purchaseProduct}
           restorePurchases={restorePurchases}
         />
 
         <ContactSettings />
+
+        <ShareSettings
+          settings={state.settings}
+          validateAdCode={validateAdCode}
+        />
 
         <View style={styles.footer}>
           <Text style={styles.textMuted}>
