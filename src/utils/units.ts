@@ -20,7 +20,7 @@ export interface Unit {
 export const MPH: Unit = {
   name: 'mph',
   bounds: {
-    min: 3,
+    min: 0,
     max: 100,
   }
 }
@@ -28,7 +28,7 @@ export const MPH: Unit = {
 export const KNOTS: Unit = {
   name: 'knots',
   bounds: {
-    min: 2,
+    min: 0,
     max: 87,
   }
 }
@@ -36,7 +36,7 @@ export const KNOTS: Unit = {
 export const MPS: Unit = {
   name: 'm/s',
   bounds: {
-    min: 1,
+    min: 0,
     max: 45,
   }
 }
@@ -44,7 +44,7 @@ export const MPS: Unit = {
 export const KPH: Unit = {
   name: 'kph',
   bounds: {
-    min: 5,
+    min: 0,
     max: 160,
   }
 }
