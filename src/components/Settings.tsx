@@ -1,10 +1,9 @@
 import React, { useRef } from 'react'
-import ReactNative from 'react-native'
+import ReactNative, { SafeAreaView, TouchableOpacity } from 'react-native'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { connect } from 'react-redux'
 import { format } from 'date-fns'
 import isIphoneX from '../utils/isIphoneX'
-import NavigationBar from 'react-native-navbar'
 import ListSpacer from './ListSpacer'
 import ContactSettings from './ContactSettings'
 import PurchaseSettings from './PurchaseSettings'
@@ -50,21 +49,20 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
   }
 
   return (
-    <View style={styles.container}>
-      <NavigationBar
-        containerStyle={styles.navbarStyle}
-        title={{
-          title: 'Settings'
-        }}
-        rightButton={{
-          title: 'Done',
-          handler: handleClose
-        }}
-      />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.navBar}>
+        <View style={styles.navBarButton} />
+
+        <Text style={styles.navbarTitleText}>Settings</Text>
+
+        <TouchableOpacity onPress={handleClose} style={[styles.navBarButton, styles.navBarButtonRight]}>
+          <Text style={styles.navBarButtonText}>Done</Text>
+        </TouchableOpacity>
+      </View>
 
       <ScrollView
         ref={scrollView}
-        style={{flex:1}}>
+        style={styles.scrollview}>
 
         {!state.settings.shouldShowAds && (
           <View style={styles.thanks}>
@@ -114,20 +112,43 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
           isOpen && scrollView.current && scrollView.current.scrollToEnd()
         }, 1)
       }}/>
-    </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.backgroundColor,
-    paddingBottom: isIphoneX() ? 24 : 0,
   },
-  navbarStyle: {
+  scrollview: {
+    backgroundColor: colors.backgroundColor,
+  },
+  navBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.borderColor,
-    paddingTop: isIphoneX() ? 24 : 0,
+    backgroundColor: '#fff',
+  },
+  navbarTitleText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: colors.darkGray,
+  },
+  navBarButton: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  navBarButtonRight: {
+    justifyContent: 'flex-end',
+  },
+  navBarButtonText: {
+    fontSize: 17,
+    fontWeight: '500',
+    color: colors.brandPrimary,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
   },
   textMuted: {
     color: colors.borderColor
