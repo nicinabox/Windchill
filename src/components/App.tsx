@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import ReactNative from 'react-native'
 import { connect } from 'react-redux'
 import { debounce } from 'lodash'
@@ -9,6 +9,8 @@ import AdBanner from './AdBanner'
 import Windchill from './Windchill'
 import { checkAdCodeExpiration } from '../actions/productActions'
 import { trackAppOpened } from '../actions/analyticsActions'
+import { SettingsState } from 'src/reducers/settingsReducer'
+import { AnalyticsState } from 'src/reducers/analyticsReducer'
 
 var {
   NativeAppEventEmitter,
@@ -22,78 +24,77 @@ var {
 
 const backgroundGradient = require('../images/background-gradient.png')
 
-export class App extends Component {
-  constructor(props) {
-    super(props)
+interface AppProps {
+  checkAdCodeExpiration: () => void
+  trackAppOpened: () => void
+  state: {
+    analytics: AnalyticsState
+    settings: SettingsState
+  }
+}
 
-    this.handleAppStateChange = this.handleAppStateChange.bind(this)
-    this.requestReview = debounce(this.requestReview.bind(this), 3000)
-    this.toggleModal = this.toggleModal.bind(this)
+export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackAppOpened }) => {
+  const [settingsVisible, setSettingsVisible] = useState(false)
 
-    this.state = {
-      settingsVisible: false,
+  useEffect(() => {
+    checkAdCodeExpiration()
+    trackAppOpened()
+  }, [])
+
+  useEffect(() => {
+    AppState.addEventListener('change', handleAppStateChange)
+
+    return () => {
+      NativeAppEventEmitter.removeAllListeners()
+      AppState.removeEventListener('change', handleAppStateChange)
     }
-  }
+  }, [])
 
-  componentDidMount() {
-    this.props.checkAdCodeExpiration()
-    this.props.trackAppOpened()
-
-    AppState.addEventListener('change', this.handleAppStateChange)
-  }
-
-  componentWillUnmount () {
-    NativeAppEventEmitter.removeAllListeners()
-    AppState.removeEventListener('change', this.handleAppStateChange)
-  }
-
-  handleAppStateChange(nextAppState) {
+  function handleAppStateChange(nextAppState: string) {
     if (nextAppState === 'active') {
-      this.props.checkAdCodeExpiration()
-      this.props.trackAppOpened()
+      checkAdCodeExpiration()
+      trackAppOpened()
     }
   }
 
-  shouldRequestReview() {
-    return this.props.state.analytics.opens >= 5
+  function shouldRequestReview() {
+    return state.analytics.opens >= 5
   }
 
-  requestReview() {
-    if (StoreReview.isAvailable && this.shouldRequestReview()) {
+  function requestReview() {
+    if (StoreReview.isAvailable && shouldRequestReview()) {
       StoreReview.requestReview()
     }
   }
 
-  toggleModal() {
-    this.setState({ settingsVisible: !this.state.settingsVisible })
+  function toggleModal() {
+    setSettingsVisible(!settingsVisible)
   }
 
-  render() {
-    let { shouldShowAds } = this.props.state.settings
+  const { shouldShowAds } = state.settings
 
-    return (
-      <ImageBackground source={backgroundGradient} style={{width: '100%', height: '100%'}}>
-        <SafeAreaView style={styles.container}>
-          <StatusBar
-            barStyle={this.state.settingsVisible ? 'default' : 'light-content'}
-          />
+  return (
+    <ImageBackground source={backgroundGradient} style={{width: '100%', height: '100%'}}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar
+          barStyle={settingsVisible ? 'default' : 'light-content'}
+        />
 
-          <Modal
-            visible={this.state.settingsVisible}
-            onRequestClose={this.toggleModal}
-            animationType="slide">
-            <Settings handleClose={this.toggleModal} />
-          </Modal>
+        <Modal
+          visible={settingsVisible}
+          onRequestClose={toggleModal}
+          animationType="slide">
+          <Settings handleClose={toggleModal} />
+        </Modal>
 
-          <Header onSettingsPress={this.toggleModal} />
+        <Header onSettingsPress={toggleModal} />
 
-          <Windchill onChange={this.requestReview} />
+        <Windchill onChange={requestReview} />
 
-          <AdBanner shouldShowAds={shouldShowAds} />
-        </SafeAreaView>
-      </ImageBackground>
-    )
-  }
+        <AdBanner shouldShowAds={shouldShowAds} />
+      </SafeAreaView>
+    </ImageBackground>
+  )
 }
 
 const styles = StyleSheet.create({
