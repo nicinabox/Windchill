@@ -8,6 +8,11 @@ interface AdBannerProps {
 }
 
 export const AdBanner: React.FC<AdBannerProps> = ({ shouldShowAds = false }) => {
+
+  if (!shouldShowAds) {
+    return null
+  }
+
   return (
     <View style={styles.container}>
       <AdMobBanner

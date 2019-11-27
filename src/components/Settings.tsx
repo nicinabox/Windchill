@@ -68,7 +68,7 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
           <View style={styles.thanks}>
             {state.products.adCode ? (
               <Text style={styles.thanksText}>
-                🎉 Enjoy Windchill ad-free until {format(state.products.adCode.expiration, 'MMM D, YYYY')}!
+                🎉 Enjoy Windchill ad-free until {format(new Date(state.products.adCode.expiration), 'MMM d, yyyy')}!
               </Text>
             ) : (
               <Text style={styles.thanksText}>
