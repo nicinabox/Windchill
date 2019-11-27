@@ -85,7 +85,6 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
 
         <PurchaseSettings
           products={state.products}
-          settings={state.settings}
           loadProducts={loadProducts}
           purchaseProduct={purchaseProduct}
           restorePurchases={restorePurchases}

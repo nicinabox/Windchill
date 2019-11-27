@@ -14,7 +14,7 @@ export interface DarkSkyTranslations {
 }
 
 export interface Product {
-  identifer: string
+  identifier: string
   title: string
   priceString: string
 }
