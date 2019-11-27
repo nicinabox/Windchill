@@ -75,7 +75,7 @@ export class App extends Component {
       <ImageBackground source={backgroundGradient} style={{width: '100%', height: '100%'}}>
         <SafeAreaView style={styles.container}>
           <StatusBar
-            barStyle={this.state.settingsVisible ? 'dark-content' : 'default'}
+            barStyle={this.state.settingsVisible ? 'default' : 'light-content'}
           />
 
           <Modal
