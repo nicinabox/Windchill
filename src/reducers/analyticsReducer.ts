@@ -1,10 +1,15 @@
 import { APP_OPENED } from '../actions/analyticsActions'
+import { AnyAction } from 'redux'
 
-const initialState = {
+export interface AnalyticsState {
+  opens: number
+}
+
+const initialState: AnalyticsState = {
   opens: 0
 }
 
-export default function (state = initialState, action) {
+export default function (state = initialState, action: AnyAction) {
   switch (action.type) {
     case APP_OPENED:
       return {
