@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+import { PixelRatio, Share, StyleSheet, Text, TextInput, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import { TextInput, StyleSheet, View, Text, PixelRatio, Share } from 'react-native'
+import Button from 'src/components/common/Button'
 import { SettingsState } from 'src/reducers/settingsReducer'
-import * as colors from '../styles/colors'
-import Button from './Button'
+import * as colors from 'src/styles/colors'
 
 interface ShareSettingsProps {
   settings: SettingsState

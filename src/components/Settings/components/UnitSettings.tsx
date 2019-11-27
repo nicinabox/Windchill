@@ -1,8 +1,8 @@
 import React from 'react'
-import ListSection from './ListSection'
-import ListRow from './ListRow'
+import ListRow from 'src/components/common/ListRow'
+import ListSection from 'src/components/common/ListSection'
 import { SettingsState } from 'src/reducers/settingsReducer'
-import { speedUnits, temperatureUnits, Unit } from '../utils/units'
+import { speedUnits, temperatureUnits, Unit } from 'src/utils/units'
 
 interface UnitSettingsProps {
   settings: SettingsState

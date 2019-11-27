@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { AdMobBanner, PublisherBanner } from 'react-native-admob'
-import errorReporter from '../utils/errorReporter'
+import errorReporter from 'src/utils/errorReporter'
 
 interface AdBannerProps {
   shouldShowAds: boolean

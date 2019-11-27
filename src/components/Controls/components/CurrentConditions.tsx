@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import ReactNative, { TextStyle } from 'react-native'
-import errorReporter from '../utils/errorReporter'
-import fetchCurrentConditions from '../utils/fetchCurrentConditions'
-import getPosition from '../utils/getPosition'
+import errorReporter from 'src/utils/errorReporter'
+import fetchCurrentConditions from 'src/utils/fetchCurrentConditions'
+import getPosition from 'src/utils/getPosition'
 import { DarkSkyConditionsCurrently } from 'src/interfaces/api'
-import { Units, Measurements, defaultMeasurements } from '../utils/units'
-import convert from '../utils/convert'
-import { DARK_SKY_TRANSLATIONS, DARK_SKY_ICONS } from '../utils/darkSky'
+import { Units, Measurements, defaultMeasurements } from 'src/utils/units'
+import convert from 'src/utils/convert'
+import { DARK_SKY_TRANSLATIONS, DARK_SKY_ICONS } from 'src/utils/darkSky'
 
 const {
   StyleSheet,

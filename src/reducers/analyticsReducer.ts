@@ -1,4 +1,4 @@
-import { APP_OPENED } from '../actions/analyticsActions'
+import { APP_OPENED } from 'src/actions/analyticsActions'
 import { AnyAction } from 'redux'
 
 export interface AnalyticsState {

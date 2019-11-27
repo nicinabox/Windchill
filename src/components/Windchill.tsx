@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactNative from 'react-native'
 import { connect } from 'react-redux'
-import getWindchill from '../utils/windchill'
-import FeelsLike from './FeelsLike'
+import { Measurements, Units } from 'src/utils/units'
+import getWindchill from 'src/utils/windchill'
 import Controls from './Controls'
-import { Units, Measurements } from 'src/utils/units'
+import FeelsLike from './FeelsLike'
 
 var {
   StyleSheet,

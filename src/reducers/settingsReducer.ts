@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux'
-import { Unit, MPH, F } from '../utils/units'
-import { shouldShowAds } from '../utils/purchases'
-import { SET_UNITS } from '../actions/settingsActions'
+import { Unit, MPH, F } from 'src/utils/units'
+import { shouldShowAds } from 'src/utils/purchases'
+import { SET_UNITS } from 'src/actions/settingsActions'
 import {
   PURCHASE_PRODUCT,
   RESTORE_PURCHASES,
@@ -9,7 +9,7 @@ import {
   RECEIVE_AD_CODE,
   RESET_AD_CODE,
   AD_CODE_EXPIRED,
-} from '../actions/productActions'
+} from 'src/actions/productActions'
 
 export interface SettingsState {
   units: {

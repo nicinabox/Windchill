@@ -1,4 +1,4 @@
-import { setItem } from '../utils/storage'
+import { setItem } from 'src/utils/storage'
 
 export default store => next => action => {
   const result = next(action) // eslint-disable-line

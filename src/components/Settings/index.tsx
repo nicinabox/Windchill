@@ -1,24 +1,19 @@
+import { format } from 'date-fns'
 import React, { useRef } from 'react'
 import ReactNative, { SafeAreaView, TouchableOpacity } from 'react-native'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { connect } from 'react-redux'
-import { format } from 'date-fns'
-import ListSpacer from './ListSpacer'
-import ContactSettings from './ContactSettings'
-import PurchaseSettings from './PurchaseSettings'
-import UnitSettings from './UnitSettings'
-import { setUnits } from '../actions/settingsActions'
-import {
-  validateAdCode,
-  loadProducts,
-  purchaseProduct,
-  restorePurchases
-} from '../actions/productActions'
-import * as colors from '../styles/colors'
-import pkg from '../../package.json'
-import { SettingsState } from 'src/reducers/settingsReducer'
+import { loadProducts, purchaseProduct, restorePurchases, validateAdCode } from 'src/actions/productActions'
+import { setUnits } from 'src/actions/settingsActions'
+import ListSpacer from 'src/components/common/ListSpacer'
 import { ProductsState } from 'src/reducers/productsReducer'
-import ShareSettings from './ShareSettings'
+import { SettingsState } from 'src/reducers/settingsReducer'
+import * as colors from 'src/styles/colors'
+import appInfo from 'src/utils/appInfo'
+import ContactSettings from './components/ContactSettings'
+import PurchaseSettings from './components/PurchaseSettings'
+import ShareSettings from './components/ShareSettings'
+import UnitSettings from './components/UnitSettings'
 
 const {
   StyleSheet,
@@ -99,7 +94,7 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
 
         <View style={styles.footer}>
           <Text style={styles.textMuted}>
-            v{pkg.version}
+            v{appInfo.version}
             {' • '}
             Made with ♥️
             {' • '}

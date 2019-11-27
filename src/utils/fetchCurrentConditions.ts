@@ -1,4 +1,4 @@
-import { get } from '../utils/http'
+import { get } from 'src/utils/http'
 import { DarkSkyConditionsCurrently, Coordinates } from '../interfaces/api'
 
 // @ts-ignore

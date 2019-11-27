@@ -1,5 +1,5 @@
 import { windchill } from 'weather-tools'
-import convert from '../utils/convert'
+import convert from 'src/utils/convert'
 import { Units, defaultMeasurements } from './units'
 
 export default (temperature: number, speed: number, units: Units): number => {

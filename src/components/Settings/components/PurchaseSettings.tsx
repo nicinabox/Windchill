@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect } from 'react'
-import { StyleSheet, TextInput, Text, } from 'react-native'
-import * as colors from '../styles/colors'
-import { isPurchased } from '../utils/purchases'
-import ListRow from './ListRow'
-import ListSection from './ListSection'
-import Button from './Button'
+import { StyleSheet, Text } from 'react-native'
+import Button from 'src/components/common/Button'
+import ListRow from 'src/components/common/ListRow'
+import ListSection from 'src/components/common/ListSection'
 import { ProductsState } from 'src/reducers/productsReducer'
+import * as colors from 'src/styles/colors'
+import { isPurchased } from 'src/utils/purchases'
 
 interface PurchaseSettingsProps {
   products: ProductsState

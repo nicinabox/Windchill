@@ -1,8 +1,8 @@
 import { NativeModules, Alert } from 'react-native'
 import { isAfter } from 'date-fns'
-import { post } from '../utils/http'
-import errorReporter from '../utils/errorReporter'
-import { PRODUCTS } from '../utils/purchases'
+import { post } from 'src/utils/http'
+import errorReporter from 'src/utils/errorReporter'
+import { PRODUCTS } from 'src/utils/purchases'
 
 const { InAppUtils } = NativeModules
 

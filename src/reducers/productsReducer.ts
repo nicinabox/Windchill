@@ -23,7 +23,7 @@ import {
   RECEIVE_AD_CODE,
   RESET_AD_CODE,
   AD_CODE_EXPIRED,
-} from '../actions/productActions'
+} from 'src/actions/productActions'
 
 export default function (state = initialState, action: AnyAction) {
   switch (action.type) {

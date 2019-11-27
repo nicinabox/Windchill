@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, TouchableHighlight, View, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import ListSeparator from './ListSeparator'
-import * as colors from '../styles/colors'
+import * as colors from 'src/styles/colors'
 
 interface ListRowProps {
   onPress?: () => void

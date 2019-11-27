@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import CurrentConditions from './CurrentConditions'
 import { View, StyleSheet } from 'react-native'
-import LineGaugeInput from './LineGaugeInput'
+import CurrentConditions from './components/CurrentConditions'
+import LineGaugeInput from 'src/components/common/LineGaugeInput'
 import { Units, Measurements } from 'src/utils/units'
 
 export interface ControlsProps {

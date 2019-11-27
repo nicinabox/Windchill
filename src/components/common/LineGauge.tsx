@@ -10,7 +10,7 @@ import {
   GestureResponderEvent,
 } from 'react-native'
 import { times } from 'lodash'
-import scale from '../utils/scale'
+import scale from 'src/utils/scale'
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window')
 const GAUGE_WIDTH = Math.floor(SCREEN_WIDTH)

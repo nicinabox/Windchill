@@ -1,14 +1,7 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import ReactNative from 'react-native'
+import React  from 'react'
+import { StyleSheet, View, Text } from 'react-native'
 import ListSeparator from './ListSeparator'
-import * as colors from '../styles/colors'
-
-const {
-  StyleSheet,
-  View,
-  Text,
-} = ReactNative
+import * as colors from 'src/styles/colors'
 
 interface ListSectionProps {
   header?: React.ReactNode

@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { borderColor } from '../styles/colors'
+import { borderColor } from 'src/styles/colors'
+
+interface ListSeparatorProps {}
 
 export const ListSeparator: React.FC<ListSeparatorProps> = () => {
   return <View style={styles.separator} />

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactNative from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import Button from './Button'
+import Button from 'src/components/common/Button'
 
 const {
   StyleSheet,
