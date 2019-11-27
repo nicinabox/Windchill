@@ -11,8 +11,8 @@ const {
 } = ReactNative
 
 interface ListSectionProps {
-  header: React.ReactNode
-  footer: React.ReactNode
+  header?: React.ReactNode
+  footer?: React.ReactNode
 }
 
 const result = (f: any) => typeof f === 'function' ? f() : f

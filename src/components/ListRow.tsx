@@ -8,7 +8,7 @@ interface ListRowProps {
   onPress?: () => void
   primaryText: string
   detailText?: string
-  renderAccessory: () => React.ReactNode
+  renderAccessory?: () => React.ReactNode
   button?: boolean
   checked?: boolean
 }
