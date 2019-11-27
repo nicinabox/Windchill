@@ -14,9 +14,12 @@ interface ListRowProps {
 }
 
 export const ListRow: React.FC<ListRowProps> = (props) => {
-  const Wrapper = props.onPress
-    ? ({ children }) => <TouchableHighlight style={styles.row}>{children}</TouchableHighlight>
-    : ({ children}) => <View style={styles.row}>{children}</View>
+  const Wrapper = ({ children }) => {
+    if (props.onPress) {
+      return <TouchableHighlight onPress={props.onPress} style={styles.row}>{children}</TouchableHighlight>
+    }
+    return <View style={styles.row}>{children}</View>
+  }
 
   return (
     <Wrapper>
