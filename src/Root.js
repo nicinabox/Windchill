@@ -12,7 +12,18 @@ export default class Root extends Component {
 
   componentDidMount() {
     getItem('store')
-      .then(state => state || {})
+      .then(state => {
+        if (!state) {
+          return {}
+        }
+
+        // unitSystem was replaced by units
+        if (state.settings.unitSystem) {
+          return {}
+        }
+
+        return state
+      })
       .then((initialState) => {
         const store = createStore(initialState)
         this.setState({ store })
