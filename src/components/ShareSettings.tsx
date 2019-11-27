@@ -30,22 +30,22 @@ export const ShareSettings: React.FC<ShareSettingsProps> = ({ settings, validate
 
   return (
     <LinearGradient
-        start={{x: 0.3, y: 0.0}} end={{x: 0.5, y: 1.0}}
-        colors={['#7c71f4', '#376fd1']}
-        style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.textPrimary}>
-            Share Windchill and get a year ad-free
-          </Text>
+      start={{x: 0.3, y: 0.0}} end={{x: 0.5, y: 1.0}}
+      colors={['#7c71f4', '#376fd1']}
+      style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.textPrimary}>
+          Share Windchill and get a year ad-free
+        </Text>
 
-          <Button onPress={handleShare} style={styles.shareButton} textStyle={styles.shareButtonText}>
-            Share
-          </Button>
-        </View>
+        <Button onPress={handleShare} style={styles.shareButton} textStyle={styles.shareButtonText}>
+          Share
+        </Button>
+      </View>
+
       <Text style={styles.textSecondary}>
-        Contact me with a link to your post to receive a code.
+        Contact me above with a screenshot of your post to receive a code.
       </Text>
-
 
       <TextInput
         style={styles.input}
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   textSecondary: {
     color: '#fff',
     fontSize: 16,
-    marginBottom: 12,
+    marginBottom: 18,
   },
   input: {
     fontSize: 19,
