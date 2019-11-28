@@ -16,10 +16,6 @@ const {
   View,
 } = ReactNative
 
-const now = () => new Date().getTime()
-const ONE_MIN = 60 * 1000
-const FIVE_MIN = ONE_MIN * 5
-
 interface ComponentProps {
   units: Units
   onPress: (values: Measurements) => void
@@ -48,9 +44,7 @@ const Button = ({ onPress, children }) => {
 
 export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: propsOnPress }) => {
   const [conditions, setConditions] = useState<DarkSkyConditionsCurrently>()
-  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [lastUpdate, setLastUpdate] = useState(0)
 
   useEffect(() => {
     fetchForecast()
@@ -62,9 +56,6 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
   }, [])
 
   async function fetchForecast() {
-    if (now() < lastUpdate + FIVE_MIN) return
-
-    setIsLoading(true)
     setError(null)
 
     try {
@@ -72,12 +63,9 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
       const currently = await fetchCurrentConditions(position.coords)
 
       setConditions(currently)
-      setLastUpdate(now())
     } catch (error) {
       errorReporter.notify(error)
       setError(error.message || 'There was an error getting the forecast.')
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -130,26 +118,21 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
     )
   }
 
-  let children
-
   if (error) {
-    children = (
-      <>
+    return (
+      <View style={styles.container}>
         <StyledText>{error}</StyledText>
+
         <Button onPress={fetchForecast}>
           <StyledText>Try again</StyledText>
         </Button>
-      </>
+      </View>
     )
-  }
-
-  if (!isLoading && !error) {
-    children = renderConditions()
   }
 
   return (
     <View style={styles.container}>
-      {children}
+      {renderConditions()}
     </View>
   )
 }
