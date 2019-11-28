@@ -76,7 +76,7 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
     <LinearGradient colors={gradient.colors} start={gradient.start} end={gradient.end} style={styles.gradient}>
       <SafeAreaView style={styles.container}>
         <StatusBar
-          barStyle={settingsVisible ? 'default' : 'light-content'}
+          barStyle={settingsVisible ? 'dark-content' : 'light-content'}
         />
 
         <Modal
