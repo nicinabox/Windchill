@@ -5,6 +5,8 @@ import Button from 'src/components/common/Button'
 import { SettingsState } from 'src/reducers/settingsReducer'
 import * as colors from 'src/styles/colors'
 
+const { gradient } = colors
+
 interface ShareSettingsProps {
   settings: SettingsState
   validateAdCode: (adFreeCode: string) => void
@@ -30,8 +32,9 @@ export const ShareSettings: React.FC<ShareSettingsProps> = ({ settings, validate
 
   return (
     <LinearGradient
-      start={{x: 0.3, y: 0.0}} end={{x: 0.5, y: 1.0}}
-      colors={['#7c71f4', '#376fd1']}
+      colors={gradient.colors}
+      start={gradient.start}
+      end={gradient.end}
       style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.textPrimary}>
@@ -68,7 +71,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 30,
     borderRadius: 6 * PixelRatio.get(),
-    backgroundColor: colors.brandInteractive,
   },
   header: {
     flexDirection: 'row',

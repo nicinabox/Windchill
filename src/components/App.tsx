@@ -10,6 +10,8 @@ import { SettingsState } from 'src/reducers/settingsReducer'
 import Header from './Header'
 import Settings from './Settings'
 import Windchill from './Windchill'
+import LinearGradient from 'react-native-linear-gradient'
+import { gradient } from 'src/styles/colors'
 
 var {
   NativeAppEventEmitter,
@@ -17,11 +19,8 @@ var {
   AppState,
   StatusBar,
   Modal,
-  ImageBackground,
   SafeAreaView,
 } = ReactNative
-
-const backgroundGradient = require('../images/background-gradient.png')
 
 interface AppProps {
   checkAdCodeExpiration: () => void
@@ -74,7 +73,7 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
   const { shouldShowAds } = state.settings
 
   return (
-    <ImageBackground source={backgroundGradient} style={{width: '100%', height: '100%'}}>
+    <LinearGradient colors={gradient.colors} start={gradient.start} end={gradient.end} style={styles.gradient}>
       <SafeAreaView style={styles.container}>
         <StatusBar
           barStyle={settingsVisible ? 'default' : 'light-content'}
@@ -93,7 +92,7 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
 
         <AdBanner shouldShowAds={shouldShowAds} />
       </SafeAreaView>
-    </ImageBackground>
+    </LinearGradient>
   )
 }
 
@@ -102,6 +101,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-around',
+  },
+  gradient: {
+    flex: 1,
   },
 })
 

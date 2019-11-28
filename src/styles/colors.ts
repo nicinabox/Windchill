@@ -9,3 +9,10 @@ export const darkGray = '#444'
 
 export const backgroundColor = '#fafafa'
 export const borderColor = '#ccc'
+
+export const gradient = {
+  colors: ['#7B71F3', '#226EC7'],
+  start: { x: 0.2, y: 0.3 },
+  end: { x: 0.5, y: 1.0 },
+  locations: [0.2, 1],
+}
