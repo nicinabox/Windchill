@@ -33,39 +33,30 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
   value = min,
   onChange,
 }) => {
-  const scrollMin = 0
-  const scrollMax = getScrollMax()
+  const scrollBounds = [0, getScrollMax()]
 
   const scrollView = useRef<ScrollView>(null)
   const scrollOffsetX = useRef(scaleValue(value))
-  const bounds = useRef([min, max])
+  const scrollValue = useRef(value)
 
-  const [scrollValue, setScrollValue] = useState(value)
   const [isUserScrolling, setIsUserScrolling] = useState(false)
 
-  useEffect(() => {
-    if (!scrollView.current) return
-
-    const [boundsMin, boundsMax] = bounds.current
-
-    if (boundsMin !== min || boundsMax !== max) {
-      bounds.current = [min, max]
-      scrollView.current.scrollTo({ x: scaleValue(value) })
+  function scrollTo(x: number) {
+    if (scrollView.current) {
+      scrollView.current.scrollTo({ x, animated: true })
     }
-  }, [min, max, value])
+  }
 
-  useEffect(() => {
-    if (scrollValue !== value) {
-      onChange(scrollValue)
-    }
-  }, [scrollValue])
+  function setScrollValue(nextValue: number) {
+    return scrollValue.current = nextValue
+  }
 
   function scaleValue(value: number) {
-    return scale(value, [min, max], [scrollMin, scrollMax])
+    return scale(value, [min, max], scrollBounds)
   }
 
   function scaleScrollOffset(offset: number) {
-    return scale(offset, [scrollMin, scrollMax], [min, max])
+    return scale(offset, scrollBounds, [min, max])
   }
 
   function getScrollMax() {
@@ -78,33 +69,33 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
     return 'small'
   }
 
+  function handleContentSizeChange() {
+    scrollTo(scaleValue(value))
+  }
+
   function handleScroll(event: NativeSyntheticEvent<NativeScrollEvent>) {
     const offset = event.nativeEvent.contentOffset.x
-    setScrollValue(scaleScrollOffset(offset))
+    const nextValue = scaleScrollOffset(offset)
+
+    if (scrollValue.current !== nextValue) {
+      setScrollValue(nextValue)
+      onChange(nextValue)
+    }
   }
 
   function handleScrollEnd() {
     setIsUserScrolling(false)
-
-    if (scrollView.current && scrollValue !== value) {
-      setScrollValue(value)
-
-      scrollView.current.scrollTo({
-        x: scaleValue(value),
-        animated: true,
-      })
-    }
   }
 
   function handleTouchEnd({ nativeEvent }: GestureResponderEvent) {
     const { pageX } = nativeEvent
 
-    if (isUserScrolling || !scrollView.current) return
+    if (isUserScrolling) return
 
     if (pageX < SCREEN_WIDTH / 2) {
-      scrollView.current.scrollTo({ x: scaleValue(scrollValue - 1) })
+      scrollTo(scaleValue(scrollValue.current - 1))
     } else {
-      scrollView.current.scrollTo({ x: scaleValue(scrollValue + 1) })
+      scrollTo(scaleValue(scrollValue.current + 1))
     }
   }
 
@@ -137,6 +128,7 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
         snapToInterval={INTERVAL_WIDTH}
         snapToAlignment="start"
         showsHorizontalScrollIndicator={false}
+        onContentSizeChange={handleContentSizeChange}
         onScroll={handleScroll}
         onMomentumScrollEnd={handleScrollEnd}
         onScrollBeginDrag={() => setIsUserScrolling(true)}
