@@ -100,7 +100,7 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
     }
 
     // @ts-ignore
-    let { temperature, speed } = getConditions()
+    const { temperature, speed } = getConditions()
 
     return (
       <Button onPress={() => propsOnPress({

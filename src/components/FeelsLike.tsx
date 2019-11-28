@@ -33,7 +33,7 @@ export const FeelsLike: React.FC<FeelsLikeProps> = ({ value }) => {
           styles.label,
           scaleText({ fontSize: 21 })
         ]}>
-        Feels like
+        Feels
       </Text>
 
       <Text allowFontScaling={false}

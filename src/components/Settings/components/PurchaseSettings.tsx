@@ -19,7 +19,6 @@ export const PurchaseSettings: React.FC<PurchaseSettingsProps> = ({ loadProducts
     loadProducts()
   }, [])
 
-
   return (
     <Fragment>
       <ListSection header="PURCHASES">

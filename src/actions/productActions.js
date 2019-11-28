@@ -64,18 +64,18 @@ export function loadProducts() {
   }
 }
 
-export function purchaseProduct(id) {
+export function purchaseProduct(productIdentifier) {
   if (__DEV__) {
     return {
       type: PURCHASE_PRODUCT,
       purchase: {
-        productIdentifier: id
+        productIdentifier
       }
     }
   }
 
   return (dispatch) => {
-    InAppUtils.purchaseProduct(id, (err, resp) => {
+    InAppUtils.purchaseProduct(productIdentifier, (err, resp) => {
       if (err) {
         errorReporter.notify(err.message)
         return Alert.alert(err.message)
