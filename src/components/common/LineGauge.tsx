@@ -103,13 +103,13 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
 
     if (isUserScrolling) return
 
-    if (pageX < SCREEN_WIDTH / 2) {
-      setScrollValue(scrollValue.current - 1)
-    } else {
-      setScrollValue(scrollValue.current + 1)
-    }
+    setIsUserScrolling(true)
 
-    scrollTo(scaleValue(scrollValue.current))
+    const nextValue = pageX < SCREEN_WIDTH / 2
+      ? scaleValue(scrollValue.current - 1)
+      : scaleValue(scrollValue.current + 1)
+
+    scrollTo(nextValue)
   }
 
   function renderIntervals() {
