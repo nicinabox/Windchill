@@ -1,10 +1,10 @@
 import { Dimensions, Platform } from 'react-native'
 
 export default () => {
-  let size = Dimensions.get('window')
+  const { height, width } = Dimensions.get('window')
 
   return (
     Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS &&
-    (size.height >= 812 || size.width === 812)
+    (height >= 812 || width === 812)
   )
 }

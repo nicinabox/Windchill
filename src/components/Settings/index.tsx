@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 import React, { useRef } from 'react'
-import ReactNative, { SafeAreaView, TouchableOpacity } from 'react-native'
+import ReactNative, { SafeAreaView } from 'react-native'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { connect } from 'react-redux'
 import { loadProducts, purchaseProduct, restorePurchases, validateAdCode } from 'src/actions/productActions'
@@ -14,6 +14,7 @@ import ContactSettings from './components/ContactSettings'
 import PurchaseSettings from './components/PurchaseSettings'
 import ShareSettings from './components/ShareSettings'
 import UnitSettings from './components/UnitSettings'
+import Navbar from '../common/Navbar'
 
 const {
   StyleSheet,
@@ -44,75 +45,73 @@ export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.navBar}>
-        <View style={styles.navBarButton} />
+    <View style={styles.container}>
+      <Navbar
+        titleText="Settings"
+        rightButtonText="Done"
+        onRightButtonPress={handleClose}
+      />
 
-        <Text style={styles.navbarTitleText}>Settings</Text>
+      <SafeAreaView style={styles.safearea}>
+        <ScrollView
+          ref={scrollView}
+          style={styles.scrollview}>
 
-        <TouchableOpacity onPress={handleClose} style={[styles.navBarButton, styles.navBarButtonRight]}>
-          <Text style={styles.navBarButtonText}>Done</Text>
-        </TouchableOpacity>
-      </View>
+          {!state.settings.shouldShowAds && (
+            <View style={styles.thanks}>
+              {state.products.adCode ? (
+                <Text style={styles.thanksText}>
+                  🎉 Enjoy Windchill ad-free until {format(new Date(state.products.adCode.expiration), 'MMM d, yyyy')}!
+                </Text>
+              ) : (
+                <Text style={styles.thanksText}>
+                  🎉 Thanks for supporting Windchill!
+                </Text>
+              )}
+            </View>
+          )}
 
-      <ScrollView
-        ref={scrollView}
-        style={styles.scrollview}>
+          <UnitSettings
+            settings={state.settings}
+            onChange={setUnits}
+          />
 
-        {!state.settings.shouldShowAds && (
-          <View style={styles.thanks}>
-            {state.products.adCode ? (
-              <Text style={styles.thanksText}>
-                🎉 Enjoy Windchill ad-free until {format(new Date(state.products.adCode.expiration), 'MMM d, yyyy')}!
+          <PurchaseSettings
+            products={state.products}
+            loadProducts={loadProducts}
+            purchaseProduct={purchaseProduct}
+            restorePurchases={restorePurchases}
+          />
+
+          <ContactSettings />
+
+          <ShareSettings
+            settings={state.settings}
+            validateAdCode={validateAdCode}
+          />
+
+          <View style={styles.footer}>
+            <Text style={styles.textMuted}>
+              v{appInfo.version}
+              {' • '}
+              Made with ♥️
+              {' • '}
+              <Text onPress={handleOpenDarkSky}>
+                Powered by Dark Sky
               </Text>
-            ) : (
-              <Text style={styles.thanksText}>
-                🎉 Thanks for supporting Windchill!
-              </Text>
-            )}
-          </View>
-        )}
-
-        <UnitSettings
-          settings={state.settings}
-          onChange={setUnits}
-        />
-
-        <PurchaseSettings
-          products={state.products}
-          loadProducts={loadProducts}
-          purchaseProduct={purchaseProduct}
-          restorePurchases={restorePurchases}
-        />
-
-        <ContactSettings />
-
-        <ShareSettings
-          settings={state.settings}
-          validateAdCode={validateAdCode}
-        />
-
-        <View style={styles.footer}>
-          <Text style={styles.textMuted}>
-            v{appInfo.version}
-            {' • '}
-            Made with ♥️
-            {' • '}
-            <Text onPress={handleOpenDarkSky}>
-              Powered by Dark Sky
             </Text>
-          </Text>
-        </View>
+          </View>
 
-        <ListSpacer />
-      </ScrollView>
+          <ListSpacer />
+        </ScrollView>
 
-      <KeyboardSpacer onToggle={(isOpen: boolean) => {
-        setTimeout(() => {
-          isOpen && scrollView.current && scrollView.current.scrollToEnd()
-        }, 1)
-      }}/>
-    </SafeAreaView>
+        <KeyboardSpacer onToggle={(isOpen: boolean) => {
+          setTimeout(() => {
+            isOpen && scrollView.current && scrollView.current.scrollToEnd()
+          }, 1)
+        }}/>
+      </SafeAreaView>
+    </View>
   )
 }
 
@@ -121,35 +120,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.backgroundColor,
   },
-  scrollview: {
-  },
-  navBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    minHeight: 48,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: colors.borderColor,
-    backgroundColor: '#fff',
-  },
-  navbarTitleText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: colors.darkGray,
-  },
-  navBarButton: {
+  safearea: {
     flex: 1,
-    flexDirection: 'row',
   },
-  navBarButtonRight: {
-    justifyContent: 'flex-end',
-  },
-  navBarButtonText: {
-    fontSize: 17,
-    fontWeight: '500',
-    color: colors.brandPrimary,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
+  scrollview: {
   },
   textMuted: {
     color: colors.lightGray,
