@@ -141,7 +141,7 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
         onMomentumScrollEnd={handleScrollEnd}
         onScrollBeginDrag={() => setIsUserScrolling(true)}
         onTouchEnd={handleTouchEnd}
-        scrollEventThrottle={1}
+        scrollEventThrottle={10}
         contentOffset={{ x: scrollOffsetX.current, y: 0 }}>
         <View style={styles.intervals}>
           {renderIntervals()}

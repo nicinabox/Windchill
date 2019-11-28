@@ -53,6 +53,7 @@ export const ShareSettings: React.FC<ShareSettingsProps> = ({ settings, validate
       <TextInput
         style={styles.input}
         placeholder="Enter code"
+        placeholderTextColor="#aaa"
         value={adFreeCode}
         onChangeText={setAdFreeCode}
         onSubmitEditing={handleSubmitAdFreeCode}
