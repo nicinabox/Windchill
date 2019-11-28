@@ -16,8 +16,8 @@ const {
   View,
 } = ReactNative
 
-const now = () => +(new Date)
-const ONE_MIN = 60
+const now = () => new Date().getTime()
+const ONE_MIN = 60 * 1000
 const FIVE_MIN = ONE_MIN * 5
 
 interface ComponentProps {
@@ -130,11 +130,7 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
     )
   }
 
-  let children: JSX.Element | null = (
-    <StyledText>
-      Getting forecast...
-    </StyledText>
-  )
+  let children
 
   if (error) {
     children = (
