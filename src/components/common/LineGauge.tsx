@@ -17,12 +17,12 @@ const GAUGE_WIDTH = Math.floor(SCREEN_WIDTH)
 const INTERVAL_WIDTH = 12
 
 interface LineGaugeProps {
-  onChange: (value: number) => void,
-  min?: number,
-  max?: number,
-  largeInterval?: number,
-  mediumInterval?: number,
-  value?: number,
+  onChange: (value: number) => void
+  min?: number
+  max?: number
+  largeInterval?: number
+  mediumInterval?: number
+  value?: number
 }
 
 export const LineGauge: React.FC<LineGaugeProps> = ({
@@ -81,6 +81,10 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
   }
 
   function handleScroll(event: NativeSyntheticEvent<NativeScrollEvent>) {
+    if (!isUserScrolling) {
+      return
+    }
+
     const offset = event.nativeEvent.contentOffset.x
     const nextValue = scaleScrollOffset(offset)
 
@@ -100,10 +104,12 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
     if (isUserScrolling) return
 
     if (pageX < SCREEN_WIDTH / 2) {
-      scrollTo(scaleValue(scrollValue.current - 1))
+      setScrollValue(scrollValue.current - 1)
     } else {
-      scrollTo(scaleValue(scrollValue.current + 1))
+      setScrollValue(scrollValue.current + 1)
     }
+
+    scrollTo(scaleValue(scrollValue.current))
   }
 
   function renderIntervals() {
