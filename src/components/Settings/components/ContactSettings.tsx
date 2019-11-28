@@ -29,6 +29,7 @@ export default function ContactSettings() {
     <ListSection header="CONTACT">
       <ListRow
         primaryText={EMAIL_ADDRESS}
+        detailText="Features, bugs, or just say Hi 🤓"
         onPress={handleEmailContact}
         button={true}
       />
