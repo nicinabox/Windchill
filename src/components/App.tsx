@@ -37,6 +37,7 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
   useEffect(() => {
     checkAdCodeExpiration()
     trackAppOpened()
+    requestReview()
   }, [])
 
   useEffect(() => {
@@ -60,6 +61,8 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
   }
 
   function requestReview() {
+    if (__DEV__) return
+
     if (StoreReview.isAvailable && shouldRequestReview()) {
       StoreReview.requestReview()
     }
