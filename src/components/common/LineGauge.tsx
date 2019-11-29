@@ -59,11 +59,11 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
   }
 
   function scaleValue(value: number) {
-    return scale(value, [min, max], scrollBounds)
+    return scale(value, [min, max], scrollBounds, Math.round)
   }
 
   function scaleScrollOffset(offset: number) {
-    return scale(offset, scrollBounds, [min, max])
+    return scale(offset, scrollBounds, [min, max], Math.round)
   }
 
   function getScrollMax() {
@@ -131,6 +131,10 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
     })
   }
 
+  function getOverflowOpacity() {
+    return scale(value, [max, Math.max(max + 10, value)], [1, 0.1])
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -149,7 +153,7 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
         onTouchEnd={handleTouchEnd}
         scrollEventThrottle={16}
         contentOffset={{ x: initialContentOffest.current, y: 0 }}>
-        <View style={styles.intervals}>
+        <View style={[styles.intervals, { opacity: getOverflowOpacity() }]}>
           {renderIntervals()}
         </View>
       </ScrollView>
