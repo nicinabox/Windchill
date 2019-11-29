@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   sectionFooter: {
-    marginHorizontal: 15,
+    marginHorizontal: 20,
     marginVertical: 8,
   },
   sectionFooterText: {
