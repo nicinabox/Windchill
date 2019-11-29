@@ -25,7 +25,7 @@ export const ShareSettings: React.FC<ShareSettingsProps> = ({ settings, validate
 
   function handleShare() {
     Share.share({
-      message: 'Windchill - Calculate feel for any speed + temperature',
+      message: 'Windchill - What-if temperature at a glance',
       url: 'https://apps.apple.com/us/app/windchill-easy-windchill-calculator/id1175553238'
     })
   }
