@@ -4,7 +4,7 @@ import ListRow from 'src/components/common/ListRow'
 import ListSection from 'src/components/common/ListSection'
 import appInfo from 'src/utils/appInfo'
 
-const EMAIL_ADDRESS = 'nic+windchill@nicinabox.com'
+const EMAIL_ADDRESS = 'nic@nicinabox.com'
 
 const handleEmailContact = async () => {
   try {
