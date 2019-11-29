@@ -26,7 +26,6 @@ interface SettingsProps {
     settings: SettingsState
     products: ProductsState
   }
-  handleClose: () => void
   setUnits: () => void
   validateAdCode: () => void
   loadProducts: () => void
@@ -34,7 +33,7 @@ interface SettingsProps {
   restorePurchases: () => void
 }
 
-export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits, validateAdCode, loadProducts, purchaseProduct, restorePurchases }) => {
+export const Settings: React.FC<SettingsProps> = ({ state, setUnits, validateAdCode, loadProducts, purchaseProduct, restorePurchases }) => {
   function handleOpenDarkSky() {
     Linking.openURL('https://darksky.net/poweredby/')
   }
