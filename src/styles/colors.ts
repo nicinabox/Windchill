@@ -3,9 +3,9 @@ export const brandDanger = '#D13856'
 export const brandSuccess = '#16ac4b'
 export const brandInteractive = '#6750fb'
 
-export const lightGray = '#888'
-export const mediumGray = '#666'
-export const darkGray = '#444'
+export const lightGray = '#898395'
+export const mediumGray = '#625b71'
+export const darkGray = '#433f4b'
 
 export const backgroundColor = '#fafafa'
 export const borderColor = '#ccc'

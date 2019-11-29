@@ -1,7 +1,6 @@
 import { format } from 'date-fns'
-import React, { useRef } from 'react'
-import ReactNative, { SafeAreaView } from 'react-native'
-import KeyboardSpacer from 'react-native-keyboard-spacer'
+import React from 'react'
+import ReactNative from 'react-native'
 import { connect } from 'react-redux'
 import { loadProducts, purchaseProduct, restorePurchases, validateAdCode } from 'src/actions/productActions'
 import { setUnits } from 'src/actions/settingsActions'
@@ -17,7 +16,6 @@ import UnitSettings from './components/UnitSettings'
 
 const {
   StyleSheet,
-  ScrollView,
   View,
   Text,
   Linking,

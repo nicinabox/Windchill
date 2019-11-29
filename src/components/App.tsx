@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import ReactNative, { Text, View } from 'react-native'
+import ReactNative from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Modalize from 'react-native-modalize'
 import { connect } from 'react-redux'
@@ -8,7 +8,8 @@ import { checkAdCodeExpiration } from 'src/actions/productActions'
 import AdBanner from 'src/components/common/AdBanner'
 import { AnalyticsState } from 'src/reducers/analyticsReducer'
 import { SettingsState } from 'src/reducers/settingsReducer'
-import { backgroundColor, gradient } from 'src/styles/colors'
+import { gradient } from 'src/styles/colors'
+import ModalHeader from './common/ModalHeader'
 import Header from './Header'
 import Settings from './Settings'
 import Windchill from './Windchill'
@@ -31,7 +32,7 @@ interface AppProps {
 }
 
 export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackAppOpened }) => {
-  const modalRef = useRef<Modalize>(null)
+  const settingsModal = useRef<Modalize>(null)
 
   useEffect(() => {
     checkAdCodeExpiration()
@@ -55,9 +56,16 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
   }
 
   function openModal() {
-    const modal = modalRef.current
+    const modal = settingsModal.current
     if (modal) {
       modal.open()
+    }
+  }
+
+  function closeModal() {
+    const modal = settingsModal.current
+    if (modal) {
+      modal.close()
     }
   }
 
@@ -69,12 +77,12 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
         <StatusBar barStyle="light-content" />
 
         <Modalize
-          ref={modalRef}
+          ref={settingsModal}
           snapPoint={600}
           HeaderComponent={
-            <View style={styles.header}>
-              <Text style={styles.headerText}>Settings</Text>
-            </View>
+            <ModalHeader onClosePress={closeModal}>
+              Settings
+            </ModalHeader>
           }>
           <Settings />
         </Modalize>
@@ -98,19 +106,6 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 1,
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    backgroundColor,
-  },
-  headerText: {
-    fontSize: 34,
-    fontWeight: '700',
-    marginHorizontal: 20,
-    paddingVertical: 20,
-  }
 })
 
 export default connect((state) => ({state}), {
