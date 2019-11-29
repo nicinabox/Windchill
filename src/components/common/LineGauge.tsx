@@ -43,6 +43,7 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
 
   useEffect(() => {
     if (!isUserScrolling && value !== scrollValue.current) {
+      setScrollValue(value)
       scrollTo(scaleValue(value))
     }
   }, [value, isUserScrolling])
