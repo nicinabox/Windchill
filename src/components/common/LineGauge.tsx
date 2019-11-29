@@ -135,11 +135,12 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
       <ScrollView
         ref={scrollView}
         automaticallyAdjustContentInsets={false}
+        scrollToOverflowEnabled={true}
+        showsHorizontalScrollIndicator={false}
         horizontal={true}
         decelerationRate={0.8}
         snapToInterval={INTERVAL_WIDTH}
         snapToAlignment="start"
-        showsHorizontalScrollIndicator={false}
         onContentSizeChange={handleContentSizeChange}
         onScroll={handleScroll}
         onMomentumScrollEnd={handleScrollEnd}
