@@ -34,7 +34,7 @@ export const KNOTS: Unit = {
 }
 
 export const MPS: Unit = {
-  name: 'm/s',
+  name: 'mps',
   bounds: {
     min: 0,
     max: 45,
