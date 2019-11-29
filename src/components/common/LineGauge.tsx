@@ -36,7 +36,7 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
   const scrollBounds = [0, getScrollMax()]
 
   const scrollView = useRef<ScrollView>(null)
-  const scrollOffsetX = useRef(scaleValue(value))
+  const initialContentOffest = useRef(scaleValue(value))
   const scrollValue = useRef(value)
 
   const [isUserScrolling, setIsUserScrolling] = useState(false)
@@ -139,7 +139,7 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
         scrollToOverflowEnabled={true}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
-        decelerationRate={0.8}
+        decelerationRate="fast"
         snapToInterval={INTERVAL_WIDTH}
         snapToAlignment="start"
         onContentSizeChange={handleContentSizeChange}
@@ -148,7 +148,7 @@ export const LineGauge: React.FC<LineGaugeProps> = ({
         onScrollBeginDrag={() => setIsUserScrolling(true)}
         onTouchEnd={handleTouchEnd}
         scrollEventThrottle={16}
-        contentOffset={{ x: scrollOffsetX.current, y: 0 }}>
+        contentOffset={{ x: initialContentOffest.current, y: 0 }}>
         <View style={styles.intervals}>
           {renderIntervals()}
         </View>

@@ -11,18 +11,18 @@ export interface ControlsProps {
 }
 
 export const Controls: React.FC<ControlsProps> = ({ units, onChange }) => {
-  const initialSpeed = units.speed.bounds.min
-  const initialTemperature = units.temperature.bounds.max
+  const minSpeed = units.speed.bounds.min
+  const maxTemperature = units.temperature.bounds.max
 
-  const [speed, setSpeed] = useState(initialSpeed)
-  const [temperature, setTemperature] = useState(initialTemperature)
+  const [speed, setSpeed] = useState(minSpeed)
+  const [temperature, setTemperature] = useState(maxTemperature)
 
   useEffect(() => {
-    setSpeed(initialSpeed)
+    setSpeed(minSpeed)
   }, [units.speed])
 
   useEffect(() => {
-    setTemperature(initialTemperature)
+    setTemperature(maxTemperature)
   }, [units.temperature])
 
   useEffect(() => {

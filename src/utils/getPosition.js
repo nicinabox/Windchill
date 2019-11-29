@@ -1,5 +1,9 @@
 import Geolocation from '@react-native-community/geolocation';
 
+Geolocation.setRNConfiguration({
+  authorizationLevel: 'whenInUse'
+})
+
 export default () => {
   return new Promise((resolve, reject) => {
     return Geolocation.getCurrentPosition(resolve, reject, {
