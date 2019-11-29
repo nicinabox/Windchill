@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react'
 import ReactNative, { Text, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Modalize from 'react-native-modalize'
-import * as StoreReview from 'react-native-store-review'
 import { connect } from 'react-redux'
 import { trackAppOpened } from 'src/actions/analyticsActions'
 import { checkAdCodeExpiration } from 'src/actions/productActions'
@@ -37,7 +36,6 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
   useEffect(() => {
     checkAdCodeExpiration()
     trackAppOpened()
-    requestReview()
   }, [])
 
   useEffect(() => {
@@ -53,18 +51,6 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
     if (nextAppState === 'active') {
       checkAdCodeExpiration()
       trackAppOpened()
-    }
-  }
-
-  function shouldRequestReview() {
-    return state.analytics.opens >= 5
-  }
-
-  function requestReview() {
-    if (__DEV__) return
-
-    if (StoreReview.isAvailable && shouldRequestReview()) {
-      StoreReview.requestReview()
     }
   }
 

@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import CurrentConditions from './components/CurrentConditions'
 import LineGaugeInput from 'src/components/common/LineGaugeInput'
 import { Units, Measurements } from 'src/utils/units'
+import requestAppStoreReview from 'src/utils/requestAppStoreReview'
 
 export interface ControlsProps {
   units: Units
@@ -31,6 +32,7 @@ export const Controls: React.FC<ControlsProps> = ({ units, onChange }) => {
   function handleConditionsPress(values: Measurements) {
     setSpeed(values.speed)
     setTemperature(values.temperature)
+    requestAppStoreReview()
   }
 
   return (
