@@ -107,13 +107,17 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
         temperature: temperature.value,
         speed: speed.value
       })}>
-        <StyledText>
-          {[
-            `${temperature.value} ${temperature.unitName}`,
-            DARK_SKY_ICONS[conditions.icon],
-            `${speed.value} ${speed.unitName}`,
-          ].join('  ')}
-        </StyledText>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <StyledText>
+            {temperature.value} {temperature.unitName}
+          </StyledText>
+          <Text>
+            {DARK_SKY_ICONS[conditions.icon]}
+          </Text>
+          <StyledText>
+            {speed.value} {speed.unitName}
+          </StyledText>
+        </View>
       </Button>
     )
   }
@@ -153,6 +157,7 @@ const styles = StyleSheet.create({
   },
   buttonInner: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   spacer: {
     width: 20,
