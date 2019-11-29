@@ -10,6 +10,10 @@ interface UnitSettingsProps {
 }
 
 export const UnitSettings: React.FC<UnitSettingsProps> = ({ settings, onChange }) => {
+  function getTemperatureFooter() {
+    return `Windchill is defined only for temperatures at or below ${settings.units.temperature.bounds.max} ${settings.units.temperature.name}.`
+  }
+
   return (
     <React.Fragment>
       <ListSection header="SPEED UNITS">
@@ -25,7 +29,7 @@ export const UnitSettings: React.FC<UnitSettingsProps> = ({ settings, onChange }
         })}
       </ListSection>
 
-      <ListSection header="TEMPERATURE UNITS">
+      <ListSection header="TEMPERATURE UNITS" footer={getTemperatureFooter()}>
         {temperatureUnits.map((unit) => {
           return (
             <ListRow
