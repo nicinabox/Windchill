@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import ReactNative from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import ReactNative, { Text, View } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
+import Modalize from 'react-native-modalize'
 import * as StoreReview from 'react-native-store-review'
 import { connect } from 'react-redux'
 import { trackAppOpened } from 'src/actions/analyticsActions'
@@ -7,18 +9,16 @@ import { checkAdCodeExpiration } from 'src/actions/productActions'
 import AdBanner from 'src/components/common/AdBanner'
 import { AnalyticsState } from 'src/reducers/analyticsReducer'
 import { SettingsState } from 'src/reducers/settingsReducer'
+import { backgroundColor, gradient } from 'src/styles/colors'
 import Header from './Header'
 import Settings from './Settings'
 import Windchill from './Windchill'
-import LinearGradient from 'react-native-linear-gradient'
-import { gradient } from 'src/styles/colors'
 
-var {
+const {
   NativeAppEventEmitter,
   StyleSheet,
   AppState,
   StatusBar,
-  Modal,
   SafeAreaView,
 } = ReactNative
 
@@ -32,12 +32,11 @@ interface AppProps {
 }
 
 export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackAppOpened }) => {
-  const [settingsVisible, setSettingsVisible] = useState(false)
+  const modalRef = useRef<Modalize>(null)
 
   useEffect(() => {
     checkAdCodeExpiration()
     trackAppOpened()
-    requestReview()
   }, [])
 
   useEffect(() => {
@@ -66,8 +65,11 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
     }
   }
 
-  function toggleModal() {
-    setSettingsVisible(!settingsVisible)
+  function openModal() {
+    const modal = modalRef.current
+    if (modal) {
+      modal.open()
+    }
   }
 
   const { shouldShowAds } = state.settings
@@ -75,18 +77,20 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
   return (
     <LinearGradient colors={gradient.colors} start={gradient.start} end={gradient.end} style={styles.gradient}>
       <SafeAreaView style={styles.container}>
-        <StatusBar
-          barStyle={settingsVisible ? 'dark-content' : 'light-content'}
-        />
+        <StatusBar barStyle="light-content" />
 
-        <Modal
-          visible={settingsVisible}
-          onRequestClose={toggleModal}
-          animationType="slide">
-          <Settings handleClose={toggleModal} />
-        </Modal>
+        <Modalize
+          ref={modalRef}
+          snapPoint={600}
+          HeaderComponent={
+            <View style={styles.header}>
+              <Text style={styles.headerText}>Settings</Text>
+            </View>
+          }>
+          <Settings />
+        </Modalize>
 
-        <Header onSettingsPress={toggleModal} />
+        <Header onSettingsPress={openModal} />
 
         <Windchill units={state.settings.units} />
 
@@ -105,6 +109,19 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 1,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    backgroundColor,
+  },
+  headerText: {
+    fontSize: 34,
+    fontWeight: '700',
+    marginHorizontal: 20,
+    paddingVertical: 20,
+  }
 })
 
 export default connect((state) => ({state}), {

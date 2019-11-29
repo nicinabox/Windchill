@@ -14,7 +14,6 @@ import ContactSettings from './components/ContactSettings'
 import PurchaseSettings from './components/PurchaseSettings'
 import ShareSettings from './components/ShareSettings'
 import UnitSettings from './components/UnitSettings'
-import Navbar from '../common/Navbar'
 
 const {
   StyleSheet,
@@ -38,79 +37,58 @@ interface SettingsProps {
 }
 
 export const Settings: React.FC<SettingsProps> = ({ state, handleClose, setUnits, validateAdCode, loadProducts, purchaseProduct, restorePurchases }) => {
-  const scrollView = useRef<ReactNative.ScrollView>(null)
-
   function handleOpenDarkSky() {
     Linking.openURL('https://darksky.net/poweredby/')
   }
 
   return (
     <View style={styles.container}>
-      <Navbar
-        titleText="Settings"
-        rightButtonText="Done"
-        onRightButtonPress={handleClose}
+      {!state.settings.shouldShowAds && (
+        <View style={styles.thanks}>
+          {state.products.adCode ? (
+            <Text style={styles.thanksText}>
+              🎉 Enjoy Windchill ad-free until {format(new Date(state.products.adCode.expiration), 'MMM d, yyyy')}!
+            </Text>
+          ) : (
+            <Text style={styles.thanksText}>
+              🎉 Thanks for supporting Windchill!
+            </Text>
+          )}
+        </View>
+      )}
+
+      <UnitSettings
+        settings={state.settings}
+        onChange={setUnits}
       />
 
-      <SafeAreaView style={styles.safearea}>
-        <ScrollView
-          ref={scrollView}
-          style={styles.scrollview}>
+      <PurchaseSettings
+        products={state.products}
+        loadProducts={loadProducts}
+        purchaseProduct={purchaseProduct}
+        restorePurchases={restorePurchases}
+      />
 
-          {!state.settings.shouldShowAds && (
-            <View style={styles.thanks}>
-              {state.products.adCode ? (
-                <Text style={styles.thanksText}>
-                  🎉 Enjoy Windchill ad-free until {format(new Date(state.products.adCode.expiration), 'MMM d, yyyy')}!
-                </Text>
-              ) : (
-                <Text style={styles.thanksText}>
-                  🎉 Thanks for supporting Windchill!
-                </Text>
-              )}
-            </View>
-          )}
+      <ContactSettings />
 
-          <UnitSettings
-            settings={state.settings}
-            onChange={setUnits}
-          />
+      <ShareSettings
+        settings={state.settings}
+        validateAdCode={validateAdCode}
+      />
 
-          <PurchaseSettings
-            products={state.products}
-            loadProducts={loadProducts}
-            purchaseProduct={purchaseProduct}
-            restorePurchases={restorePurchases}
-          />
+      <View style={styles.footer}>
+        <Text style={styles.textMuted}>
+          v{appInfo.version}
+          {' • '}
+          Made with ♥️
+          {' • '}
+          <Text onPress={handleOpenDarkSky}>
+            Powered by Dark Sky
+          </Text>
+        </Text>
+      </View>
 
-          <ContactSettings />
-
-          <ShareSettings
-            settings={state.settings}
-            validateAdCode={validateAdCode}
-          />
-
-          <View style={styles.footer}>
-            <Text style={styles.textMuted}>
-              v{appInfo.version}
-              {' • '}
-              Made with ♥️
-              {' • '}
-              <Text onPress={handleOpenDarkSky}>
-                Powered by Dark Sky
-              </Text>
-            </Text>
-          </View>
-
-          <ListSpacer />
-        </ScrollView>
-
-        <KeyboardSpacer onToggle={(isOpen: boolean) => {
-          setTimeout(() => {
-            isOpen && scrollView.current && scrollView.current.scrollToEnd()
-          }, 1)
-        }}/>
-      </SafeAreaView>
+      <ListSpacer />
     </View>
   )
 }
@@ -119,11 +97,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-  },
-  safearea: {
-    flex: 1,
-  },
-  scrollview: {
   },
   textMuted: {
     color: colors.lightGray,
