@@ -78,7 +78,7 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
 
         <Modalize
           ref={settingsModal}
-          snapPoint={600}
+          snapPoint={550}
           HeaderComponent={
             <ModalHeader onClosePress={closeModal}>
               Settings
