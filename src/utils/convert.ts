@@ -4,6 +4,7 @@ import { Unit } from './units'
 export const UNIT_NAME_MAP: { [key: string]: string } = {
   mph: 'm/h',
   kph: 'km/h',
+  mps: 'm/s',
   knots: 'knot',
 }
 
