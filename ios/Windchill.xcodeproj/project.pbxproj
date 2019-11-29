@@ -721,7 +721,7 @@
 			baseConfigurationReference = C4BA7280B35532C77E85A655 /* Pods-Windchill.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M55932FLPL;
 				INFOPLIST_FILE = Windchill/Info.plist;
@@ -743,7 +743,7 @@
 			baseConfigurationReference = E04B6C9161FA0CFBC93E86D2 /* Pods-Windchill.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = M55932FLPL;
 				INFOPLIST_FILE = Windchill/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
