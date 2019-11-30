@@ -13,6 +13,7 @@ import ContactSettings from './components/ContactSettings'
 import PurchaseSettings from './components/PurchaseSettings'
 import ShareSettings from './components/ShareSettings'
 import UnitSettings from './components/UnitSettings'
+import Thanks from './components/Thanks'
 
 const {
   StyleSheet,
@@ -40,20 +41,6 @@ export const Settings: React.FC<SettingsProps> = ({ state, setUnits, validateAdC
 
   return (
     <View style={styles.container}>
-      {!state.settings.shouldShowAds && (
-        <View style={styles.thanks}>
-          {state.products.adCode ? (
-            <Text style={styles.thanksText}>
-              🎉 Enjoy Windchill ad-free until {format(new Date(state.products.adCode.expiration), 'MMM d, yyyy')}!
-            </Text>
-          ) : (
-            <Text style={styles.thanksText}>
-              🎉 Thanks for supporting Windchill!
-            </Text>
-          )}
-        </View>
-      )}
-
       <UnitSettings
         settings={state.settings}
         onChange={setUnits}
@@ -71,6 +58,11 @@ export const Settings: React.FC<SettingsProps> = ({ state, setUnits, validateAdC
       <ShareSettings
         settings={state.settings}
         validateAdCode={validateAdCode}
+      />
+
+      <Thanks
+        settings={state.settings}
+        products={state.products}
       />
 
       <View style={styles.footer}>
@@ -97,15 +89,6 @@ const styles = StyleSheet.create({
   },
   textMuted: {
     color: colors.lightGray,
-  },
-  thanks: {
-    flexDirection: 'row',
-    marginTop: 30,
-    justifyContent: 'center'
-  },
-  thanksText: {
-    color: colors.brandSuccess,
-    fontSize: 16,
   },
   footerLink: {
     textDecorationLine: 'underline',

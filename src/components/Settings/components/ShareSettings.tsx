@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { PixelRatio, Share, StyleSheet, Text, TextInput, View } from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
 import Button from 'src/components/common/Button'
 import { SettingsState } from 'src/reducers/settingsReducer'
-import * as colors from 'src/styles/colors'
-
-const { gradient } = colors
+import Promo from './Promo'
 
 interface ShareSettingsProps {
   settings: SettingsState
@@ -31,21 +28,14 @@ export const ShareSettings: React.FC<ShareSettingsProps> = ({ settings, validate
   }
 
   return (
-    <LinearGradient
-      colors={gradient.colors}
-      start={gradient.start}
-      end={gradient.end}
-      style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.textPrimary}>
-          Share Windchill and get a year ad-free
-        </Text>
-
+    <Promo
+      heading="Share Windchill and get a year ad-free"
+      headerAccessory={
         <Button onPress={handleShare} style={styles.shareButton} textStyle={styles.shareButtonText}>
           Share
         </Button>
-      </View>
-
+      }
+    >
       <Text style={styles.textSecondary}>
         Contact me above with a screenshot of your post to receive a code.
       </Text>
@@ -61,23 +51,11 @@ export const ShareSettings: React.FC<ShareSettingsProps> = ({ settings, validate
         autoCapitalize="characters"
         returnKeyType="go"
       />
-    </LinearGradient>
+    </Promo>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 24,
-    paddingVertical: 24,
-    marginHorizontal: 20,
-    marginTop: 30,
-    borderRadius: 16,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
   shareButton: {
     backgroundColor: '#fff',
     borderRadius: 20,
@@ -93,13 +71,6 @@ const styles = StyleSheet.create({
   },
   shareButtonText: {
     fontWeight: '700',
-  },
-  textPrimary: {
-    flex: 1,
-    marginRight: 20,
-    color: '#fff',
-    fontWeight: '700',
-    fontSize: 20,
   },
   textSecondary: {
     color: '#fff',
