@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import ReactNative from 'react-native'
+import ReactNative, { Share } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Modalize from 'react-native-modalize'
 import { connect } from 'react-redux'
@@ -13,6 +13,7 @@ import ModalHeader from './common/ModalHeader'
 import Header from './Header'
 import Settings from './Settings'
 import Windchill from './Windchill'
+import ViewShot from 'react-native-view-shot'
 
 const {
   NativeAppEventEmitter,
@@ -33,6 +34,7 @@ interface AppProps {
 
 export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackAppOpened }) => {
   const settingsModal = useRef<Modalize>(null)
+  const shareWindchill = useRef<ViewShot>(null)
 
   useEffect(() => {
     checkAdCodeExpiration()
@@ -69,6 +71,21 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
     }
   }
 
+  async function handleSharePress() {
+    if (!shareWindchill.current) return
+
+    try {
+      const uri = await shareWindchill.current.capture!()
+
+      return Share.share({
+        title: 'Windchill',
+        url: `data:jpg;base64,${uri}`,
+      })
+    } catch (e) {
+      console.warn(e)
+    }
+  }
+
   const { shouldShowAds } = state.settings
 
   return (
@@ -88,9 +105,15 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
           <Settings />
         </Modalize>
 
-        <Header onSettingsPress={openModal} />
+        <Header
+          onSettingsPress={openModal}
+          onSharePress={handleSharePress}
+        />
 
-        <Windchill units={state.settings.units} />
+        <Windchill
+          units={state.settings.units}
+          shareImageRef={shareWindchill}
+        />
 
         <AdBanner shouldShowAds={shouldShowAds} />
       </SafeAreaView>

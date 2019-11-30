@@ -4,6 +4,8 @@ import { Measurements, Units } from 'src/utils/units'
 import getWindchill from 'src/utils/windchill'
 import Controls from './Controls'
 import FeelsLike from './FeelsLike'
+import ViewShot from 'react-native-view-shot'
+import ShareImage from './ShareImage'
 
 const {
   StyleSheet,
@@ -12,9 +14,10 @@ const {
 
 interface WindchillProps {
   units: Units
+  shareImageRef: React.Ref<ViewShot>
 }
 
-export const Windchill: React.FC<WindchillProps> = ({ units }) => {
+export const Windchill: React.FC<WindchillProps> = ({ units, shareImageRef }) => {
   const initialSpeed = units.speed.bounds.min
   const initialTemperature = units.temperature.bounds.max
 
@@ -35,6 +38,14 @@ export const Windchill: React.FC<WindchillProps> = ({ units }) => {
 
   return (
     <View style={styles.container}>
+      <ShareImage
+        ref={shareImageRef}
+        feelsLike={windchillValue}
+        temperature={temperature}
+        speed={speed}
+        units={units}
+      />
+
       <FeelsLike value={windchillValue} />
       <Controls units={units} onChange={handleChange} />
     </View>

@@ -42,7 +42,6 @@ export const ListRow: React.FC<ListRowProps> = ({
     <TouchableWrapper style={styles.row} onPress={onPress}>
       <View style={styles.rowInner}>
         <View style={styles.contentContainer}>
-
           <View style={styles.content}>
             <Text style={[styles.primaryText, button ? styles.buttonText : null]}>
               {primaryText}
@@ -80,6 +79,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   primaryText: {
     fontSize: 16,
@@ -96,8 +96,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   accessory: {
-    flex: 1,
-    alignItems: 'flex-end',
+    alignItems: 'center',
     marginRight: 15,
     marginLeft: 10,
   },

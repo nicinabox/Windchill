@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactNative from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Feather'
 import Button from 'src/components/common/Button'
 
 const {
@@ -10,25 +10,31 @@ const {
 
 interface HeaderProps {
   onSettingsPress: () => void
-}
+  onSharePress: () => void
+  }
 
-export const Header: React.FC<HeaderProps> = ({ onSettingsPress }) => {
+export const Header: React.FC<HeaderProps> = ({ onSettingsPress, onSharePress }) => {
   return (
     <View style={styles.container}>
-      <View>
-      </View>
+      <View style={styles.actions}>
+        <Button onPress={onSharePress} style={styles.button}>
+          <Icon name="share" size={26} style={styles.buttonText} />
+        </Button>
 
-      <Button onPress={onSettingsPress} style={styles.button}>
-        <Icon name="ios-settings" size={26} style={styles.buttonText} />
-      </Button>
+        <Button onPress={onSettingsPress} style={styles.button}>
+          <Icon name="settings" size={26} style={styles.buttonText} />
+        </Button>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+  },
+  actions: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   button: {
@@ -37,6 +43,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
+    fontSize: 22,
   },
 })
 
