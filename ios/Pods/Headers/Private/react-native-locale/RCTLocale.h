@@ -1,1 +1,0 @@
-../../../../../node_modules/react-native-locale/ios/RCTLocale/RCTLocale.h

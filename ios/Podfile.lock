@@ -224,8 +224,6 @@ PODS:
     - React
   - react-native-in-app-utils (6.0.2):
     - React
-  - react-native-locale (0.0.19):
-    - React
   - React-RCTActionSheet (0.61.4):
     - React-Core/RCTActionSheetHeaders (= 0.61.4)
   - React-RCTAnimation (0.61.4):
@@ -294,7 +292,6 @@ DEPENDENCIES:
   - react-native-admob (from `../node_modules/react-native-admob`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-in-app-utils (from `../node_modules/react-native-in-app-utils`)
-  - react-native-locale (from `../node_modules/react-native-locale`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -359,8 +356,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-in-app-utils:
     :path: "../node_modules/react-native-in-app-utils"
-  react-native-locale:
-    :path: "../node_modules/react-native-locale"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -417,7 +412,6 @@ SPEC CHECKSUMS:
   react-native-admob: cb7f9e5e7d6f1e68bfbf1df8f72b2e23963bc7db
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-in-app-utils: 07ea1df4bb6e8cbb27337d42a65ffe4cf7a35e97
-  react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
   React-RCTActionSheet: 7369b7c85f99b6299491333affd9f01f5a130c22
   React-RCTAnimation: d07be15b2bd1d06d89417eb0343f98ffd2b099a7
   React-RCTBlob: 8e0b23d95c9baa98f6b0e127e07666aaafd96c34
@@ -434,6 +428,6 @@ SPEC CHECKSUMS:
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
-PODFILE CHECKSUM: 4a4631d6943ae34201210349387e2e01ddc92470
+PODFILE CHECKSUM: aaa4c2eebc264cd271ccdd3642470ff04ce53b85
 
 COCOAPODS: 1.8.4
