@@ -224,6 +224,8 @@ PODS:
     - React
   - react-native-in-app-utils (6.0.2):
     - React
+  - react-native-view-shot (3.0.2):
+    - React
   - React-RCTActionSheet (0.61.4):
     - React-Core/RCTActionSheetHeaders (= 0.61.4)
   - React-RCTAnimation (0.61.4):
@@ -294,6 +296,7 @@ DEPENDENCIES:
   - react-native-admob (from `../node_modules/react-native-admob`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-in-app-utils (from `../node_modules/react-native-in-app-utils`)
+  - react-native-view-shot (from `../node_modules/react-native-view-shot`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -359,6 +362,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-in-app-utils:
     :path: "../node_modules/react-native-in-app-utils"
+  react-native-view-shot:
+    :path: "../node_modules/react-native-view-shot"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -417,6 +422,7 @@ SPEC CHECKSUMS:
   react-native-admob: cb7f9e5e7d6f1e68bfbf1df8f72b2e23963bc7db
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-in-app-utils: 07ea1df4bb6e8cbb27337d42a65ffe4cf7a35e97
+  react-native-view-shot: 5f80b8f4f9003c3da8c0c0013488e5b2db17b1e2
   React-RCTActionSheet: 7369b7c85f99b6299491333affd9f01f5a130c22
   React-RCTAnimation: d07be15b2bd1d06d89417eb0343f98ffd2b099a7
   React-RCTBlob: 8e0b23d95c9baa98f6b0e127e07666aaafd96c34
