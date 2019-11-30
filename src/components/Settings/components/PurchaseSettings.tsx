@@ -6,6 +6,7 @@ import ListSection from 'src/components/common/ListSection'
 import { ProductsState } from 'src/reducers/productsReducer'
 import * as colors from 'src/styles/colors'
 import { isPurchased } from 'src/utils/purchases'
+import ListSeparator from 'src/components/common/ListSeparator'
 
 interface PurchaseSettingsProps {
   products: ProductsState
@@ -25,20 +26,22 @@ export const PurchaseSettings: React.FC<PurchaseSettingsProps> = ({ loadProducts
         {products.products.map((product) => {
           const isProductPurchased = isPurchased(product.identifier, products.purchases)
           return (
-            <ListRow
-              key={product.identifier}
-              primaryText={product.title}
-              detailText={isProductPurchased ? undefined : product.priceString}
-              renderAccessory={() => isProductPurchased ? (
-                <Text style={styles.textMuted}>
-                  Purchased!
-                </Text>
-              ) : (
-                <Button onPress={() => purchaseProduct(product.identifier)}>
-                  Remove Ads
-                </Button>
-              )}
-            />
+            <React.Fragment key={product.identifier}>
+              <ListRow
+                primaryText={product.title}
+                detailText={isProductPurchased ? undefined : product.priceString}
+                renderAccessory={() => isProductPurchased ? (
+                  <Text style={styles.textMuted}>
+                    Purchased
+                  </Text>
+                ) : (
+                  <Button onPress={() => purchaseProduct(product.identifier)} textStyle={{ fontWeight: '500' }}>
+                    Buy
+                  </Button>
+                )}
+              />
+              <ListSeparator />
+            </React.Fragment>
           )
         })}
 

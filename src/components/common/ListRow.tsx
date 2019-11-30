@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginLeft: 20,
-    minHeight: 48,
+    minHeight: 50,
     paddingVertical: 3,
     flexDirection: 'row',
     alignItems: 'center',
@@ -68,12 +68,14 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 12,
+    marginTop: 2,
     color: colors.mediumGray,
   },
   buttonText: {
     color: colors.brandPrimary,
   },
   content: {
+    paddingVertical: 6,
   },
   accessory: {
     flex: 1,
