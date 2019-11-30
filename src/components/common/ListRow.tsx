@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, TouchableHighlight, View, Text } from 'react-native'
+import { StyleSheet, TouchableHighlight, View, Text, ViewStyle } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import * as colors from 'src/styles/colors'
 
@@ -12,40 +12,58 @@ interface ListRowProps {
   checked?: boolean
 }
 
-export const ListRow: React.FC<ListRowProps> = (props) => {
-  const Wrapper = ({ children }: { children: React.ReactNode }) => {
-    if (props.onPress) {
-      return <TouchableHighlight onPress={props.onPress} style={styles.row}>{children}</TouchableHighlight>
-    }
-    return <View style={styles.row}>{children}</View>
+interface TouchableWrapperProps {
+  children: React.ReactNode
+  style: ViewStyle
+  onPress?: () => void
+}
+
+const TouchableWrapper: React.FC<TouchableWrapperProps> = ({ onPress, children, style }) => {
+  if (onPress) {
+    return (
+      <TouchableHighlight onPress={onPress} style={style}>
+        {children}
+      </TouchableHighlight>
+    )
   }
 
+  return <View style={style}>{children}</View>
+}
+
+export const ListRow: React.FC<ListRowProps> = ({
+  onPress,
+  primaryText,
+  detailText,
+  renderAccessory,
+  checked,
+  button
+}) => {
   return (
-    <Wrapper>
+    <TouchableWrapper style={styles.row} onPress={onPress}>
       <View style={styles.rowInner}>
         <View style={styles.contentContainer}>
 
           <View style={styles.content}>
-            <Text style={[styles.primaryText, props.button ? styles.buttonText : null]}>
-              {props.primaryText}
+            <Text style={[styles.primaryText, button ? styles.buttonText : null]}>
+              {primaryText}
             </Text>
-            {props.detailText && (
+            {detailText && (
               <Text style={styles.detailText}>
-                {props.detailText}
+                {detailText}
               </Text>
             )}
           </View>
 
           <View style={styles.accessory}>
-            {props.renderAccessory && props.renderAccessory()}
+            {renderAccessory && renderAccessory()}
 
-            {props.checked ? (
+            {checked ? (
               <Icon name="ios-checkmark" style={styles.checkmark} />
             ) : null}
           </View>
         </View>
       </View>
-    </Wrapper>
+    </TouchableWrapper>
   )
 }
 
