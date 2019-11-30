@@ -2,7 +2,7 @@ import { NativeModules, Alert } from 'react-native'
 import { isAfter } from 'date-fns'
 import { post } from 'src/utils/http'
 import errorReporter from 'src/utils/errorReporter'
-import { PRODUCTS } from 'src/utils/purchases'
+import { PRODUCTS_IDENTIFIERS } from 'src/utils/purchases'
 
 const { InAppUtils } = NativeModules
 
@@ -50,7 +50,7 @@ export function validateAdCode(code) {
 
 export function loadProducts() {
   return (dispatch) => {
-    InAppUtils.loadProducts(PRODUCTS, (err, products) => {
+    InAppUtils.loadProducts(PRODUCTS_IDENTIFIERS, (err, products) => {
       if (err) {
         errorReporter.notify(err.message)
         return Alert.alert(err.message)
