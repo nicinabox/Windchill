@@ -7,7 +7,7 @@ import { speedUnits, temperatureUnits, Unit } from 'src/utils/units'
 
 interface UnitSettingsProps {
   settings: SettingsState
-  onChange: (measurement: 'speed' | 'temperature', unit: Unit) => void
+  onChange: (unit: Unit) => void
 }
 
 export const UnitSettings: React.FC<UnitSettingsProps> = ({ settings, onChange }) => {
@@ -24,7 +24,7 @@ export const UnitSettings: React.FC<UnitSettingsProps> = ({ settings, onChange }
               {i > 0 && <ListSeparator />}
               <ListRow
                 primaryText={unit.name}
-                onPress={() => onChange('speed', unit)}
+                onPress={() => onChange(unit)}
                 checked={settings.units.speed.name === unit.name}
               />
             </React.Fragment>
@@ -39,7 +39,7 @@ export const UnitSettings: React.FC<UnitSettingsProps> = ({ settings, onChange }
               {i > 0 && <ListSeparator />}
               <ListRow
                 primaryText={unit.name}
-                onPress={() => onChange('temperature', unit)}
+                onPress={() => onChange(unit)}
                 checked={settings.units.temperature.name === unit.name}
               />
             </React.Fragment>

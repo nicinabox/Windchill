@@ -84,14 +84,14 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
     return Math.round(convert(value, defaultMeasurements[measurement], units[measurement]))
   }
 
-  function getConditions() {
-    return ['temperature', 'speed'].reduce((acc, name) => ({
+  function getConditions(): Units {
+    return Object.keys(units).reduce((acc, measurement) => ({
       ...acc,
-      [name]: {
-        value: getCurrentCondition(name),
-        unitName: units[name].name,
-      },
-    }), {})
+      [measurement]: {
+        ...units[measurement],
+        value: getCurrentCondition(measurement),
+      }
+    }), {} as Units)
   }
 
   function renderConditions() {
@@ -99,23 +99,22 @@ export const CurrentConditions: React.FC<ComponentProps> = ({ units, onPress: pr
       return null
     }
 
-    // @ts-ignore
     const { temperature, speed } = getConditions()
 
     return (
       <Button onPress={() => propsOnPress({
-        temperature: temperature.value,
-        speed: speed.value
+        temperature: temperature.value!,
+        speed: speed.value!
       })}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <StyledText>
-            {temperature.value} {temperature.unitName}
+            {temperature.value} {temperature.name}
           </StyledText>
           <Text>
             {DARK_SKY_ICONS[conditions.icon]}
           </Text>
           <StyledText>
-            {speed.value} {speed.unitName}
+            {speed.value} {speed.name}
           </StyledText>
         </View>
       </Button>

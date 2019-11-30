@@ -31,7 +31,7 @@ export default (state = initialState, action: AnyAction) => {
         ...state,
         units: {
           ...state.units,
-          [action.measurement]: action.unit
+          [action.unit.measurement]: action.unit
         }
       }
 
