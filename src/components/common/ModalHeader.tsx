@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text, View, MaskedViewIOS, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/Ionicons'
+import MaskedView from '@react-native-community/masked-view'
 import { gradient, lightGray, backgroundColor } from 'src/styles/colors'
 
 interface ModalHeaderProps {
@@ -11,7 +12,7 @@ interface ModalHeaderProps {
 export const ModalHeader: React.FC<ModalHeaderProps> = ({ children, onClosePress }) => {
   return (
     <View style={styles.header}>
-      <MaskedViewIOS maskElement={
+      <MaskedView maskElement={
         <Text style={styles.headerText}>{children}</Text>
       }>
         <LinearGradient {...gradient}>
@@ -19,7 +20,7 @@ export const ModalHeader: React.FC<ModalHeaderProps> = ({ children, onClosePress
             {children}
           </Text>
         </LinearGradient>
-      </MaskedViewIOS>
+      </MaskedView>
 
       <TouchableOpacity onPress={onClosePress}>
         <Icon name="ios-close-circle" size={26} style={styles.closeButton} />

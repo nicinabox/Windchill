@@ -8,7 +8,7 @@ import { checkAdCodeExpiration } from 'src/actions/productActions'
 import AdBanner from 'src/components/common/AdBanner'
 import { AnalyticsState } from 'src/reducers/analyticsReducer'
 import { SettingsState } from 'src/reducers/settingsReducer'
-import { gradient } from 'src/styles/colors'
+import { gradient, backgroundColor } from 'src/styles/colors'
 import ModalHeader from './common/ModalHeader'
 import Header from './Header'
 import Settings from './Settings'
@@ -79,6 +79,7 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
         <Modalize
           ref={settingsModal}
           snapPoint={550}
+          modalStyle={{ backgroundColor }}
           HeaderComponent={
             <ModalHeader onClosePress={closeModal}>
               Settings
