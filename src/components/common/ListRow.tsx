@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, TouchableHighlight, View, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import ListSeparator from './ListSeparator'
 import * as colors from 'src/styles/colors'
 
 interface ListRowProps {
@@ -14,7 +13,7 @@ interface ListRowProps {
 }
 
 export const ListRow: React.FC<ListRowProps> = (props) => {
-  const Wrapper = ({ children }) => {
+  const Wrapper = ({ children }: { children: React.ReactNode }) => {
     if (props.onPress) {
       return <TouchableHighlight onPress={props.onPress} style={styles.row}>{children}</TouchableHighlight>
     }
@@ -45,8 +44,6 @@ export const ListRow: React.FC<ListRowProps> = (props) => {
             ) : null}
           </View>
         </View>
-
-        <ListSeparator />
       </View>
     </Wrapper>
   )

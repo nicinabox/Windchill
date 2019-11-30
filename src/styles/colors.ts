@@ -7,7 +7,7 @@ export const lightGray = '#898395'
 export const mediumGray = '#625b71'
 export const darkGray = '#433f4b'
 
-export const backgroundColor = '#fafafa'
+export const backgroundColor = '#f2f2f2'
 export const borderColor = '#ccc'
 
 export const gradient = {

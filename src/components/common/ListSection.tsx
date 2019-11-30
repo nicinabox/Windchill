@@ -1,6 +1,5 @@
 import React  from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import ListSeparator from './ListSeparator'
 import * as colors from 'src/styles/colors'
 
 interface ListSectionProps {
@@ -21,8 +20,10 @@ export const ListSection: React.FC<ListSectionProps> = ({ children, header, foot
         </View>
       ) : null}
 
-      <ListSeparator />
-      {children}
+
+      <View style={styles.rows}>
+        {children}
+      </View>
 
       {footer ? (
         <View style={styles.sectionFooter}>
@@ -38,6 +39,7 @@ export const ListSection: React.FC<ListSectionProps> = ({ children, header, foot
 const styles = StyleSheet.create({
   section: {
     marginTop: 30,
+    marginHorizontal: 20,
   },
   sectionHeader: {
     marginHorizontal: 20,
@@ -48,9 +50,14 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 14,
   },
+  rows: {
+    borderRadius: 16,
+    backgroundColor: '#fff',
+    overflow: 'hidden',
+  },
   sectionFooter: {
     marginHorizontal: 20,
-    marginVertical: 8,
+    marginTop: 8,
   },
   sectionFooterText: {
     color: colors.lightGray,

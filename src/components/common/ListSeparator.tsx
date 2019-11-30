@@ -11,8 +11,9 @@ export const ListSeparator: React.FC<ListSeparatorProps> = () => {
 const styles = StyleSheet.create({
   separator: {
     flex: 1,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderColor,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: borderColor,
+    marginLeft: 20,
   }
 })
 

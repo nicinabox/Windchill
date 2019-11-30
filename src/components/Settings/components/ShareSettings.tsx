@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 24,
     marginHorizontal: 20,
-    marginVertical: 30,
-    borderRadius: 6 * PixelRatio.get(),
+    marginTop: 30,
+    borderRadius: 16,
   },
   header: {
     flexDirection: 'row',
