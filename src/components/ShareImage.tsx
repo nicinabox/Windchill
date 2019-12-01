@@ -5,6 +5,7 @@ import ViewShot from 'react-native-view-shot'
 import { gradient } from 'src/styles/colors'
 import { Units } from 'src/utils/units'
 import FeelsLike from './FeelsLike'
+import app from '../../app.json'
 
 interface ShareImageProps {
   feelsLike: number
@@ -31,7 +32,7 @@ export const ShareImage: React.FC<ShareImageProps> = ({ feelsLike, temperature, 
           <View style={styles.iconContainer}>
             <Image source={require('../images/Icon-Small.png')} style={styles.icon} />
           </View>
-          <Text style={styles.footerText}>WindchillApp</Text>
+          <Text style={styles.footerText}>{app.displayName}</Text>
         </View>
       </LinearGradient>
     </ViewShot>

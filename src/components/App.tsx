@@ -1,19 +1,20 @@
 import React, { useEffect, useRef } from 'react'
-import ReactNative, { Share } from 'react-native'
+import ReactNative, { Alert, Share } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Modalize from 'react-native-modalize'
+import ViewShot from 'react-native-view-shot'
 import { connect } from 'react-redux'
 import { trackAppOpened } from 'src/actions/analyticsActions'
 import { checkAdCodeExpiration } from 'src/actions/productActions'
 import AdBanner from 'src/components/common/AdBanner'
 import { AnalyticsState } from 'src/reducers/analyticsReducer'
 import { SettingsState } from 'src/reducers/settingsReducer'
-import { gradient, backgroundColor } from 'src/styles/colors'
+import { backgroundColor, gradient } from 'src/styles/colors'
+import errorReporter from 'src/utils/errorReporter'
 import ModalHeader from './common/ModalHeader'
 import Header from './Header'
 import Settings from './Settings'
 import Windchill from './Windchill'
-import ViewShot from 'react-native-view-shot'
 
 const {
   NativeAppEventEmitter,
@@ -82,7 +83,8 @@ export const App: React.FC<AppProps> = ({ state, checkAdCodeExpiration, trackApp
         url: `data:jpg;base64,${uri}`,
       })
     } catch (e) {
-      console.warn(e)
+      Alert.alert('Sorry, something went wrong generating the share image')
+      errorReporter.notify(e)
     }
   }
 
