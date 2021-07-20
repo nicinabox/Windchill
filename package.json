@@ -18,7 +18,7 @@
     "date-fns": "^2.8.1",
     "lodash": "^4.17.15",
     "react": "16.9.0",
-    "react-native": "0.61.4",
+    "react-native": "0.62.3",
     "react-native-admob": "^2.0.0-beta.6",
     "react-native-gesture-handler": "^1.5.2",
     "react-native-in-app-utils": "^6.0.2",
